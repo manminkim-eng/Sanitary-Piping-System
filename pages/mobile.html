@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,maximum-scale=1"/>
+<title>위생배관 [모바일] MANMIN-Ver2.0</title>
+<meta name="theme-color" content="#0e7490"/>
+<link rel="manifest" href="../manifest.json"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="위생배관"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+/* ═══ MOBILE-FIRST STYLES ═══ */
+*{-webkit-tap-highlight-color:transparent;}
+body{background:#ecfeff;padding-bottom:80px;}
+
+/* Mobile Header */
+.mob-hdr{
+  background:linear-gradient(135deg,#155e75,#0e7490);
+  padding:env(safe-area-inset-top,0px) 0 0;
+  position:sticky;top:0;z-index:100;
+}
+.mob-hdr-inner{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 14px;
+}
+.mob-logo{width:34px;height:34px;background:rgba(255,255,255,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.mob-title{font-size:13px;font-weight:900;color:#fff;line-height:1.2;flex:1;}
+.mob-sub{font-size:8.5px;color:rgba(255,255,255,.7);font-weight:700;}
+.mob-hdr-btn{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:7px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* Bottom Nav */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:#fff;border-top:1px solid #e0f2fe;
+  display:flex;z-index:200;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  box-shadow:0 -4px 20px rgba(14,116,144,.12);
+}
+.nav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:8px 4px;
+  background:none;border:none;cursor:pointer;
+  font-family:inherit;transition:background .15s;
+  gap:2px;
+}
+.nav-btn:hover,.nav-btn.active{background:#ecfeff;}
+.nav-btn.active .nav-ico{filter:none;}
+.nav-ico{font-size:20px;transition:transform .15s;}
+.nav-btn.active .nav-ico{transform:scale(1.15);}
+.nav-lbl{font-size:9.5px;font-weight:700;color:#5c7a8a;}
+.nav-btn.active .nav-lbl{color:#0e7490;}
+.nav-indicator{position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:2.5px;background:#0e7490;border-radius:0 0 3px 3px;opacity:0;transition:opacity .15s;}
+.nav-btn.active .nav-indicator{opacity:1;}
+
+/* Main content */
+.mob-main{padding:12px 12px 0;}
+.section-gap{height:12px;}
+
+/* Page panels */
+.mob-panel{display:none;}.mob-panel.active{display:block;}
+
+/* Card adjustments for mobile */
+.card-body{padding:11px 12px;}
+.bld-grid{grid-template-columns:repeat(4,1fr)!important;}
+@media(max-width:360px){.bld-grid{grid-template-columns:repeat(3,1fr)!important;}}
+.frow{gap:8px;}
+.stat-grid{grid-template-columns:repeat(3,1fr)!important;}
+
+/* Result pipe boxes */
+.pipe-box-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.pipe-box{border-radius:12px;padding:14px;text-align:center;color:#fff;}
+.pipe-box.supply{background:linear-gradient(135deg,#164e63,#0e7490);}
+.pipe-box.hot{background:linear-gradient(135deg,#7c2d12,#b45309);}
+.pipe-box.drain{background:linear-gradient(135deg,#1a2e05,#365314);}
+.pipe-box.vent{background:linear-gradient(135deg,#3b0764,#7e22ce);}
+.pb-label{font-size:9px;font-weight:700;opacity:.75;margin-bottom:3px;}
+.pb-val{font-size:28px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#fde047;line-height:1;}
+.pb-unit{font-size:9px;opacity:.7;margin-top:2px;}
+
+/* Scroll share panel */
+.result-scroll{background:#f0fdfe;border:1px solid #cffafe;border-radius:12px;padding:12px;}
+.rs-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px dashed #b2ebf2;}
+.rs-row:last-child{border-bottom:none;}
+.rs-key{font-size:11px;font-weight:700;color:#475569;}
+.rs-val{font-size:12px;font-weight:900;color:#0e7490;font-family:'JetBrains Mono',monospace;}
+
+/* Fixture rows - touch optimized */
+.fixture-row{padding:9px 10px;min-height:44px;}
+.fx-input{min-height:36px;font-size:16px;} /* 16px prevents zoom on iOS */
+
+/* Floating action */
+.mob-fab{
+  position:fixed;right:14px;bottom:72px;
+  width:48px;height:48px;border-radius:50%;
+  background:#f97316;color:#fff;border:none;
+  font-size:20px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(249,115,22,.45);
+  z-index:150;display:flex;align-items:center;justify-content:center;
+}
+
+/* Share result */
+.share-row{display:flex;gap:8px;margin-top:12px;}
+.share-btn{flex:1;padding:11px;border-radius:10px;border:none;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;}
+.share-btn.primary{background:#0e7490;color:#fff;}
+.share-btn.ghost{background:#fff;color:#0e7490;border:1.5px solid #b2ebf2;}
+
+/* Standard table (mobile scroll) */
+.std-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* Guide sections */
+.guide-section{margin-bottom:10px;}
+.guide-acc{
+  background:#fff;border:1px solid #e0f2fe;border-radius:10px;overflow:hidden;
+}
+.guide-acc-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px;cursor:pointer;font-weight:800;font-size:12px;
+}
+.guide-acc-body{padding:0 14px 12px;display:none;font-size:11px;line-height:1.8;color:#5c7a8a;}
+.guide-acc.open .guide-acc-body{display:block;}
+.guide-acc-arrow{transition:transform .2s;font-size:10px;}
+.guide-acc.open .guide-acc-arrow{transform:rotate(180deg);}
+
+/* Full-width result table on mobile */
+@media(max-width:480px){
+  .rtbl th,.rtbl td{padding:5px 5px;font-size:10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE HEADER -->
+<header class="mob-hdr no-print">
+  <div class="mob-hdr-inner">
+    <div class="mob-logo">🚿</div>
+    <div style="flex:1">
+      <div class="mob-title">위생배관 관경 산정</div>
+      <div class="mob-sub">MANMIN-Ver2.0 · 기계설비 기술기준</div>
+    </div>
+    <button class="mob-hdr-btn btn-install" onclick="triggerInstall()" style="display:none">📲</button>
+    <button class="mob-hdr-btn" onclick="resetAll()">🔄</button>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="mob-main">
+
+<!-- ████ 관경 산정 패널 ████ -->
+<div class="mob-panel active" id="mpanel-calc">
+  <!-- Step Bar -->
+  <div class="step-bar" style="margin-bottom:10px">
+    <div class="step-item"><div class="sc active" id="sc1">1</div><span class="sl active" id="sl1">건물</span></div>
+    <div class="sdiv" id="sd1"></div>
+    <div class="step-item"><div class="sc" id="sc2">2</div><span class="sl" id="sl2">기구</span></div>
+    <div class="sdiv" id="sd2"></div>
+    <div class="step-item"><div class="sc" id="sc3">3</div><span class="sl" id="sl3">조건</span></div>
+    <div class="sdiv" id="sd3"></div>
+    <div class="step-item"><div class="sc" id="sc4">4</div><span class="sl" id="sl4">결과</span></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-head"><div class="card-ico">🏢</div><span class="card-tit">STEP 1 — 건물 정보</span><span class="badge badge-grn" id="bld-badge">선택</span></div>
+    <div class="card-body">
+      <div class="fgrp" style="margin-bottom:8px"><label class="flbl">공사명</label><input type="text" class="finput" id="inp-projname" value="만민 건축사 신사옥 신축공사" oninput="liveCalc()"></div>
+      <label class="flbl">건축물 용도</label>
+      <div class="bld-grid" id="bldGrid" style="margin-bottom:8px"></div>
+      <div class="frow">
+        <div class="fgrp"><label class="flbl">층수</label><div class="input-sfx"><input type="number" class="finput" id="inp-floors" value="5" min="1" max="100" oninput="liveCalc()"><span class="sfx">층</span></div></div>
+        <div class="fgrp"><label class="flbl">층고</label><div class="input-sfx"><input type="number" class="finput" id="inp-floorht" value="3.0" min="2" max="15" step="0.1" oninput="liveCalc()"><span class="sfx">m</span></div></div>
+      </div>
+      <div class="frow" style="margin-bottom:0">
+        <div class="fgrp"><label class="flbl">용도 구분</label>
+          <select class="fselect" id="sel-usage" onchange="liveCalc()">
+            <option value="public">공용</option><option value="private">주거</option>
+          </select></div>
+        <div class="fgrp"><label class="flbl">급수 방식</label>
+          <select class="fselect" id="sel-supply" onchange="liveCalc()">
+            <option value="pressure">가압(펌프)</option><option value="gravity">중력</option><option value="direct">직결</option>
+          </select></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-head"><div class="card-ico">🚽</div><span class="card-tit">STEP 2 — 위생기구 수량</span><span class="badge badge-teal" id="fu-badge-total">FU:0</span></div>
+    <div class="card-body">
+      <div class="seg-ctrl">
+        <button class="seg-btn active" onclick="filterFixtures('wc',this,'mob-fixtureGrid')">🚽</button>
+        <button class="seg-btn" onclick="filterFixtures('kitchen',this,'mob-fixtureGrid')">🍽️</button>
+        <button class="seg-btn" onclick="filterFixtures('bath',this,'mob-fixtureGrid')">🛁</button>
+        <button class="seg-btn" onclick="filterFixtures('util',this,'mob-fixtureGrid')">🪣</button>
+        <button class="seg-btn" onclick="filterFixtures('all',this,'mob-fixtureGrid')">전체</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 74px 74px;gap:5px;padding:3px 10px;margin-bottom:3px">
+        <div class="flbl">기구명 (FU)</div>
+        <div class="flbl" style="text-align:center">급수(개)</div>
+        <div class="flbl" style="text-align:center">급탕(개)</div>
+      </div>
+      <div class="fixture-grid" id="mob-fixtureGrid" style="gap:4px"></div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-head"><div class="card-ico">⚙️</div><span class="card-tit">STEP 3 — 배관 조건</span></div>
+    <div class="card-body">
+      <div class="frow">
+        <div class="fgrp"><label class="flbl">급수 관재질</label>
+          <select class="fselect" id="sel-mat-supply" onchange="liveCalc()">
+            <option value="stp">STP(C=130)</option><option value="sgp">SGP(C=100)</option>
+            <option value="cu">동관(C=130)</option><option value="ppc">PP-C(C=150)</option>
+          </select></div>
+        <div class="fgrp"><label class="flbl">배수 관재질</label>
+          <select class="fselect" id="sel-mat-drain" onchange="liveCalc()">
+            <option value="vpvc">VP관</option><option value="cast">주철관</option><option value="pvc">PVC관</option>
+          </select></div>
+      </div>
+      <div class="frow">
+        <div class="fgrp"><label class="flbl">유속</label><div class="input-sfx"><input type="number" class="finput" id="inp-vel-supply" value="1.5" min="0.5" max="3.0" step="0.1" oninput="liveCalc()"><span class="sfx">m/s</span></div></div>
+        <div class="fgrp"><label class="flbl">공급압</label><div class="input-sfx"><input type="number" class="finput" id="inp-pressure" value="300" min="100" max="700" oninput="liveCalc()"><span class="sfx">kPa</span></div></div>
+      </div>
+      <div class="frow" style="margin-bottom:0">
+        <div class="fgrp"><label class="flbl">급탕온도</label><div class="input-sfx"><input type="number" class="finput" id="inp-hwtemp" value="60" min="40" max="90" oninput="liveCalc()"><span class="sfx">°C</span></div></div>
+        <div class="fgrp"><label class="flbl">환탕</label>
+          <select class="fselect" id="sel-circ" onchange="liveCalc()">
+            <option value="auto">자동판정</option><option value="yes">설치</option><option value="no">없음</option>
+          </select></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 결과 -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-head"><div class="card-ico">📊</div><span class="card-tit">STEP 4 — 산정 결과</span><span class="badge badge-teal" id="result-badge">대기</span></div>
+    <div class="card-body">
+      <div id="result-placeholder" style="padding:24px;text-align:center;color:#94a3b8">
+        <div style="font-size:28px;margin-bottom:8px">🚿</div>
+        <div style="font-size:12px;font-weight:700">위생기구 수량을 입력하면<br>관경이 자동 산정됩니다</div>
+      </div>
+      <div id="result-content" style="display:none">
+        <div class="stat-grid" style="margin-bottom:10px">
+          <div class="sbox"><div class="sico">💧</div><div class="sval" id="r-fuS">0</div><div class="slbl">급수 FU</div></div>
+          <div class="sbox"><div class="sico">🔥</div><div class="sval" id="r-fuH">0</div><div class="slbl">급탕 FU</div></div>
+          <div class="sbox"><div class="sico">🔩</div><div class="sval" id="r-fuD">0</div><div class="slbl">배수 FU</div></div>
+          <div class="sbox"><div class="sico">📐</div><div class="sval" id="r-qwS">—</div><div class="slbl">설계유량</div></div>
+          <div class="sbox"><div class="sico">⬆️</div><div class="sval" id="r-topP">—</div><div class="slbl">최상층압</div></div>
+          <div class="sbox"><div class="sico">📉</div><div class="sval" id="r-frlS">—</div><div class="slbl">마찰손실</div></div>
+        </div>
+
+        <!-- Pipe result boxes -->
+        <div class="pipe-box-grid">
+          <div class="pipe-box supply"><div class="pb-label">💧 급수 주관</div><div class="pb-val" id="r-supply-main">—</div><div class="pb-unit">mm(A호칭)</div></div>
+          <div class="pipe-box hot"><div class="pb-label">🔥 급탕 주관</div><div class="pb-val" id="r-hot-main">—</div><div class="pb-unit">mm(A호칭)</div></div>
+          <div class="pipe-box drain"><div class="pb-label">🔩 배수 수평관</div><div class="pb-val" id="r-drain-horiz">—</div><div class="pb-unit">mm(A호칭)</div></div>
+          <div class="pipe-box vent"><div class="pb-label">🌀 통기 주관</div><div class="pb-val" id="r-vent-loop">—</div><div class="pb-unit">mm(A호칭)</div></div>
+        </div>
+
+        <!-- Detail summary -->
+        <div class="result-scroll">
+          <div class="rs-row"><span class="rs-key">배수 수직관</span><span class="rs-val" id="r-drain-vert">—</span></div>
+          <div class="rs-row"><span class="rs-key">개별 통기관</span><span class="rs-val" id="r-vent-indiv">—</span></div>
+          <div class="rs-row"><span class="rs-key">환탕 배관</span><span class="rs-val" id="r-circ">—</span></div>
+          <div class="rs-row"><span class="rs-key">감압밸브</span><span class="rs-val" id="r-prv">—</span></div>
+          <div class="rs-row"><span class="rs-key">최상층 잔류압</span><span class="rs-val" id="r-topPressure">—</span></div>
+          <div class="rs-row"><span class="rs-key">최하층 공급압</span><span class="rs-val" id="r-botPressure">—</span></div>
+        </div>
+
+        <div class="share-row">
+          <button class="share-btn primary" onclick="saveJPG()">📷 JPG 저장</button>
+          <button class="share-btn ghost" onclick="shareResult()">📤 공유</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /mpanel-calc -->
+
+<!-- ████ 관경 표 패널 ████ -->
+<div class="mob-panel" id="mpanel-table">
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-head"><div class="card-ico">📋</div><span class="card-tit">급수·급탕 관경 FU 기준표</span></div>
+    <div class="card-body">
+      <div class="std-wrap"><table class="rtbl">
+        <thead><tr><th>FU 범위</th><th>관경(A)</th><th>최대유량</th><th>용도</th></tr></thead>
+        <tbody id="mob-std-supply"></tbody>
+      </table></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div class="card-ico">🔩</div><span class="card-tit">오배수·통기 관경 FU 기준표</span></div>
+    <div class="card-body">
+      <div class="std-wrap"><table class="rtbl">
+        <thead><tr><th>FU</th><th>수평(A)</th><th>수직(A)</th><th>개통(A)</th><th>루프(A)</th></tr></thead>
+        <tbody id="mob-std-drain"></tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ████ 설계 기준 패널 ████ -->
+<div class="mob-panel" id="mpanel-guide">
+  <div class="guide-section">
+    <div class="guide-acc" onclick="toggleAcc(this)">
+      <div class="guide-acc-head"><span>🟠 관경 결정 기준</span><span class="guide-acc-arrow">▼</span></div>
+      <div class="guide-acc-body">• FU(기구부하단위) 헌터(Hunter) 곡선 적용<br>• 동시사용률 고려한 확률적 산정<br>• 주거용 / 공용 구분 적용<br>• 유속 기준 역산 후 안전측 채택</div>
+    </div>
+  </div>
+  <div class="guide-section">
+    <div class="guide-acc" onclick="toggleAcc(this)">
+      <div class="guide-acc-head"><span>💧 급수관 설계 기준</span><span class="guide-acc-arrow">▼</span></div>
+      <div class="guide-acc-body">• 설계 유속: 주관 1.0~2.0 m/s<br>• 최소 잔류압: 30kPa (일반), 70kPa (플러시밸브)<br>• 최대 공급압: 550kPa<br>• Hazen-Williams: V = 0.8492·C·R^0.63·S^0.54</div>
+    </div>
+  </div>
+  <div class="guide-section">
+    <div class="guide-acc" onclick="toggleAcc(this)">
+      <div class="guide-acc-head"><span>🔥 급탕관 설계 기준</span><span class="guide-acc-arrow">▼</span></div>
+      <div class="guide-acc-body">• 급탕 온도: 55~65°C (레지오넬라균 사멸)<br>• 환탕 필요 기준: 배관길이 15m 초과<br>• 환탕관: 급탕관의 1~2단계 소경<br>• 최소 유속: 환탕 0.2 m/s 이상</div>
+    </div>
+  </div>
+  <div class="guide-section">
+    <div class="guide-acc" onclick="toggleAcc(this)">
+      <div class="guide-acc-head"><span>🔩 배수관 설계 기준</span><span class="guide-acc-arrow">▼</span></div>
+      <div class="guide-acc-body">• 수평관 기울기: 1/100 이상 (DN100 이하)<br>• 최소 유속: 0.6 m/s (자정작용)<br>• Manning: V = (1/n)·R^(2/3)·S^(1/2)<br>• 트랩 봉수 깊이: 50~100mm</div>
+    </div>
+  </div>
+  <div class="guide-section">
+    <div class="guide-acc" onclick="toggleAcc(this)">
+      <div class="guide-acc-head"><span>🌀 통기관 설계 기준</span><span class="guide-acc-arrow">▼</span></div>
+      <div class="guide-acc-body">• 최소 관경: 25mm 이상<br>• 루프통기관: 배수수평관 관경 이상<br>• 신정통기: 최상부에서 150mm 이상 연장<br>• 말단: 개구부에서 600mm 이상 이격</div>
+    </div>
+  </div>
+</div>
+
+<!-- ████ 정보 패널 ████ -->
+<div class="mob-panel" id="mpanel-info">
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-head"><div class="card-ico">🚿</div><span class="card-tit">위생배관 관경 산정 시스템</span></div>
+    <div class="card-body">
+      <div class="nb teal" style="margin-bottom:12px">
+        <div class="nb-tit">MANMIN-Ver2.0</div>
+        <div class="nb-txt">Engineer Kim Manmin<br>기계설비 기술기준 국토교통부 고시 제2021-851호<br>FU 기구부하단위법 · Hunter 곡선 적용</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <a href="../index.html" class="btn btn-primary" style="justify-content:center">🖥️ 데스크탑 전체 화면으로 열기</a>
+        <a href="../github-guide.html" class="btn btn-ghost" style="justify-content:center">🐙 GitHub 배포 가이드</a>
+        <button class="btn btn-install btn-ghost" onclick="triggerInstall()" style="display:none;justify-content:center">📲 홈 화면에 설치</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div class="card-ico">📋</div><span class="card-tit">적용 기준</span></div>
+    <div class="card-body">
+      <div class="cbox">
+        <div class="crow"><span class="ck">법령 기준</span><span class="cv">국토교통부 고시 제2021-851호</span></div>
+        <div class="crow"><span class="ck">FU 기준표</span><span class="cv">[별표 4·5·6·8]</span></div>
+        <div class="crow"><span class="ck">유량 산정</span><span class="cv">Hunter 곡선 근사식</span></div>
+        <div class="crow"><span class="ck">급수 마찰손실</span><span class="cv">Hazen-Williams 공식</span></div>
+        <div class="crow"><span class="ck">배수 유동</span><span class="cv">Manning 공식</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /mob-main -->
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav no-print">
+  <button class="nav-btn active" onclick="switchMobPanel('calc',this)">
+    <div class="nav-indicator"></div>
+    <div class="nav-ico">🔧</div>
+    <div class="nav-lbl">산정</div>
+  </button>
+  <button class="nav-btn" onclick="switchMobPanel('table',this)">
+    <div class="nav-indicator"></div>
+    <div class="nav-ico">📋</div>
+    <div class="nav-lbl">표준표</div>
+  </button>
+  <button class="nav-btn" onclick="switchMobPanel('guide',this)">
+    <div class="nav-indicator"></div>
+    <div class="nav-ico">📖</div>
+    <div class="nav-lbl">기준</div>
+  </button>
+  <button class="nav-btn" onclick="switchMobPanel('info',this)">
+    <div class="nav-indicator"></div>
+    <div class="nav-ico">ℹ️</div>
+    <div class="nav-lbl">정보</div>
+  </button>
+</nav>
+
+<!-- Toast -->
+<div class="toast" id="toastMsg"></div>
+
+<script src="../js/engine.js"></script>
+<script src="../js/ui.js"></script>
+<script>
+// ── Mobile specific ──
+function switchMobPanel(id, btn){
+  document.querySelectorAll('.mob-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const p = document.getElementById('mpanel-'+id);
+  if(p) p.classList.add('active');
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function toggleAcc(el){
+  el.classList.toggle('open');
+}
+
+// ── Override liveCalc for mobile ──
+function liveCalc(){
+  liveCalcBase();
+}
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', function(){
+  const d = new Date();
+  const inp = document.getElementById('inp-projdate');
+  if(inp) inp.value = d.toISOString().split('T')[0];
+  renderBuildingGrid('bldGrid');
+  renderFixtureGrid('mob-fixtureGrid','wc');
+  renderStdTables();
+  liveCalc();
+});
+
+function renderStdTables(){
+  const sb = document.getElementById('mob-std-supply');
+  if(sb) sb.innerHTML = SUPPLY_PIPE_TABLE.map(r=>`<tr><td>${r[0]}~${r[1]}</td><td class="mono">${r[2]}A</td><td>${r[3]}</td><td style="font-size:9.5px">${r[4]}</td></tr>`).join('');
+  const db = document.getElementById('mob-std-drain');
+  if(db) db.innerHTML = DRAIN_PIPE_TABLE.map(r=>`<tr><td>${r[0]}~${r[1]}</td><td class="mono">${r[2]}A</td><td class="mono">${r[3]}A</td><td class="mono">${r[4]}A</td><td class="mono">${r[5]}A</td></tr>`).join('');
+}
+
+function resetAll(){
+  STATE.fixtureQty = {};
+  STATE.buildingId = 'office';
+  STATE.result = null;
+  document.getElementById('inp-projname').value = '만민 건축사 신사옥 신축공사';
+  document.getElementById('inp-floors').value   = '5';
+  document.getElementById('inp-floorht').value  = '3.0';
+  document.getElementById('inp-vel-supply').value = '1.5';
+  document.getElementById('inp-pressure').value = '300';
+  document.getElementById('inp-hwtemp').value   = '60';
+  renderBuildingGrid('bldGrid');
+  renderFixtureGrid('mob-fixtureGrid','wc');
+  liveCalc();
+  showToast('🔄 초기화 완료');
+}
+
+// ── JPG save ──
+function saveJPG(){
+  const el = document.getElementById('result-content');
+  if(!el || !STATE.result){ showToast('⚠️ 먼저 관경을 산정하세요'); return; }
+  if(typeof html2canvas==='undefined'){ showToast('⚠️ 잠시 후 다시 시도해주세요'); return; }
+  showToast('📷 이미지 생성 중...');
+  html2canvas(el, {scale:2, backgroundColor:'#fff'}).then(function(canvas){
+    const url = canvas.toDataURL('image/jpeg', 0.95);
+    const a = document.createElement('a');
+    a.href=url; a.download='위생배관_산정결과_'+new Date().toISOString().split('T')[0]+'.jpg'; a.click();
+    showToast('✅ JPG 저장 완료');
+    window._shareJpg = url;
+    window._shareJpgName = a.download;
+  });
+}
+
+function shareResult(){
+  if(!STATE.result){ showToast('⚠️ 먼저 관경을 산정하세요'); return; }
+  const r = STATE.result;
+  const txt = `위생배관 관경 산정 결과\n` +
+    `급수 주관: ${r.supplyMain}A | 급탕 주관: ${r.hotMain}A\n` +
+    `배수 수평관: ${r.drainHoriz}A | 배수 수직관: ${r.drainVert}A\n` +
+    `통기관: ${r.ventLoop}A | FU: 급수${r.fuS}/급탕${r.fuH}/배수${r.fuD}\n` +
+    `— MANMIN 위생배관 관경 산정 시스템 Ver2.0`;
+  if(navigator.share){
+    navigator.share({title:'위생배관 관경 산정 결과', text:txt})
+      .then(()=>showToast('✅ 공유 완료'))
+      .catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(txt).then(()=>showToast('📋 클립보드에 복사 완료'));
+  }
+}
+</script>
+</body>
+</html>

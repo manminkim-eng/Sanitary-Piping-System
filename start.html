@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>위생배관 관경 산정 시스템</title>
+<meta name="theme-color" content="#0e7490"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="위생배관"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background:linear-gradient(135deg,#0c4a6e 0%,#0e7490 50%,#06b6d4 100%);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.splash{
+  text-align:center;
+  animation:fadeIn .6s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.splash-logo{
+  width:90px;height:90px;background:rgba(255,255,255,.15);
+  border-radius:22px;display:flex;align-items:center;justify-content:center;
+  font-size:46px;margin:0 auto 20px;
+  box-shadow:0 8px 32px rgba(0,0,0,.2);
+  backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);
+  animation:logoPulse 2s ease-in-out infinite;
+}
+@keyframes logoPulse{0%,100%{box-shadow:0 8px 32px rgba(0,0,0,.2);}50%{box-shadow:0 8px 48px rgba(6,182,212,.4);}}
+.splash-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:6px;}
+.splash-sub{font-size:12px;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:32px;line-height:1.6;}
+.device-cards{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.dcard{
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:16px;padding:22px 20px;
+  cursor:pointer;transition:all .2s;
+  text-decoration:none;color:#fff;
+  width:160px;text-align:center;
+}
+.dcard:hover{background:rgba(255,255,255,.22);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.2);}
+.dcard.recommended{border-color:rgba(253,224,71,.6);background:rgba(253,224,71,.1);}
+.dcard-ico{font-size:36px;margin-bottom:10px;}
+.dcard-title{font-size:13px;font-weight:900;margin-bottom:4px;}
+.dcard-desc{font-size:10px;opacity:.7;font-weight:600;line-height:1.5;}
+.dcard-badge{display:inline-block;background:#fde047;color:#0c1a2e;font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;margin-bottom:6px;}
+.redirect-msg{font-size:12px;color:rgba(255,255,255,.6);font-weight:600;}
+.progress-bar{width:160px;height:3px;background:rgba(255,255,255,.2);border-radius:3px;margin:8px auto 0;overflow:hidden;}
+.progress-fill{height:100%;background:#fde047;border-radius:3px;width:0;transition:width 2s linear;}
+</style>
+</head>
+<body>
+<div class="splash">
+  <div class="splash-logo">🚿</div>
+  <div class="splash-title">위생배관 관경 산정 시스템</div>
+  <div class="splash-sub">
+    기계설비 기술기준 국토교통부 고시 제2021-851호<br>
+    ENGINEER KIM MANMIN · Ver 2.0
+  </div>
+
+  <div class="device-cards">
+    <a href="index.html" class="dcard" id="card-desktop">
+      <div class="dcard-ico">🖥️</div>
+      <div class="dcard-title">데스크탑</div>
+      <div class="dcard-desc">전체 화면<br>2열 레이아웃<br>A4 미리보기</div>
+    </a>
+    <a href="pages/tablet.html" class="dcard" id="card-tablet">
+      <div class="dcard-ico">📱</div>
+      <div class="dcard-title">태블릿</div>
+      <div class="dcard-desc">사이드바 메뉴<br>실시간 결과<br>터치 최적화</div>
+    </a>
+    <a href="pages/mobile.html" class="dcard" id="card-mobile">
+      <div class="dcard-ico">📲</div>
+      <div class="dcard-title">모바일</div>
+      <div class="dcard-desc">하단 네비게이션<br>JPG 저장·공유<br>PWA 설치 지원</div>
+    </a>
+  </div>
+
+  <div class="redirect-msg" id="redirect-msg">기기를 자동 감지하여 이동합니다...</div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<script>
+(function(){
+  const w = window.innerWidth;
+  let target, cardId;
+  if(w <= 640){
+    target = 'pages/mobile.html';
+    cardId = 'card-mobile';
+  } else if(w <= 1024){
+    target = 'pages/tablet.html';
+    cardId = 'card-tablet';
+  } else {
+    target = 'index.html';
+    cardId = 'card-desktop';
+  }
+
+  // Highlight recommended card
+  const rec = document.getElementById(cardId);
+  if(rec){
+    rec.classList.add('recommended');
+    const badge = document.createElement('div');
+    badge.className = 'dcard-badge';
+    badge.textContent = '✨ 현재 기기 최적';
+    rec.insertBefore(badge, rec.firstChild);
+  }
+
+  // Auto redirect after 2s
+  const fill = document.getElementById('progress-fill');
+  if(fill) setTimeout(()=>{ fill.style.width='100%'; }, 50);
+  setTimeout(function(){
+    window.location.href = target;
+  }, 2200);
+
+  // SW
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  }
+})();
+</script>
+</body>
+</html>

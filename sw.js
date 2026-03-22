@@ -1,43 +1,40 @@
 // 위생배관 관경 산정 시스템 — Service Worker
-// MANMIN-Ver2.0
+// MANMIN-Ver2.0 · WAP 세트
 
-const CACHE_NAME = 'sanitary-pipe-v2.0';
-const ASSETS = [
+const CACHE = 'sanitary-pipe-wap-v1';
+const FILES = [
   './',
+  './start.html',
   './index.html',
-  './manifest.json'
+  './pages/tablet.html',
+  './pages/mobile.html',
+  './css/style.css',
+  './js/engine.js',
+  './js/ui.js',
+  './manifest.json',
 ];
 
-// Install
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
-  );
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
   self.skipWaiting();
 });
-
-// Activate — clean old caches
-self.addEventListener('activate', event => {
-  event.waitUntil(
+self.addEventListener('activate', e => {
+  e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
 });
-
-// Fetch — cache-first with network fallback
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request).then(response => {
-        if (response && response.status === 200 && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      });
-    }).catch(() => caches.match('./index.html'))
+self.addEventListener('fetch', e => {
+  if(e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.match(e.request).then(c => c || fetch(e.request).then(r => {
+      if(r && r.status===200 && r.type==='basic'){
+        const clone = r.clone();
+        caches.open(CACHE).then(cache => cache.put(e.request, clone));
+      }
+      return r;
+    })).catch(() => caches.match('./index.html'))
   );
 });
