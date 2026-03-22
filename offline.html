@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>오프라인 — 위생배관</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  min-height:100vh;background:#ecfeff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color:#0c1a2e;padding:24px;
+}
+.box{
+  max-width:380px;width:100%;text-align:center;
+  background:#fff;border:1px solid #a5f3fc;
+  border-radius:20px;padding:48px 32px;
+  box-shadow:0 8px 40px rgba(14,116,144,.12);
+}
+.ico-wrap{
+  width:72px;height:72px;margin:0 auto 24px;
+  background:#cffafe;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+}
+h1{font-size:1.25rem;font-weight:900;color:#164e63;margin-bottom:8px;}
+p{font-size:.85rem;color:#0e7490;line-height:1.75;margin-bottom:28px;}
+button{
+  background:#0e7490;color:#fff;
+  border:none;padding:12px 32px;border-radius:8px;
+  font-size:.88rem;font-weight:800;cursor:pointer;
+  font-family:inherit;transition:background .15s;
+}
+button:hover{background:#155e75;}
+.foot{margin-top:20px;font-size:.7rem;color:#a5f3fc;font-family:'JetBrains Mono',monospace,sans-serif;}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="ico-wrap">🔧</div>
+  <h1>오프라인 상태입니다</h1>
+  <p>인터넷 연결을 확인해 주세요.<br>연결 후 다시 시도하면<br>캐시 데이터로 자동 복원됩니다.</p>
+  <button onclick="location.reload()">🔄 다시 시도</button>
+  <div class="foot">위생배관 관경 산정 시스템 — MANMIN-Ver2.0</div>
+</div>
+</body>
+</html>
