@@ -264,9 +264,9 @@ input[type="number"]{-moz-appearance:textfield;}
 .gtbl tr:nth-child(even) td{background:#f0fdfe;}
 
 /* A4 PREVIEW */
-.a4-wrap{background:#78909c;padding:24px 20px 40px;min-height:calc(100vh - 120px);overflow-y:auto;position:relative;display:flex;justify-content:center;align-items:flex-start;}
+.a4-wrap{background:#78909c;padding:24px 20px 40px;min-height:calc(100vh - 120px);overflow-y:auto;overflow-x:hidden;position:relative;display:flex;justify-content:center;align-items:flex-start;}
 .a4-scale-wrap{display:block;transform-origin:top center;flex-shrink:0;}
-@media(max-width:860px){.a4-wrap{padding:8px 4px 20px;justify-content:flex-start;}.a4-scale-wrap{transform-origin:top left;}}
+@media(max-width:860px){.a4-wrap{padding:10px 6px 24px;justify-content:center;align-items:flex-start;}.a4-scale-wrap{transform-origin:top center;}}
 .a4-page{background:#fff;width:794px;margin:0 auto;padding:76px 90px 76px 90px;box-shadow:0 8px 40px rgba(0,0,0,.28);font-size:10.5px;color:#0c1a2e;display:block;}
 .a4-page *{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif!important;}
 .a4-tit{font-size:17px;font-weight:900;color:#164e63;text-align:center;border-bottom:2.5px solid #0e7490;padding-bottom:8px;margin-bottom:10px;letter-spacing:-.02em;}
@@ -352,8 +352,6 @@ input[type="number"]{-moz-appearance:textfield;}
 .btn-export{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;border:none;font-family:inherit;transition:all .15s;white-space:nowrap;}
 .btn-print{background:#0e7490;color:#fff;}
 .btn-print:hover{background:#155e75;}
-.btn-pdf{background:#dc2626;color:#fff;}
-.btn-pdf:hover{background:#b91c1c;}
 .btn-jpg-mob{background:#7e22ce;color:#fff;}
 .btn-jpg-mob:hover{background:#6b21a8;}
 .export-status{font-size:10px;font-weight:700;color:#0e7490;margin-left:4px;}
@@ -951,7 +949,6 @@ input[type="number"]{-moz-appearance:textfield;}
   <div class="a4-export-bar">
     <span class="bar-lbl">📄 A4 출력 :</span>
     <button class="btn-export btn-print" onclick="printA4()">🖨️ 인쇄 (브라우저)</button>
-    <button class="btn-export btn-pdf" onclick="exportPDF()" id="btnExportPDF">📕 PDF 저장</button>
     <span class="export-status" id="exportStatus"></span>
   </div>
   <div class="a4-wrap">
@@ -2507,6 +2504,8 @@ function scaleA4(){
   // 스케일 적용
   wrap.style.transform = `scale(${scale})`;
   wrap.style.width     = '794px';
+  wrap.style.marginLeft = 'auto';
+  wrap.style.marginRight = 'auto';
 
   // 실제 페이지 높이(내용에 따라 가변) 기반으로 래퍼 높이 설정
   const page = document.getElementById('a4Page');
@@ -2546,113 +2545,6 @@ function printA4(){
   target.style.display = 'block';
   window.print();
   setTimeout(()=>{ target.style.display='none'; }, 1500);
-}
-
-/* ── PDF 저장 ──
-   html2canvas 전체 높이 캡처 → PNG 다운로드 + 인쇄창 PDF 저장 유도
-   ① scrollHeight 기준으로 하부 잘림 방지
-   ② scale:2 (메모리 안전)
-   ③ 팝업 차단 시 PNG 직접 다운로드로 자동 대체
-*/
-function exportPDF(){
-  if(!STATE.result){ showToast('⚠️ 먼저 관경을 산정하세요'); return; }
-  if(typeof html2canvas==='undefined'){ showToast('⚠️ html2canvas 로딩 중 — 잠시 후 재시도'); return; }
-
-  const btn    = document.getElementById('btnExportPDF');
-  const status = document.getElementById('exportStatus');
-  btn.textContent    = '⏳ 캡처 중...';
-  btn.disabled       = true;
-  status.textContent = 'A4 이미지 생성 중...';
-
-  const page = document.getElementById('a4Page');
-  // 실제 전체 높이 기준 (하부 잘림 방지)
-  const fullH = Math.max(page.scrollHeight, page.offsetHeight);
-  const fullW = page.offsetWidth || 794;
-
-  html2canvas(page, {
-    scale:           2,
-    useCORS:         true,
-    allowTaint:      true,
-    backgroundColor: '#ffffff',
-    logging:         false,
-    width:           fullW,
-    height:          fullH,
-    windowWidth:     fullW,
-    windowHeight:    fullH,
-    scrollX:         0,
-    scrollY:         -window.scrollY,
-  })
-  .then(function(canvas){
-    status.textContent = 'PDF 창 생성 중...';
-    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-
-    const printWin = window.open('', '_blank',
-      'width=900,height=700,scrollbars=yes,toolbar=no,menubar=no');
-
-    if(!printWin){
-      // 팝업 차단 → PNG 직접 다운로드
-      const now   = new Date();
-      const stamp = now.getFullYear()
-        + String(now.getMonth()+1).padStart(2,'0')
-        + String(now.getDate()).padStart(2,'0');
-      const a = document.createElement('a');
-      a.href     = imgData;
-      a.download = '위생배관관경산정서_' + stamp + '.jpg';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      btn.textContent='📕 PDF 저장'; btn.disabled=false;
-      status.textContent='⚠️ 팝업 차단됨 — JPG 저장됨';
-      setTimeout(()=>{ status.textContent=''; }, 5000);
-      showToast('⚠️ 팝업 차단 — JPG로 저장됨');
-      return;
-    }
-
-    printWin.document.write(`<!DOCTYPE html>
-<html lang="ko"><head>
-<meta charset="UTF-8">
-<title>위생배관 관경 산정서 — PDF 저장</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{background:#fff;}
-  @page{size:A4 portrait;margin:0;}
-  @media screen{
-    body{display:flex;flex-direction:column;align-items:center;
-         padding:16px;background:#78909c;gap:12px;}
-    .sheet{width:794px;box-shadow:0 4px 20px rgba(0,0,0,.4);}
-    .guide{width:794px;font-family:sans-serif;font-size:13px;text-align:center;
-           background:#164e63;color:#fff;padding:10px;border-radius:6px;}
-  }
-  @media print{
-    body,html{background:#fff!important;}
-    .guide{display:none;}
-    .sheet{width:100%;}
-    img{width:100%;height:auto;display:block;page-break-inside:avoid;}
-  }
-  img{width:100%;display:block;}
-</style>
-</head><body>
-<div class="guide">🖨️ <b>PDF 저장 방법:</b> 인쇄 대화상자 → 프린터 = <b>"PDF로 저장"</b> → 저장</div>
-<div class="sheet"><img src="${imgData}" alt="산정서"></div>
-<script>
-  window.addEventListener('load',function(){
-    setTimeout(function(){ window.print(); }, 700);
-  });
-<\/script>
-</body></html>`);
-    printWin.document.close();
-
-    btn.textContent    = '📕 PDF 저장';
-    btn.disabled       = false;
-    status.textContent = '✅ PDF 창 열림 — 인쇄→PDF로 저장 선택';
-    setTimeout(()=>{ status.textContent=''; }, 6000);
-    showToast('✅ 새 창에서 인쇄 → PDF 저장하세요');
-  })
-  .catch(function(err){
-    console.error('exportPDF error:', err);
-    btn.textContent    = '📕 PDF 저장';
-    btn.disabled       = false;
-    status.textContent = '';
-    showToast('⚠️ 캡처 오류: ' + (err.message||'알 수 없음'));
-  });
 }
 
 /* ── 삭제된 exportExcel 흔적 제거 (빈 함수 방어) ── */
