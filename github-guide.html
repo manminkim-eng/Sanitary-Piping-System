@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GitHub 배포 가이드 — 위생배관 관경 산정 시스템</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --teal:#0e7490;
+  --teal-d:#155e75;
+  --teal-l:#cffafe;
+  --cyan:#06b6d4;
+  --bg:#ecfeff;
+  --white:#fff;
+  --text:#0c1a2e;
+  --muted:#5c7a8a;
+  --border:#b2ebf2;
+  --orange:#f97316;
+  --green:#22c55e;
+}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--teal-d),var(--teal));padding:0;position:sticky;top:0;z-index:100;box-shadow:0 4px 24px rgba(14,116,144,.35);}
+.hdr-inner{max-width:960px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:12px;}
+.hdr-ico{width:42px;height:42px;background:rgba(255,255,255,.2);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;backdrop-filter:blur(4px);}
+.hdr-txt{flex:1;}
+.hdr-title{font-size:15px;font-weight:900;color:#fff;line-height:1.2;}
+.hdr-sub{font-size:10px;color:rgba(255,255,255,.7);font-weight:600;margin-top:2px;}
+.hdr-badge{background:rgba(255,255,255,.2);color:#fff;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;backdrop-filter:blur(4px);white-space:nowrap;border:1px solid rgba(255,255,255,.25);}
+
+/* HERO */
+.hero{max-width:960px;margin:0 auto;padding:40px 20px 20px;}
+.hero-card{background:#fff;border-radius:18px;padding:32px;border:1px solid var(--border);box-shadow:0 4px 30px rgba(14,116,144,.1);display:flex;gap:28px;align-items:center;}
+@media(max-width:640px){.hero-card{flex-direction:column;gap:16px;padding:20px;}}
+.hero-left{flex:1;}
+.hero-title{font-size:26px;font-weight:900;color:var(--teal-d);line-height:1.25;margin-bottom:10px;}
+.hero-title em{color:var(--orange);font-style:normal;}
+.hero-desc{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:18px;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.pill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;}
+.pill.teal{background:var(--teal-l);color:var(--teal-d);border:1px solid var(--border);}
+.pill.org{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
+.hero-right{flex-shrink:0;}
+.hero-stat{text-align:center;background:linear-gradient(135deg,var(--teal-d),var(--teal));border-radius:14px;padding:20px 28px;color:#fff;}
+.hs-num{font-size:44px;font-weight:900;font-family:'JetBrains Mono',monospace;color:#fde047;line-height:1;}
+.hs-txt{font-size:11px;opacity:.8;margin-top:4px;font-weight:600;}
+.hs-sub{font-size:10px;opacity:.6;margin-top:2px;}
+
+/* MAIN */
+.main{max-width:960px;margin:0 auto;padding:0 20px 80px;}
+
+/* SECTION HEADING */
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:32px;}
+.sec-num{width:30px;height:30px;background:var(--teal);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0;}
+.sec-title{font-size:15px;font-weight:900;color:var(--teal-d);}
+.sec-desc{font-size:11px;color:var(--muted);margin-left:auto;font-weight:600;}
+
+/* STEP CARD */
+.step-card{background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px;box-shadow:0 2px 12px rgba(14,116,144,.06);}
+.step-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:linear-gradient(90deg,var(--teal-l),#fff);border-bottom:1px solid var(--border);}
+.step-ico{font-size:20px;flex-shrink:0;}
+.step-label{font-size:10px;font-weight:800;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;}
+.step-title{font-size:13px;font-weight:900;color:var(--teal-d);}
+.step-body{padding:16px 18px;}
+
+/* SCREENSHOT AREA */
+.ss-area{background:#f8fafc;border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;color:var(--muted);font-size:12px;margin-bottom:12px;position:relative;overflow:hidden;}
+.ss-area .ss-inner{position:relative;z-index:1;}
+.ss-bg{position:absolute;inset:0;background:linear-gradient(135deg,#f0fdfe,#fff);opacity:.6;}
+
+/* UI MOCKUP */
+.ui-mock{background:#1a1a2e;border-radius:10px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:11px;margin-bottom:12px;}
+.ui-mock-bar{background:#2d2d44;padding:8px 12px;display:flex;align-items:center;gap:6px;}
+.dot{width:10px;height:10px;border-radius:50%;}
+.dot.r{background:#ff5f57;}
+.dot.y{background:#febc2e;}
+.dot.g{background:#28c840;}
+.ui-mock-url{background:#3a3a55;border-radius:5px;padding:3px 10px;flex:1;text-align:center;font-size:10px;color:#a5b4fc;}
+.ui-mock-body{padding:14px;}
+.ui-mock-body .cmd{color:#67e8f9;margin-bottom:6px;display:flex;align-items:flex-start;gap:8px;}
+.cmd-prompt{color:#fde047;flex-shrink:0;}
+.cmd-txt{color:#e2e8f0;}
+.cmd-comment{color:#6b7280;font-size:9.5px;}
+
+/* BUTTONS */
+.action-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;border:none;font-family:inherit;transition:all .15s;text-decoration:none;}
+.ab-primary{background:var(--teal);color:#fff;box-shadow:0 3px 12px rgba(14,116,144,.3);}
+.ab-primary:hover{background:var(--teal-d);transform:translateY(-1px);}
+.ab-ghost{background:#fff;color:var(--teal);border:2px solid var(--border);}
+.ab-ghost:hover{border-color:var(--teal);background:var(--teal-l);}
+.ab-orange{background:var(--orange);color:#fff;box-shadow:0 3px 12px rgba(249,115,22,.3);}
+.ab-orange:hover{background:#ea580c;transform:translateY(-1px);}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+
+/* NOTICE BOXES */
+.nb{border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.nb.teal{background:var(--teal-l);border:1.5px solid var(--border);}
+.nb.org{background:#fff7ed;border:1.5px solid #fed7aa;}
+.nb.grn{background:#f0fdf4;border:1.5px solid #bbf7d0;}
+.nb.red{background:#fef2f2;border:1.5px solid #fecaca;}
+.nb-tit{font-size:11px;font-weight:800;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.nb.teal .nb-tit{color:#155e75;} .nb.org .nb-tit{color:#c2410c;}
+.nb.grn .nb-tit{color:#15803d;} .nb.red .nb-tit{color:#dc2626;}
+.nb-txt{font-size:11px;line-height:1.8;}
+.nb.teal .nb-txt{color:#164e63;} .nb.org .nb-txt{color:#78350f;}
+.nb.grn .nb-txt{color:#14532d;} .nb.red .nb-txt{color:#7f1d1d;}
+
+/* INLINE CODE */
+code{font-family:'JetBrains Mono',monospace;font-size:11px;background:#f0fdfe;color:var(--teal);padding:2px 6px;border-radius:4px;border:1px solid var(--border);}
+
+/* CHECKLIST */
+.checklist{list-style:none;}
+.checklist li{display:flex;align-items:flex-start;gap:9px;padding:8px 0;border-bottom:1px dashed var(--border);font-size:12px;line-height:1.6;}
+.checklist li:last-child{border-bottom:none;}
+.ck-box{width:20px;height:20px;border-radius:5px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px;}
+
+/* GH CARD MOCKUP */
+.gh-mock{border:1px solid #d0d7de;border-radius:10px;overflow:hidden;background:#fff;font-size:12px;}
+.gh-mock-header{background:#f6f8fa;border-bottom:1px solid #d0d7de;padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.gh-repo-name{font-weight:700;color:#0969da;font-size:13px;}
+.gh-badge{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid #d0d7de;color:#57606a;}
+.gh-mock-body{padding:14px;}
+.gh-file-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #f0f0f0;font-size:11.5px;}
+.gh-file-row:last-child{border-bottom:none;}
+.gh-file-ico{font-size:14px;flex-shrink:0;}
+.gh-file-name{color:#0969da;font-weight:600;flex:1;}
+.gh-file-date{color:#57606a;font-size:10.5px;}
+
+/* SETTINGS MOCKUP */
+.settings-mock{border:1px solid #d0d7de;border-radius:10px;overflow:hidden;background:#fff;}
+.sm-nav{background:#f6f8fa;border-bottom:1px solid #d0d7de;padding:10px 16px;display:flex;gap:16px;}
+.sm-tab{font-size:12px;color:#57606a;font-weight:600;padding:4px 0;border-bottom:2px solid transparent;}
+.sm-tab.active{color:#0969da;border-bottom-color:#0969da;font-weight:700;}
+.sm-body{padding:16px;}
+.sm-section-title{font-size:13px;font-weight:700;margin-bottom:12px;}
+.sm-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f0;}
+.sm-row:last-child{border-bottom:none;}
+.sm-row-label{font-size:12px;font-weight:600;}
+.sm-row-val{font-size:12px;color:#57606a;}
+.sm-select-mock{background:#f6f8fa;border:1px solid #d0d7de;border-radius:6px;padding:5px 24px 5px 10px;font-size:12px;font-weight:600;color:#0c1a2e;position:relative;}
+.sm-select-mock::after{content:'▾';position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;}
+.sm-highlight{background:#ddf4ff;border:1px solid #54aeff;border-radius:6px;padding:8px 12px;margin-top:10px;font-size:12px;color:#0969da;font-weight:600;display:flex;align-items:center;gap:6px;}
+.sm-save-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 16px;background:#1f883d;color:#fff;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;margin-top:10px;}
+
+/* URL DISPLAY */
+.url-display{background:var(--teal-d);color:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px;margin-top:12px;}
+.url-ico{font-size:24px;flex-shrink:0;}
+.url-label{font-size:10px;opacity:.7;margin-bottom:3px;font-weight:700;}
+.url-text{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#67e8f9;}
+.url-copy-btn{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;font-family:inherit;}
+.url-copy-btn:hover{background:rgba(255,255,255,.3);}
+
+/* USERNAME FORM */
+.username-form{background:var(--teal-l);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+.uf-label{font-size:11px;font-weight:800;color:var(--teal-d);margin-bottom:8px;display:block;}
+.uf-row{display:flex;gap:8px;}
+.uf-input{flex:1;padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;color:var(--text);outline:none;font-family:inherit;}
+.uf-input:focus{border-color:var(--teal);}
+.uf-btn{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;}
+
+/* PROGRESS BAR */
+.deploy-progress{background:#f0fdfe;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px;}
+.dp-title{font-size:11px;font-weight:800;color:var(--teal-d);margin-bottom:10px;}
+.dp-step{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.dp-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+.dp-dot.done{background:var(--green);color:#fff;}
+.dp-dot.active{background:var(--teal);color:#fff;animation:pulse 1.5s infinite;}
+.dp-dot.wait{background:#e2e8f0;color:#94a3b8;}
+.dp-label{font-size:11.5px;font-weight:700;}
+.dp-label.done{color:#15803d;}
+.dp-label.active{color:var(--teal-d);}
+.dp-label.wait{color:#94a3b8;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(14,116,144,.4);}50%{box-shadow:0 0 0 6px rgba(14,116,144,0);}}
+
+/* FOOTER */
+.footer{background:var(--teal-d);color:rgba(255,255,255,.7);text-align:center;padding:24px 20px;font-size:11px;font-weight:600;}
+.footer strong{color:#fff;}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .hero-title{font-size:20px;}
+  .step-body{padding:12px 14px;}
+}
+
+/* COPY TOAST */
+.copy-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:#164e63;color:#fff;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:700;opacity:0;transition:all .25s;z-index:999;pointer-events:none;}
+.copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-ico">🚿</div>
+    <div class="hdr-txt">
+      <div class="hdr-title">위생배관 GitHub 배포 가이드</div>
+      <div class="hdr-sub">Engineer Kim Manmin · Ver 2.0 · GitHub Pages 무료 호스팅</div>
+    </div>
+    <div class="hdr-badge">📖 설치 가이드</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-card">
+    <div class="hero-left">
+      <div class="hero-title">3단계로 완성하는<br><em>무료 웹 배포</em></div>
+      <div class="hero-desc">
+        GitHub Pages를 이용해 위생배관 관경 산정 시스템을 인터넷에 배포하세요.<br>
+        무료이며, 별도 서버 없이 영구적으로 운영 가능합니다.
+      </div>
+      <div class="hero-pills">
+        <span class="pill teal">✅ 무료 호스팅</span>
+        <span class="pill teal">🔒 HTTPS 자동 적용</span>
+        <span class="pill teal">🌐 전 세계 접속 가능</span>
+        <span class="pill org">⏱️ 5분이면 완성</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hs-num">3</div>
+        <div class="hs-txt">단계 배포</div>
+        <div class="hs-sub">총 소요 시간 ≈ 5분</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- USERNAME INPUT -->
+  <div class="username-form">
+    <label class="uf-label">👤 GitHub 사용자명을 입력하면 정확한 URL을 확인할 수 있어요</label>
+    <div class="uf-row">
+      <input type="text" class="uf-input" id="usernameInput" placeholder="예: kimmanmin" oninput="updateUrls()">
+      <button class="uf-btn" onclick="updateUrls()">적용 →</button>
+    </div>
+  </div>
+
+  <!-- STEP 0: GitHub 계정 -->
+  <div class="sec-head">
+    <div class="sec-num">0</div>
+    <div class="sec-title">사전 준비 — GitHub 계정</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head">
+      <div class="step-ico">👤</div>
+      <div>
+        <div class="step-label">PREREQUISITE</div>
+        <div class="step-title">GitHub 계정이 없다면 먼저 가입하세요</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="nb teal">
+        <div class="nb-tit">ℹ️ 이미 GitHub 계정이 있으시면 STEP 1로 바로 이동하세요</div>
+        <div class="nb-txt">GitHub 계정은 완전 무료입니다. 이메일 주소만 있으면 1분 안에 가입 완료!</div>
+      </div>
+      <div class="btn-row">
+        <a href="https://github.com/signup" target="_blank" class="action-btn ab-primary">🐙 GitHub 가입하기 (무료)</a>
+        <a href="https://github.com/login" target="_blank" class="action-btn ab-ghost">🔑 로그인</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1: 저장소 생성 -->
+  <div class="sec-head">
+    <div class="sec-num">1</div>
+    <div class="sec-title">저장소(Repository) 생성</div>
+    <div class="sec-desc">약 1분</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head">
+      <div class="step-ico">📁</div>
+      <div>
+        <div class="step-label">STEP 1</div>
+        <div class="step-title">새 저장소 만들기</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <ul class="checklist">
+        <li>
+          <div class="ck-box">1</div>
+          <div>GitHub에 로그인 후 우상단 <code>+</code> 버튼 클릭 → <strong>New repository</strong> 선택</div>
+        </li>
+        <li>
+          <div class="ck-box">2</div>
+          <div>Repository name에 <code>위생배관</code> 입력 (또는 영문: <code>sanitary-pipe</code>)</div>
+        </li>
+        <li>
+          <div class="ck-box">3</div>
+          <div><strong>Public</strong> 선택 (GitHub Pages는 Public 저장소에서 무료)</div>
+        </li>
+        <li>
+          <div class="ck-box">4</div>
+          <div>✅ <strong>Add a README file</strong> 체크 후 <strong>Create repository</strong> 클릭</div>
+        </li>
+      </ul>
+
+      <div class="gh-mock" style="margin-top:14px;">
+        <div class="gh-mock-header">
+          <span>🐙</span>
+          <span class="gh-repo-name" id="repoNameDisplay">YOUR_USERNAME / 위생배관</span>
+          <span class="gh-badge">Public</span>
+        </div>
+        <div class="gh-mock-body" style="padding:10px 14px;font-size:11px;color:#57606a;">
+          저장소가 이렇게 생성됩니다 ↑
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a href="https://github.com/new" target="_blank" class="action-btn ab-primary">➕ 새 저장소 만들기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: 파일 업로드 -->
+  <div class="sec-head">
+    <div class="sec-num">2</div>
+    <div class="sec-title">파일 업로드</div>
+    <div class="sec-desc">약 2분</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head">
+      <div class="step-ico">📤</div>
+      <div>
+        <div class="step-label">STEP 2</div>
+        <div class="step-title">다운로드한 파일을 저장소에 올리기</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="nb org">
+        <div class="nb-tit">📦 업로드할 파일 목록</div>
+        <div class="nb-txt">
+          아래 파일들을 모두 업로드해야 합니다:<br>
+          • <code>index.html</code> — 메인 애플리케이션<br>
+          • <code>README.md</code> — 프로젝트 설명<br>
+          • <code>.nojekyll</code> — GitHub Pages 설정
+        </div>
+      </div>
+
+      <ul class="checklist">
+        <li>
+          <div class="ck-box">1</div>
+          <div>생성된 저장소 페이지에서 <strong>Add file → Upload files</strong> 클릭</div>
+        </li>
+        <li>
+          <div class="ck-box">2</div>
+          <div>다운로드한 파일 3개를 드래그하여 업로드 영역에 놓거나 <strong>choose your files</strong> 클릭</div>
+        </li>
+        <li>
+          <div class="ck-box">3</div>
+          <div>페이지 하단 <strong>Commit changes</strong> 버튼 클릭 (녹색 버튼)</div>
+        </li>
+      </ul>
+
+      <div class="gh-mock" style="margin-top:14px;">
+        <div class="gh-mock-header">
+          <span>📁</span>
+          <span class="gh-repo-name">저장소 파일 목록</span>
+        </div>
+        <div class="gh-mock-body">
+          <div class="gh-file-row"><div class="gh-file-ico">📄</div><div class="gh-file-name">index.html</div><div class="gh-file-date">방금 전</div></div>
+          <div class="gh-file-row"><div class="gh-file-ico">📝</div><div class="gh-file-name">README.md</div><div class="gh-file-date">방금 전</div></div>
+          <div class="gh-file-row"><div class="gh-file-ico">⚙️</div><div class="gh-file-name">.nojekyll</div><div class="gh-file-date">방금 전</div></div>
+        </div>
+      </div>
+
+      <div class="nb grn" style="margin-top:12px;">
+        <div class="nb-tit">💡 TIP — .nojekyll 파일이 안 보이면?</div>
+        <div class="nb-txt">
+          .nojekyll 파일이 업로드 목록에 없을 경우, 저장소에서 직접 생성하면 됩니다:<br>
+          <strong>Add file → Create new file</strong> → 파일명에 <code>.nojekyll</code> 입력 → 내용 없이 Commit
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: GitHub Pages 활성화 -->
+  <div class="sec-head">
+    <div class="sec-num">3</div>
+    <div class="sec-title">GitHub Pages 활성화</div>
+    <div class="sec-desc">약 2분</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head">
+      <div class="step-ico">⚙️</div>
+      <div>
+        <div class="step-label">STEP 3</div>
+        <div class="step-title">Settings에서 Pages 설정하기</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <ul class="checklist">
+        <li>
+          <div class="ck-box">1</div>
+          <div>저장소 상단 메뉴에서 <strong>Settings</strong> 탭 클릭</div>
+        </li>
+        <li>
+          <div class="ck-box">2</div>
+          <div>왼쪽 사이드바에서 <strong>Pages</strong> 클릭</div>
+        </li>
+        <li>
+          <div class="ck-box">3</div>
+          <div>Source에서 <strong>Deploy from a branch</strong> 선택</div>
+        </li>
+        <li>
+          <div class="ck-box">4</div>
+          <div>Branch를 <strong>main</strong>, 폴더를 <strong>/ (root)</strong> 로 선택</div>
+        </li>
+        <li>
+          <div class="ck-box">5</div>
+          <div><strong>Save</strong> 버튼 클릭 → 약 1~2분 대기</div>
+        </li>
+      </ul>
+
+      <div class="settings-mock" style="margin-top:14px;">
+        <div class="sm-nav">
+          <div class="sm-tab">Code</div>
+          <div class="sm-tab">Issues</div>
+          <div class="sm-tab active">Settings</div>
+        </div>
+        <div class="sm-body">
+          <div class="sm-section-title">🌐 GitHub Pages</div>
+          <div class="sm-row">
+            <div class="sm-row-label">Source</div>
+            <div class="sm-select-mock">Deploy from a branch</div>
+          </div>
+          <div class="sm-row">
+            <div class="sm-row-label">Branch</div>
+            <div style="display:flex;gap:6px;">
+              <div class="sm-select-mock">main</div>
+              <div class="sm-select-mock">/ (root)</div>
+            </div>
+          </div>
+          <div class="sm-highlight">✅ Your site is live at <span id="pagesUrlDisplay" style="font-family:monospace;margin-left:4px;">https://YOUR_USERNAME.github.io/위생배관</span></div>
+          <div class="sm-save-btn">Save</div>
+        </div>
+      </div>
+
+      <div class="deploy-progress">
+        <div class="dp-title">📡 배포 진행 상황</div>
+        <div class="dp-step"><div class="dp-dot done">✓</div><div class="dp-label done">저장소 생성 완료</div></div>
+        <div class="dp-step"><div class="dp-dot done">✓</div><div class="dp-label done">파일 업로드 완료</div></div>
+        <div class="dp-step"><div class="dp-dot active">●</div><div class="dp-label active">GitHub Pages 빌드 중 (1~2분)</div></div>
+        <div class="dp-step"><div class="dp-dot wait">4</div><div class="dp-label wait">배포 완료 → 접속 가능!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 완료 -->
+  <div class="sec-head">
+    <div class="sec-num">🎉</div>
+    <div class="sec-title">배포 완료! 이제 접속해보세요</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-head">
+      <div class="step-ico">🌐</div>
+      <div>
+        <div class="step-label">COMPLETE</div>
+        <div class="step-title">배포된 사이트 URL</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="url-display">
+        <div class="url-ico">🚿</div>
+        <div style="flex:1;">
+          <div class="url-label">YOUR SITE URL</div>
+          <div class="url-text" id="finalUrl">https://YOUR_USERNAME.github.io/위생배관</div>
+        </div>
+        <button class="url-copy-btn" onclick="copyUrl()">복사</button>
+      </div>
+
+      <div class="nb grn" style="margin-top:14px;">
+        <div class="nb-tit">✅ 배포 성공 확인 방법</div>
+        <div class="nb-txt">
+          Settings → Pages 페이지에서 초록색 배너에<br>
+          <strong>"Your site is published at https://..."</strong> 메시지가 나타나면 성공입니다!
+        </div>
+      </div>
+
+      <div class="nb org" style="margin-top:10px;">
+        <div class="nb-tit">⏳ 배포 직후 접속이 안 된다면?</div>
+        <div class="nb-txt">
+          GitHub Pages 빌드에 1~3분 소요됩니다. 잠시 후 다시 접속해보세요.<br>
+          브라우저 캐시 문제라면 <strong>Ctrl+Shift+R</strong> (강력 새로고침) 시도.
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a href="#" id="visitBtn" target="_blank" class="action-btn ab-primary">🌐 사이트 방문하기</a>
+        <a href="https://github.com" target="_blank" class="action-btn ab-ghost">🐙 GitHub 열기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec-head">
+    <div class="sec-num">❓</div>
+    <div class="sec-title">자주 묻는 질문</div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-body">
+      <ul class="checklist">
+        <li>
+          <div class="ck-box" style="background:#f97316;">Q</div>
+          <div><strong>저장소 이름을 영문으로 해야 하나요?</strong><br><span style="color:var(--muted);font-size:11px;">아니요. 한글 이름(위생배관)도 가능합니다. URL에는 인코딩되어 표시되지만 정상 작동합니다. 영문을 원하시면 <code>sanitary-pipe</code> 로 만드세요.</span></div>
+        </li>
+        <li>
+          <div class="ck-box" style="background:#f97316;">Q</div>
+          <div><strong>비용이 발생하나요?</strong><br><span style="color:var(--muted);font-size:11px;">GitHub Pages는 Public 저장소에서 완전 무료입니다. 서버 비용, 도메인 비용 없이 영구 운영 가능합니다.</span></div>
+        </li>
+        <li>
+          <div class="ck-box" style="background:#f97316;">Q</div>
+          <div><strong>파일을 수정하면 자동 반영되나요?</strong><br><span style="color:var(--muted);font-size:11px;">네. GitHub에 파일을 업데이트하면 약 1~2분 후 자동으로 배포됩니다.</span></div>
+        </li>
+        <li>
+          <div class="ck-box" style="background:#f97316;">Q</div>
+          <div><strong>커스텀 도메인을 연결할 수 있나요?</strong><br><span style="color:var(--muted);font-size:11px;">네. Settings → Pages → Custom domain에 본인의 도메인을 입력하면 됩니다.</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>🚿 위생배관 관경 산정 시스템</strong> · Engineer Kim Manmin · Ver 2.0<br>
+  기계설비 기술기준 국토교통부 고시 제2021-851호 · GitHub Pages 무료 호스팅
+</div>
+
+<!-- COPY TOAST -->
+<div class="copy-toast" id="copyToast">📋 URL 복사 완료!</div>
+
+<script>
+function updateUrls(){
+  const u = document.getElementById('usernameInput').value.trim() || 'YOUR_USERNAME';
+  const base = `https://${u}.github.io/위생배관`;
+  document.getElementById('repoNameDisplay').textContent = `${u} / 위생배관`;
+  document.getElementById('pagesUrlDisplay').textContent = base;
+  document.getElementById('finalUrl').textContent = base;
+  document.getElementById('visitBtn').href = base;
+}
+function copyUrl(){
+  const url = document.getElementById('finalUrl').textContent;
+  navigator.clipboard.writeText(url).then(()=>{
+    const t = document.getElementById('copyToast');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 2000);
+  });
+}
+</script>
+</body>
+</html>
