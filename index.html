@@ -1018,6 +1018,7 @@ input[type="number"]{-moz-appearance:textfield;}
       <button class="gm-tab" id="gmt-2" onclick="switchGuideTab(2)">💧 급수·급탕</button>
       <button class="gm-tab" id="gmt-3" onclick="switchGuideTab(3)">🔩 오배수·통기</button>
       <button class="gm-tab" id="gmt-4" onclick="switchGuideTab(4)">⚙️ 설계 연관성</button>
+      <button class="gm-tab" id="gmt-5" onclick="switchGuideTab(5)">📱 웹 이용방법</button>
     </div>
 
     <div class="modal-body" style="padding:14px 16px">
@@ -1315,6 +1316,140 @@ input[type="number"]{-moz-appearance:textfield;}
           </div>
         </div>
       </div>
+
+      <!-- ▌패널 5: 웹 이용방법 -->
+      <div class="gm-panel" id="gmp-5" style="display:none">
+
+        <!-- 시스템 개요 -->
+        <div class="nb blue" style="margin-bottom:12px">
+          <div class="nb-tit">📱 위생배관 관경 산정 시스템 이용 안내</div>
+          <div class="nb-txt">
+            본 시스템은 기계설비 기술기준(국토교통부 고시 제2021-851호) [별표 4·5·6·8]을 기반으로<br>
+            급수·급탕·오배수·통기관 관경을 자동 산정하는 웹 기반 설계 보조 도구입니다.<br>
+            <b>데스크탑 · 태블릿 · 모바일</b> 모든 환경에서 최적화된 화면으로 사용 가능합니다.
+          </div>
+        </div>
+
+        <!-- STEP 흐름 -->
+        <div style="font-size:11px;font-weight:800;color:#0e7490;letter-spacing:.05em;margin-bottom:8px">🗂️ 사용 절차 (4단계)</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px">
+
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#f0fdfe;border:1.5px solid #a5f3fc;border-radius:10px;padding:11px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#0e7490;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">1</div>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#155e75;margin-bottom:4px">🏢 건물 정보 입력</div>
+              <div style="font-size:10.5px;color:#164e63;line-height:1.75">
+                상단 <b>「급수·급탕 관경」</b> 탭을 선택합니다.<br>
+                ① 건물 용도 선택 (아파트·사무소·호텔·병원 등)<br>
+                ② 사용 용도 구분 선택 → <b>주거용</b>(아파트·단독주택) / <b>공용</b>(그 외 모든 용도)<br>
+                ③ 층수 및 층높이(m) 입력<br>
+                ④ 급수압(kPa), 유속(m/s), 관재질 설정
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:11px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#b45309;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">2</div>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#c2410c;margin-bottom:4px">🚿 위생기구 수량 입력</div>
+              <div style="font-size:10.5px;color:#78350f;line-height:1.75">
+                위생기구 목록에서 각 기구 수량을 입력합니다.<br>
+                • 세면기, 양변기(세정탱크/세정밸브), 소변기, 욕조, 샤워기, 싱크대 등<br>
+                • 급수(냉수)와 급탕(온수) FU가 자동 계산됩니다.<br>
+                • <b>💡 Tip:</b> 기구를 0으로 두면 해당 기구는 계산에서 제외됩니다.
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:11px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#15803d;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">3</div>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:4px">⚡ 관경 자동 산정</div>
+              <div style="font-size:10.5px;color:#14532d;line-height:1.75">
+                <b>「관경 산정」</b> 버튼을 누르면 결과가 즉시 표시됩니다.<br>
+                • 급수관 / 급탕관 / 배수횡관 / 배수수직관 / 통기관 관경 자동 결정<br>
+                • FU 기준 관경 vs 유속 기준 관경 비교 후 큰 값 채택<br>
+                • 최상층 잔류압·환탕 배관 필요 여부·감압밸브 설치 여부 자동 판정<br>
+                • 결과 하단에 설계 근거(계산 과정)가 함께 표시됩니다.
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#faf5ff;border:1.5px solid #e9d5ff;border-radius:10px;padding:11px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#7e22ce;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">4</div>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#7e22ce;margin-bottom:4px">📄 결과 출력 및 저장</div>
+              <div style="font-size:10.5px;color:#4c1d95;line-height:1.75">
+                상단 탭 <b>「A4 보고서」</b> 또는 <b>「모바일 미리보기」</b>를 선택합니다.<br>
+                • <b>A4 인쇄:</b> 브라우저 인쇄 기능으로 PDF 저장 또는 종이 출력<br>
+                • <b>이미지 저장:</b> 결과를 JPG 이미지로 저장 (모바일 친화적)<br>
+                • <b>오배수 탭:</b> 오배수·통기 관경 별도 산정 가능
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 탭 안내 -->
+        <div style="font-size:11px;font-weight:800;color:#0e7490;letter-spacing:.05em;margin-bottom:8px">🗂️ 상단 탭 기능 안내</div>
+        <div style="background:#fff;border:1px solid #e0f2fe;border-radius:10px;overflow:hidden;margin-bottom:12px">
+          <div style="display:grid;grid-template-columns:auto 1fr;font-size:10.5px">
+            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">💧 급수·급탕 관경</div>
+            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">냉수·온수 공급관 관경 산정 메인 화면</div>
+            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">🔩 오배수 관경</div>
+            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">배수횡관·배수수직관·통기관 관경 산정</div>
+            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">📄 A4 보고서</div>
+            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">인쇄용 A4 설계 보고서 미리보기 · PDF 저장</div>
+            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">📱 모바일 미리보기</div>
+            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">모바일 화면 결과 이미지 저장</div>
+            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490">📖 설계 기준</div>
+            <div style="padding:7px 11px;color:#164e63;font-weight:600">기술기준 별표 원문 및 FU 기준표 참조</div>
+          </div>
+        </div>
+
+        <!-- 기기별 이용 안내 -->
+        <div style="font-size:11px;font-weight:800;color:#0e7490;letter-spacing:.05em;margin-bottom:8px">🖥️ 기기별 이용 환경</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+          <div style="background:#f0fdfe;border:1.5px solid #a5f3fc;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:20px;margin-bottom:5px">🖥️</div>
+            <div style="font-size:11px;font-weight:800;color:#155e75;margin-bottom:4px">데스크탑</div>
+            <div style="font-size:10px;color:#164e63;line-height:1.65">입력 패널 + 결과 패널 2컬럼 동시 표시<br>전체 기능 최적화</div>
+          </div>
+          <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:20px;margin-bottom:5px">📱</div>
+            <div style="font-size:11px;font-weight:800;color:#c2410c;margin-bottom:4px">태블릿</div>
+            <div style="font-size:10px;color:#78350f;line-height:1.65">가로 2컬럼 유지<br>세로 전환 시 1컬럼</div>
+          </div>
+          <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:10px;text-align:center">
+            <div style="font-size:20px;margin-bottom:5px">📲</div>
+            <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:4px">모바일</div>
+            <div style="font-size:10px;color:#14532d;line-height:1.65">1컬럼 최적화<br>PWA 앱 설치 지원</div>
+          </div>
+        </div>
+
+        <!-- PWA 설치 안내 -->
+        <div class="nb org" style="margin-bottom:10px">
+          <div class="nb-tit">📲 PWA 앱으로 설치하기 (오프라인 사용 가능)</div>
+          <div class="nb-txt">
+            <b>Android Chrome:</b> 주소창 우측 ⋮ 메뉴 → 「홈 화면에 추가」 또는 하단 설치 배너 클릭<br>
+            <b>iOS Safari:</b> 하단 공유 아이콘(□↑) → 「홈 화면에 추가」 선택<br>
+            <b>PC Chrome / Edge:</b> 주소창 우측 ⊕ 아이콘 클릭 → 「설치」<br>
+            설치 후 인터넷 없이도 모든 기능을 오프라인으로 사용할 수 있습니다.
+          </div>
+        </div>
+
+        <!-- 주의사항 -->
+        <div class="nb red">
+          <div class="nb-tit">⚠️ 사용 시 주의사항</div>
+          <div class="nb-txt">
+            • 본 시스템은 설계 보조 도구입니다. 실제 시공 전 반드시 담당 기술사의 검토를 받으시기 바랍니다.<br>
+            • 결과는 기계설비 기술기준 기준이며 현장 조건(기존 배관·압력 등)에 따라 조정이 필요합니다.<br>
+            • 입력값(층수·유속·급수압 등)을 정확하게 입력해야 올바른 결과를 얻을 수 있습니다.<br>
+            • 하단 우측 📐 플로팅 버튼을 눌러도 이 안내창을 열 수 있습니다.
+          </div>
+        </div>
+
+      </div><!-- /gmp-5 -->
 
     </div><!-- /modal-body -->
   </div><!-- /modal-box -->
@@ -2631,7 +2766,7 @@ function closeGuideModal(){
 let _currentGuideTab = 0;
 function switchGuideTab(idx){
   // 탭 버튼
-  for(let i=0;i<5;i++){
+  for(let i=0;i<6;i++){
     const t = document.getElementById('gmt-'+i);
     const p = document.getElementById('gmp-'+i);
     if(t) t.classList.toggle('active', i===idx);
