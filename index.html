@@ -48,6 +48,101 @@ input[type="number"]{-moz-appearance:textfield;}
   50%{box-shadow:0 0 0 7px rgba(6,182,212,0);}
 }
 @media(max-width:520px){#pwa-install-btn .pwa-txt{display:none;}}
+/* ══ PWA 설치 버튼 강화 (급배수관경 Edition) ══ */
+#pwa-install-btn{
+  display:none;align-items:center;gap:5px;
+  background:linear-gradient(135deg,#0e7490,#06b6d4) !important;
+  color:#fff !important;border:none;padding:7px 13px;border-radius:8px;
+  font-size:11px;font-weight:800;cursor:pointer;
+  font-family:inherit;white-space:nowrap;flex-shrink:0;
+  transition:all .2s;
+  box-shadow:0 2px 12px rgba(6,182,212,.4);
+  animation:san-pwa-glow 2.5s ease-in-out infinite;
+}
+#pwa-install-btn.visible{display:flex !important;}
+#pwa-install-btn:hover{
+  background:linear-gradient(135deg,#155e75,#0e7490) !important;
+  transform:translateY(-1px) !important;
+  box-shadow:0 4px 18px rgba(6,182,212,.65) !important;
+  animation:none !important;
+}
+@keyframes san-pwa-glow{
+  0%,100%{box-shadow:0 2px 12px rgba(6,182,212,.4);}
+  50%{box-shadow:0 2px 22px rgba(6,182,212,.75),0 0 10px rgba(14,116,144,.25);}
+}
+
+/* ══ 배너 강화 ══ */
+#pwa-banner{
+  background:linear-gradient(135deg,#164e63 0%,#0e7490 70%,#155e75 100%) !important;
+  border-top:2px solid rgba(165,243,252,.4) !important;
+  border-radius:20px 20px 0 0 !important;
+  box-shadow:0 -6px 32px rgba(14,116,144,.55) !important;
+  padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px)) !important;
+  animation:san-banner-up .35s cubic-bezier(.22,.61,.36,1) !important;
+}
+@keyframes san-banner-up{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+.pwa-icon{
+  width:52px !important;height:52px !important;
+  border-radius:13px !important;
+  border:1.5px solid rgba(165,243,252,.4) !important;
+  box-shadow:0 2px 12px rgba(14,116,144,.35) !important;
+  overflow:hidden;flex-shrink:0;
+}
+.pwa-ok{
+  background:linear-gradient(135deg,#ecfeff,#cffafe) !important;
+  color:#0e7490 !important;
+  padding:10px 18px !important;font-size:13px !important;font-weight:800 !important;
+  border-radius:10px !important;border:none;
+  box-shadow:0 2px 10px rgba(14,116,144,.3) !important;
+  cursor:pointer;font-family:inherit;white-space:nowrap;
+  transition:all .2s !important;
+}
+.pwa-ok:hover{background:#fff !important;transform:translateY(-1px) !important;}
+.pwa-no{
+  background:rgba(255,255,255,.12) !important;
+  color:#a5f3fc !important;
+  border:1px solid rgba(165,243,252,.3) !important;
+  padding:10px 13px !important;border-radius:10px !important;
+  font-size:13px !important;font-weight:700 !important;
+  cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;
+  transition:all .15s !important;
+}
+.pwa-no:hover{color:#cffafe !important;}
+
+/* iOS 안내 모달 (추가) */
+#ios-guide-modal-san{
+  position:fixed;bottom:0;left:0;right:0;z-index:10000;
+  background:linear-gradient(135deg,#164e63,#0e7490);
+  border-top:2px solid rgba(165,243,252,.5);
+  border-radius:20px 20px 0 0;
+  padding:22px 20px calc(18px + env(safe-area-inset-bottom,0px));
+  display:none;
+  box-shadow:0 -8px 40px rgba(14,116,144,.55);
+  animation:san-banner-up .35s cubic-bezier(.22,.61,.36,1);
+}
+#ios-guide-modal-san.show{display:block;}
+.sg-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.sg-title{font-size:15px;font-weight:800;color:#fff;}
+.sg-cls{background:rgba(255,255,255,.12);border:none;color:#fff;
+  width:28px;height:28px;border-radius:50%;font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;}
+.sg-step{display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,.07);border-radius:10px;padding:12px;margin-bottom:8px;}
+.sg-num{min-width:26px;height:26px;border-radius:50%;
+  background:rgba(14,116,144,.5);border:1px solid rgba(165,243,252,.5);
+  color:#a5f3fc;font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sg-txt{font-size:13px;color:#cffafe;line-height:1.5;}
+.sg-txt strong{color:#fff;}
+.sg-foot{text-align:center;font-size:11px;color:#67e8f9;margin-top:12px;}
+
+@media(max-width:480px){
+  #pwa-install-btn .pwa-txt{display:none;}
+  #pwa-install-btn{padding:7px 10px;}
+  .pwa-icon{width:42px !important;height:42px !important;}
+}
+@media(max-width:360px){.pwa-desc{display:none;}}
+
 /* ── PWA 설치 배너 ── */
 #pwa-banner{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
@@ -540,7 +635,7 @@ input[type="number"]{-moz-appearance:textfield;}
 <header class="app-header no-print">
   <div class="header-inner">
     <div class="brand-logo">
-      <div class="brand-icon">🚿</div>
+      <div class="brand-icon" style="background:none;padding:0;overflow:hidden;width:38px;height:38px;border-radius:9px;flex-shrink:0;box-shadow:0 2px 10px rgba(14,116,144,.4);"><img src="./icons/brand-icon.jpg" alt="급배수관경 MANMIN" style="width:38px;height:38px;object-fit:cover;border-radius:9px;display:block;"/></div>
       <div class="brand-texts">
         <div class="brand-title">위생배관 관경 산정 시스템 [MANMIN-Ver2.0]</div>
         <div class="brand-sub">기계설비 기술기준 국토교통부 고시 제2021-851호 · FU 기구부하단위법</div>
@@ -2818,19 +2913,41 @@ document.addEventListener('keydown', function(e){
 </script>
 </div><!-- /root-app -->
 <div id="a4-print-target" style="display:none;"></div>
+
+<!-- ══ iOS 홈화면 추가 안내 모달 ══ -->
+<div id="ios-guide-modal-san">
+  <div class="sg-hdr">
+    <div class="sg-title">📱 홈 화면에 추가하기 (iOS)</div>
+    <button class="sg-cls" onclick="document.getElementById('ios-guide-modal-san').classList.remove('show')">✕</button>
+  </div>
+  <div class="sg-step">
+    <div class="sg-num">1</div>
+    <div class="sg-txt">Safari 하단 <strong>공유 버튼</strong> (□↑) 을 탭하세요</div>
+  </div>
+  <div class="sg-step">
+    <div class="sg-num">2</div>
+    <div class="sg-txt">스크롤해서 <strong>홈 화면에 추가</strong>를 탭하세요</div>
+  </div>
+  <div class="sg-step">
+    <div class="sg-num">3</div>
+    <div class="sg-txt">오른쪽 상단 <strong>추가</strong>를 탭하면 완료!</div>
+  </div>
+  <div class="sg-foot">급배수관경을 홈 화면에서 오프라인으로도 사용 가능합니다 ✓</div>
+</div>
+
 <!-- ═══ PWA 설치 배너 ═══ -->
 <div id="pwa-banner">
   <div class="pwa-inner">
     <div class="pwa-icon">
-      <img src="./icons/icon-192x192.png" alt="위생배관 아이콘"/>
+      <img src="./icons/brand-icon.jpg" alt="급배수관경 MANMIN" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
     <div class="pwa-texts">
-      <div class="pwa-title">📲 위생배관 앱 설치</div>
-      <div class="pwa-desc">홈 화면에 추가하면 오프라인에서도 바로 사용 가능합니다</div>
+      <div class="pwa-title">📲 급배수관경 앱으로 설치!</div>
+      <div class="pwa-desc">홈화면 추가 → 오프라인 관경 산정 가능 · 빠른 실행</div>
     </div>
     <div class="pwa-btns">
       <button class="pwa-ok" onclick="pwaTriggerInstall()">설치하기</button>
-      <button class="pwa-no" onclick="pwaDismiss()">✕</button>
+      <button class="pwa-no" onclick="pwaDismiss()">나중에</button>
     </div>
   </div>
 </div>
@@ -2839,32 +2956,36 @@ document.addEventListener('keydown', function(e){
 <script>
 (function(){
   var deferred = null;
+  var _isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var _isSA  = window.matchMedia('(display-mode:standalone)').matches || !!navigator.standalone;
 
-  /* ── Service Worker 등록 ── */
+  /* ── 1. Service Worker 등록 ── */
   if('serviceWorker' in navigator){
     window.addEventListener('load', function(){
-      navigator.serviceWorker.register('./sw.js')
+      navigator.serviceWorker.register('./sw.js', {scope:'./'})
         .then(function(reg){
           console.log('[PWA] SW 등록:', reg.scope);
-          /* 새 버전 감지 배너 */
           reg.addEventListener('updatefound', function(){
-            var nw = reg.installing;
-            if(!nw) return;
+            var nw = reg.installing; if(!nw) return;
             nw.addEventListener('statechange', function(){
               if(nw.state==='installed' && navigator.serviceWorker.controller){
                 var b=document.createElement('div');
-                b.style.cssText='position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#0e7490;color:#fff;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.4);white-space:nowrap;';
-                b.innerHTML='<span>🔄 새 버전 있음</span><button onclick="navigator.serviceWorker.ready.then(r=>{r.waiting&&r.waiting.postMessage({type:\'SKIP_WAITING\'})});this.parentNode.remove();" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-weight:700;">업데이트</button>';
+                b.style.cssText='position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:9999;background:#0e7490;color:#fff;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(14,116,144,.5);white-space:nowrap;font-family:inherit;';
+                b.innerHTML='<span>🔄 새 버전 준비됨</span><button onclick="navigator.serviceWorker.ready.then(function(r){if(r.waiting)r.waiting.postMessage({type:\'SKIP_WAITING\'});});this.parentNode.remove();location.reload();" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:5px 12px;border-radius:7px;cursor:pointer;font-weight:800;font-family:inherit;">지금 적용</button><button onclick="this.parentNode.remove()" style="background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:16px;padding:0 4px;">✕</button>';
                 document.body.appendChild(b);
+                setTimeout(function(){if(b.parentNode)b.remove();},8000);
               }
             });
           });
         })
         .catch(function(e){ console.warn('[PWA] SW 실패:', e); });
+      navigator.serviceWorker.addEventListener('controllerchange', function(){
+        if(!window._pwaR){window._pwaR=true;location.reload();}
+      });
     });
   }
 
-  /* ── beforeinstallprompt 캡처 ── */
+  /* ── 2. beforeinstallprompt (Android/PC) ── */
   window.addEventListener('beforeinstallprompt', function(e){
     e.preventDefault();
     deferred = e;
@@ -2878,12 +2999,38 @@ document.addEventListener('keydown', function(e){
     }
   });
 
-  /* ── 설치 실행 (전역) ── */
+  /* ── 3. iOS: 헤더 버튼 표시 + 2초 후 모달 ── */
+  document.addEventListener('DOMContentLoaded', function(){
+    if(_isIOS && !_isSA){
+      var btn = document.getElementById('pwa-install-btn');
+      if(btn) btn.classList.add('visible');
+      if(!sessionStorage.getItem('pwa-dismissed')){
+        setTimeout(function(){
+          var m = document.getElementById('ios-guide-modal-san');
+          if(m) m.classList.add('show');
+        }, 2000);
+      }
+    }
+    if(_isSA){
+      var btn=document.getElementById('pwa-install-btn');
+      if(btn) btn.style.display='none';
+    }
+  });
+
+  /* ── 4. 설치 실행 (전역) ── */
   window.pwaTriggerInstall = function(){
     var banner = document.getElementById('pwa-banner');
     if(banner) banner.classList.remove('visible');
+    /* iOS → 안내 모달 */
+    if(_isIOS && !_isSA){
+      var m = document.getElementById('ios-guide-modal-san');
+      if(m) m.classList.add('show');
+      return;
+    }
     if(!deferred){
-      alert('이미 설치되어 있거나 자동 설치를 지원하지 않는 브라우저입니다.\n\n📱 iOS Safari: 공유(□↑) → "홈 화면에 추가"\n💻 Chrome/Edge: 주소창 우측 ⊕ 아이콘');
+      if(_isSA){ if(typeof showToast==='function') showToast('✅ 이미 앱으로 설치되어 있습니다.'); return; }
+      if(typeof showToast==='function') showToast('📱 브라우저 메뉴 → 앱 설치 / 홈 화면에 추가');
+      else alert('📱 브라우저 메뉴 → 앱 설치 또는 홈 화면에 추가를 선택하세요.');
       return;
     }
     deferred.prompt();
@@ -2891,34 +3038,28 @@ document.addEventListener('keydown', function(e){
       if(r.outcome==='accepted'){
         var btn=document.getElementById('pwa-install-btn');
         if(btn) btn.classList.remove('visible');
+        if(typeof showToast==='function') showToast('🎉 급배수관경 앱이 설치되었습니다!');
       }
       deferred=null;
     });
   };
 
-  /* ── 배너 닫기 ── */
+  /* ── 5. 배너 닫기 ── */
   window.pwaDismiss = function(){
     var banner=document.getElementById('pwa-banner');
-    if(banner) banner.classList.remove('visible');
+    if(banner){banner.style.transition='transform .3s,opacity .25s';banner.style.transform='translateY(100%)';banner.style.opacity='0';setTimeout(function(){banner.classList.remove('visible');banner.style='';},320);}
     try{ sessionStorage.setItem('pwa-dismissed','1'); }catch(e){}
   };
 
-  /* ── 설치 완료 ── */
+  /* ── 6. 설치 완료 ── */
   window.addEventListener('appinstalled', function(){
     var btn=document.getElementById('pwa-install-btn');
     var banner=document.getElementById('pwa-banner');
     if(btn) btn.classList.remove('visible');
     if(banner) banner.classList.remove('visible');
     deferred=null;
+    if(typeof showToast==='function') showToast('🎉 급배수관경 앱이 설치되었습니다!');
   });
-
-  /* ── standalone 모드이면 버튼 숨김 ── */
-  if(window.matchMedia('(display-mode:standalone)').matches || window.navigator.standalone===true){
-    document.addEventListener('DOMContentLoaded',function(){
-      var btn=document.getElementById('pwa-install-btn');
-      if(btn) btn.style.display='none';
-    });
-  }
 })();
 </script>
 

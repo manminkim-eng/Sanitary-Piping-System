@@ -1,33 +1,27 @@
 {
-  "name": "위생배관",
-  "short_name": "위생배관",
-  "description": "건축물 급수·급탕·오배수 위생배관 관경 산정 — 기계설비 기술기준 국토교통부 고시 제2021-851호",
+  "name": "급배수관경 — 위생배관 관경 산정 시스템 [MANMIN-Ver2.0]",
+  "short_name": "급배수관경",
+  "description": "건축물 용도별 급수·급탕·오배수 관경 산정 — 기계설비 기술기준 국토교통부 고시 제2021-851호 | ENGINEER KIM MANMIN",
   "start_url": "./index.html",
-  "display": "standalone",
-  "orientation": "any",
-  "background_color": "#0e7490",
-  "theme_color": "#0e7490",
-  "lang": "ko",
   "scope": "./",
+  "display": "standalone",
+  "background_color": "#ecfeff",
+  "theme_color": "#0e7490",
+  "orientation": "portrait-primary",
+  "lang": "ko",
   "categories": ["utilities", "productivity"],
   "icons": [
-    { "src": "icons/icon-72x72.png",            "sizes": "72x72",   "type": "image/png" },
-    { "src": "icons/icon-96x96.png",            "sizes": "96x96",   "type": "image/png" },
-    { "src": "icons/icon-128x128.png",          "sizes": "128x128", "type": "image/png" },
-    { "src": "icons/icon-144x144.png",          "sizes": "144x144", "type": "image/png" },
-    { "src": "icons/icon-152x152.png",          "sizes": "152x152", "type": "image/png" },
-    { "src": "icons/icon-192x192.png",          "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-384x384.png",          "sizes": "384x384", "type": "image/png" },
-    { "src": "icons/icon-512x512.png",          "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "./icons/icon-72x72.png",   "sizes": "72x72",   "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-96x96.png",   "sizes": "96x96",   "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-128x128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-144x144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-152x152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable any" },
+    { "src": "./icons/icon-256x256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-384x384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
   ],
-  "shortcuts": [
-    {
-      "name": "위생배관 관경 산정",
-      "short_name": "관경산정",
-      "description": "급수·급탕·오배수 관경을 바로 산정합니다",
-      "url": "./index.html",
-      "icons": [{ "src": "icons/icon-96x96.png", "sizes": "96x96" }]
-    }
+  "screenshots": [
+    { "src": "./icons/icon-512x512.png", "sizes": "512x512", "type": "image/png", "form_factor": "narrow" }
   ]
 }
