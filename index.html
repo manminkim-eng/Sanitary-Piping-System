@@ -682,9 +682,13 @@ input[type="number"]{-moz-appearance:textfield;}
     <div class="card">
       <div class="card-head"><div class="card-ico">🏢</div><span class="card-tit">STEP 1 — 건물 정보 입력</span><span class="cbadge grn" id="bld-badge">미선택</span></div>
       <div class="card-body">
-        <div class="frow" style="margin-bottom:10px">
+        <div class="frow" style="margin-bottom:8px">
           <div class="fgrp"><label class="flbl">🏗️ 공사명</label><input type="text" class="finput" id="inp-projname" placeholder="예: 만민 건축사 신사옥" value="만민 건축사 신사옥 신축공사" oninput="liveCalc()"></div>
           <div class="fgrp"><label class="flbl">📅 작성일</label><input type="date" class="finput" id="inp-projdate" oninput="liveCalc()"></div>
+        </div>
+        <div class="frow" style="margin-bottom:10px">
+          <div class="fgrp"><label class="flbl">✍️ 작성자</label><input type="text" class="finput" id="inp-author" placeholder="작성자 이름 입력" value="김만민" oninput="liveCalc()"></div>
+          <div class="fgrp"><label class="flbl">🏢 소속/직책</label><input type="text" class="finput" id="inp-affiliation" placeholder="예: 기계설비팀 / 주임" oninput="liveCalc()"></div>
         </div>
 
         <label class="flbl">건축물 용도 선택</label>
@@ -1648,6 +1652,8 @@ let STATE = {
   circ: 'auto',
   projName: '만민 건축사 신사옥 신축공사',
   projDate: '',
+  author: '김만민',
+  affiliation: '',
   result: null,
 };
 
@@ -1787,6 +1793,8 @@ function liveCalc(){
   STATE.usage       = document.getElementById('sel-usage').value;
   STATE.projName    = document.getElementById('inp-projname').value;
   STATE.projDate    = document.getElementById('inp-projdate').value;
+  STATE.author      = document.getElementById('inp-author').value;
+  STATE.affiliation = document.getElementById('inp-affiliation').value;
 
   const C = HW_C[STATE.matSupply] || 130;
   const {fuS, fuH, fuD, fuOsu, fuJabsu} = calcTotalFU();
@@ -2259,7 +2267,8 @@ function renderA4(r){
       <tr><td class="a4-th">급수 관재질 (C값)</td><td>${matName(STATE.matSupply)} (C=${r.C})</td><td class="a4-th">최대 설계 유속</td><td>${STATE.velSupply} m/s</td></tr>
       <tr><td class="a4-th">급탕 온도</td><td>${STATE.hwTemp}°C</td><td class="a4-th">환탕 배관</td><td>${circText}</td></tr>
       <tr><td class="a4-th">감압밸브</td><td>${prvText}</td><td class="a4-th">작성일</td><td>${dateStr}</td></tr>
-      <tr><td class="a4-th">적용 기준</td><td colspan="3">기계설비 기술기준 국토교통부 고시 제2021-851호 [별표 4·5·6·8]</td></tr>
+      <tr><td class="a4-th">작성자</td><td>${STATE.author||'—'}${STATE.affiliation ? ' / '+STATE.affiliation : ''}</td><td class="a4-th">적용 기준</td><td>기계설비 기술기준 제2021-851호</td></tr>
+      <tr><td class="a4-th">적용 기준 (전문)</td><td colspan="3">기계설비 기술기준 국토교통부 고시 제2021-851호 [별표 4·5·6·8]</td></tr>
     </table>
 
     <div class="a4-sub">2. 수리 계산 (층수·압력·유속 연동)</div>
@@ -2448,10 +2457,11 @@ function renderMobile(r){
     <!-- ① 공사 정보 헤더 -->
     <div style="background:linear-gradient(135deg,#164e63,#0e7490);padding:10px 12px;margin-bottom:9px;border-radius:8px;color:#fff">
       <div style="font-size:11px;font-weight:900;line-height:1.3;margin-bottom:3px">${STATE.projName || '(공사명 미입력)'}</div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
         <div style="font-size:9px;opacity:.75">${bld.ico} ${bld.nm} · ${STATE.floors}층 · ${STATE.usage==='private'?'주거용':'공용'}</div>
         <div style="font-size:9px;opacity:.75;font-family:'JetBrains Mono',monospace">📅 ${dateStr}</div>
       </div>
+      ${STATE.author ? `<div style="font-size:9px;opacity:.85;margin-top:2px">✍️ ${STATE.author}${STATE.affiliation?' · '+STATE.affiliation:''}</div>` : ''}
     </div>
 
     <!-- ② 설계 파라미터 요약 -->
