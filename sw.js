@@ -1,9 +1,12 @@
 /* ══════════════════════════════════════════════════════════
-   위생배관 관경 산정 시스템 — Service Worker v3.0
+   위생배관 관경 산정 시스템 — Service Worker Ver-5.0
    MANMIN Engineering · 기계설비 기술기준 2021-851
+   ㈜대성건축사사무소 · 건축사 김만민
+   v5.0 : 전 39종 버전 체계를 manmin-v5.0.0 으로 통일하고
+          로컬 폴백 폰트(assets/fonts)를 사전 캐시에 편입한다.
    ══════════════════════════════════════════════════════════ */
 
-const SW_VER      = 'sanpipe-v3.0.0';
+const SW_VER      = 'manmin-v5.0.0';
 const CACHE_CORE  = `${SW_VER}-core`;
 const CACHE_FONTS = `${SW_VER}-fonts`;
 const CACHE_CDN   = `${SW_VER}-cdn`;
@@ -22,7 +25,10 @@ const PRECACHE = [
   './icons/apple-touch-icon.png',
   './icons/icon-144x144.png',
   './icons/icon-152x152.png',
-  './icons/brand-icon.jpg'
+  './icons/brand-icon.jpg',
+  /* v5.0 : 로컬 폴백 폰트 — 오프라인·차단망에서 한글 유지 */
+  './assets/fonts/manmin-fonts.css',
+  './assets/fonts/NotoSansKR-var.woff2'
 ];
 
 const FONT_HOSTS = [
