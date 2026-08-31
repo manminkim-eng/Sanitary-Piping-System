@@ -1,0 +1,11 @@
+# MANMIN Ver-5.0 · GitHub Pages 설정
+theme: null
+plugins: []
+exclude:
+  - README.md
+  - .gitignore
+  - "index_백업_*.html"
+include:
+  - .nojekyll
+  - assets
+  - icons
