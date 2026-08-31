@@ -184,7 +184,7 @@ input[type="number"]{-moz-appearance:textfield;}
    마스터처럼 헤더·탭바 모두 자연 스크롤시킨다. */
 /* v5.0 — 헤더 단일색. 소방 마스터는 진한 배경 + 흰 텍스트 구성이다.
    기계설비 주도색 #0e7490 (teal-700) 을 그라데이션 없이 단색으로 쓴다. */
-.app-header{background:#0e7490;color:#fff;box-shadow:0 2px 16px rgba(14,116,144,.35);}
+.app-header{background:linear-gradient(135deg,#083344 0%,#0e7490 50%,#0891b2 100%);color:#fff;box-shadow:0 2px 20px rgba(14,116,144,.35);}
 /* v5.0 — 본문↔탭 간격 16px 은 .tab-bar 의 margin-top 이 아니라 헤더의 padding-bottom 으로 둔다.
    margin 으로 두면 그 구간에 body 배경이 비쳐 진한 헤더 한가운데 밝은 띠가 생긴다.
    높이 합은 동일하다 : 20 + 78.2 + 16 + 4 + 44 = 162.2 */
@@ -225,7 +225,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
 /* TAB BAR */
 /* v5.0 — 헤더와 같은 단일색. 간격 16px 은 헤더 padding-bottom 이 담당하므로 margin-top 은 두지 않는다. */
-.tab-bar{background:#0e7490;overflow-x:auto;scrollbar-width:none;}
+.tab-bar{background:#0891b2;overflow-x:auto;scrollbar-width:none;}
 .tab-bar::-webkit-scrollbar{display:none;}
 .tab-bar-inner{max-width:1300px;margin:0 auto;padding:4px 24px 0;display:flex;}
 .tb{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.75);font-family:inherit;padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.02em;position:relative;transition:color .15s,background .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
@@ -585,7 +585,8 @@ input[type="number"]{-moz-appearance:textfield;}
   .main-wrap{padding:8px 7px 65px;}
   /* v5.0 : Ver2.0 의 header 52px 붕괴 · h1 10.5px!important 강등 규칙 제거.
      헤더 축소는 마스터 규격대로 768·640·420 단계에서만 다룬다. */
-  .tb{padding:7px 9px;font-size:10px;}
+  /* v5.0 — Ver2.0 의 탭 축소 규칙 제거. 20 건물우수는 모바일에서도 13px/41px 를 유지하는데
+     21번만 10px/29px 로 줄어 두 도구가 어긋나 있었다. .tb 는 전 구간 13px 규격이다. */
   .step-bar{padding:6px 8px;}
   .sc{width:20px;height:20px;font-size:9px;}
   .sl{font-size:9px;}
