@@ -61,7 +61,7 @@ body{
   <div class="splash-title">위생배관 관경 산정 시스템</div>
   <div class="splash-sub">
     기계설비 기술기준 국토교통부 고시 제2021-851호<br>
-    ENGINEER KIM MANMIN · Ver 2.0
+    ENGINEER KIM MANMIN · Ver-5.0
   </div>
 
   <div class="device-cards">
@@ -70,15 +70,15 @@ body{
       <div class="dcard-title">데스크탑</div>
       <div class="dcard-desc">전체 화면<br>2열 레이아웃<br>A4 미리보기</div>
     </a>
-    <a href="pages/tablet.html" class="dcard" id="card-tablet">
+    <a href="index.html" class="dcard" id="card-tablet">
       <div class="dcard-ico">📱</div>
       <div class="dcard-title">태블릿</div>
-      <div class="dcard-desc">사이드바 메뉴<br>실시간 결과<br>터치 최적화</div>
+      <div class="dcard-desc">2열 균등 배치<br>실시간 결과<br>터치 타깃 최적화</div>
     </a>
-    <a href="pages/mobile.html" class="dcard" id="card-mobile">
+    <a href="index.html" class="dcard" id="card-mobile">
       <div class="dcard-ico">📲</div>
       <div class="dcard-title">모바일</div>
-      <div class="dcard-desc">하단 네비게이션<br>JPG 저장·공유<br>PWA 설치 지원</div>
+      <div class="dcard-desc">1열 레이아웃<br>JPG 저장·인쇄<br>PWA 설치 지원</div>
     </a>
   </div>
 
@@ -90,16 +90,13 @@ body{
 (function(){
   const w = window.innerWidth;
   let target, cardId;
-  if(w <= 640){
-    target = 'pages/mobile.html';
-    cardId = 'card-mobile';
-  } else if(w <= 1024){
-    target = 'pages/tablet.html';
-    cardId = 'card-tablet';
-  } else {
-    target = 'index.html';
-    cardId = 'card-desktop';
-  }
+  /* v5.0 : 단일 index.html 이 4단계 반응형(1024·768·640·480·420)으로
+     데스크탑·태블릿·모바일을 모두 대응하므로 별도 페이지 분기를 폐지한다.
+     카드 하이라이트만 기기별로 남긴다. */
+  target = 'index.html';
+  if(w <= 640)        cardId = 'card-mobile';
+  else if(w <= 1024)  cardId = 'card-tablet';
+  else                cardId = 'card-desktop';
 
   // Highlight recommended card
   const rec = document.getElementById(cardId);
