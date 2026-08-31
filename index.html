@@ -340,14 +340,20 @@ input[type="number"]{-moz-appearance:textfield;}
 /* TABLE */
 .twrap{overflow-x:auto;border-radius:9px;border:1px solid #e0f2fe;position:relative;}
 .rtbl{width:100%;border-collapse:collapse;font-size:11px;}
-/* v5.0 ⑮ 보류 — 2026-08-31 모바일 회귀 수정
-   .rtbl,.gtbl 에 min-width:560px 를 걸었더니 계산 실행 후 결과표뿐 아니라
-   입력 폼 카드까지 함께 늘어나, 390px 화면에서 문서 폭이 385 → 611px 로 벌어졌다(221px 초과).
-   .twrap{overflow-x:auto} 로도 막히지 않는다 — .twrap 자체가 560px 로 늘어나기 때문이다.
-   (.twrap min-width:0 · 조상 컨테이너 min-width:0 둘 다 무효함을 실측 확인)
-   20 건물우수는 .rtbl 이 결과 표에만 쓰여 문제가 없었으나, 21번은 입력 폼 카드 안에도
-   쓰이므로 카드 전체가 밀려난다. 표별 선별 적용 방식이 확정되기 전까지는
-   원본 동작(화면 폭에 맞춰 축소)을 유지한다. .tbl-hint 마크업은 남겨 두되 숨긴다. */
+/* ═══ v5.0 ⑮ 표 스크롤 — 2026-08-31 재적용 ═══
+   1차에서 .rtbl,.gtbl{min-width:560px} 를 넣었다가 모바일에서 문서 폭이 385→611px 로
+   벌어져 규칙을 뺐었다. 그러나 원인은 min-width 자체가 아니라 **grid 자식의 min-width:auto**
+   였다. grid/flex item 은 기본값이 auto 라 "내용보다 작아질 수 없다" — 560px 표가 들어오면
+   item 이 부풀고 그것이 부모를 차례로 밀어 페이지 전체가 넘친다.
+   .twrap{overflow-x:auto} 는 이미 부풀어버린 뒤라 무력했다.
+   (실측: .twrap min-width:0 무효 · 조상 컨테이너 min-width:0 무효 — 터진 것이 클래스 없는
+    익명 div 라 셀렉터에 안 걸렸다. 20 건물우수에서 .two-col>*{min-width:0} 로 해결 확인)
+   → 아래 두 줄이 한 쌍이다. 하나만 넣으면 안 된다. */
+.two-col>*,.frow>*,.frow3>*,.stat-grid>*,.guide-grid-2col>*,.bld-grid>*{min-width:0;}
+@media(max-width:768px){
+  .rtbl,.gtbl{min-width:560px;}
+  .tbl-hint{display:block;}
+}
 .tbl-hint{display:none;font-size:9.5px;font-weight:700;color:#0891b2;
   padding:3px 2px 5px;letter-spacing:-.01em;}
 .tbl-hint::before{content:'↔ ';font-weight:900;}
@@ -734,7 +740,7 @@ input[type="number"]{-moz-appearance:textfield;}
       </div>
       <div class="hdr-btns">
         <button id="pwa-install-btn" onclick="pwaTriggerInstall()">📲 <span class="pwa-txt">설치</span></button>
-        <button class="btn-g" onclick="resetAll()">🔄 <span class="btn-txt">초기화</span></button>
+        <!-- v5.0 — 초기화 버튼을 우측 하단 FAB 스택으로 이설 (설계기준 안내 위) -->
         <!-- v5.0 — 헤더 출력 버튼 삭제. 인쇄는 A4 탭의 .mm-btn 으로 일원화(§4-3) -->
       </div>
     </div>
@@ -1173,6 +1179,9 @@ input[type="number"]{-moz-appearance:textfield;}
 <!-- FAB — v5.0 고정 세로스택 -->
 <div class="fab-wrap" id="fabWrap">
   <!-- v5.0 — 우측 하단 FAB 출력 버튼 삭제. 인쇄는 A4 탭 .mm-btn 한 곳으로 일원화한다(20번과 동일). -->
+  <button class="fab-item" id="fabReset" onclick="resetAll()" title="입력 초기화">
+    <span class="fab-ico">🔄</span><span class="fab-lbl">초기화</span><span class="fab-sub">전체</span>
+  </button>
   <button class="fab-item" id="fabCalc" onclick="openGuideModal()" title="설계기준 종합 안내">
     <span class="fab-ico">📐</span><span class="fab-lbl">기준</span><span class="fab-sub">설계기준</span>
   </button>
