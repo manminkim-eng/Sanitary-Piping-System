@@ -184,7 +184,11 @@ input[type="number"]{-moz-appearance:textfield;}
    마스터처럼 헤더·탭바 모두 자연 스크롤시킨다. */
 /* v5.0 — 헤더 단일색. 소방 마스터는 진한 배경 + 흰 텍스트 구성이다.
    기계설비 주도색 #0e7490 (teal-700) 을 그라데이션 없이 단색으로 쓴다. */
-.app-header{background:linear-gradient(135deg,#083344 0%,#0e7490 50%,#0891b2 100%);color:#fff;box-shadow:0 2px 20px rgba(14,116,144,.35);}
+/* v5.0.1 — 헤더+탭바를 하나의 그라데이션 면으로 통합한다.
+   135deg 대각 그라데이션은 하단 가장자리 색이 좌우로 변하는데 탭바를 끝색 단색으로 두면
+   좌측에서 색이 어긋나 띠가 둘로 갈라진다. 소방 마스터(탭이 header 안)와 같은 1면 구조로 되돌린다. */
+.hdr-shell{background:linear-gradient(135deg,#083344 0%,#0e7490 50%,#0891b2 100%);box-shadow:0 2px 20px rgba(14,116,144,.35);}
+.app-header{background:transparent;color:#fff;}
 /* v5.0 — 본문↔탭 간격 16px 은 .tab-bar 의 margin-top 이 아니라 헤더의 padding-bottom 으로 둔다.
    margin 으로 두면 그 구간에 body 배경이 비쳐 진한 헤더 한가운데 밝은 띠가 생긴다.
    높이 합은 동일하다 : 20 + 78.2 + 16 + 4 + 44 = 162.2 */
@@ -225,7 +229,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
 /* TAB BAR */
 /* v5.0 — 헤더와 같은 단일색. 간격 16px 은 헤더 padding-bottom 이 담당하므로 margin-top 은 두지 않는다. */
-.tab-bar{background:#0891b2;overflow-x:auto;scrollbar-width:none;}
+.tab-bar{background:transparent;overflow-x:auto;scrollbar-width:none;}   /* 배경은 .hdr-shell 이 담당 */
 .tab-bar::-webkit-scrollbar{display:none;}
 .tab-bar-inner{max-width:1300px;margin:0 auto;padding:4px 24px 0;display:flex;}
 .tb{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.75);font-family:inherit;padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.02em;position:relative;transition:color .15s,background .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
@@ -467,7 +471,7 @@ input[type="number"]{-moz-appearance:textfield;}
 @media print{
   *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
   html,body{margin:0;padding:0;width:100%;height:auto;}
-  .app-header,.tab-bar,.main-wrap,.fab-wrap,.fab-calc,.toast,.a4-export-bar,
+  .hdr-shell,.app-header,.tab-bar,.main-wrap,.fab-wrap,.fab-calc,.toast,.a4-export-bar,
   .modal-ov,#guideModal{display:none!important;}
   #a4-print-target{display:block!important;margin:0;padding:0;}
   /* v5.0 : 미리보기 스케일이 인쇄에 새어들지 않도록 해제 (모바일 인쇄 깨짐 방지) */
@@ -719,6 +723,8 @@ input[type="number"]{-moz-appearance:textfield;}
 <div id="root-app">
 
 <!-- HEADER -->
+<!-- v5.0.1 : 헤더+탭바 그라데이션 1면 통합 래퍼 -->
+<div class="hdr-shell no-print">
 <header class="app-header no-print">
   <div class="header-inner">
     <div class="brand-logo">
@@ -757,6 +763,7 @@ input[type="number"]{-moz-appearance:textfield;}
     <button class="tb" onclick="switchTab('a4',this)" id="tab-a4">📄 A4 미리보기 · 출력</button>
   </div>
 </nav>
+</div><!-- /.hdr-shell -->
 
 <div class="main-wrap">
 

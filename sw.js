@@ -6,7 +6,7 @@
           로컬 폴백 폰트(assets/fonts)를 사전 캐시에 편입한다.
    ══════════════════════════════════════════════════════════ */
 
-const SW_VER      = 'manmin-v5.0.0';
+const SW_VER      = 'manmin-v5.0.1';
 const CACHE_CORE  = `${SW_VER}-core`;
 const CACHE_FONTS = `${SW_VER}-fonts`;
 const CACHE_CDN   = `${SW_VER}-cdn`;
