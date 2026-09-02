@@ -192,17 +192,18 @@ input[type="number"]{-moz-appearance:textfield;}
 /* v5.0 — 본문↔탭 간격 16px 은 .tab-bar 의 margin-top 이 아니라 헤더의 padding-bottom 으로 둔다.
    margin 으로 두면 그 구간에 body 배경이 비쳐 진한 헤더 한가운데 밝은 띠가 생긴다.
    높이 합은 동일하다 : 20 + 78.2 + 16 + 4 + 44 = 162.2 */
-.header-inner{max-width:1300px;margin:0 auto;padding:20px 24px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.header-inner{max-width:1300px;margin:0 auto;padding:20px 24px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
 .brand-logo{display:flex;align-items:flex-start;min-width:0;}
 .brand-texts{min-width:0;}
 .hdr-eyebrow{font-size:11px;font-weight:600;opacity:.7;color:#fff;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
 .hdr-h1{font-size:26px;font-weight:900;color:#fff;letter-spacing:.04em;line-height:1.2;}
-.hdr-sub{font-size:11px;margin-top:8px;color:#fff;opacity:.85;letter-spacing:.02em;line-height:1.7;}
+/* v5.0-HDR — line-height normal(17px). 1.7 이면 20.4px 가 되어 마스터 78.2/162.2 가 안 나온다 */
+.hdr-sub{font-size:11px;margin-top:8px;color:#fff;opacity:.85;letter-spacing:.02em;line-height:normal;}
 .hdr-manmin{font-family:'Orbitron',sans-serif!important;font-weight:900;font-size:12px;color:#7dd3fc;letter-spacing:.08em;text-shadow:0 0 8px rgba(125,211,252,.6);white-space:nowrap;display:inline-block;}
 .hdr-right-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding-bottom:2px;flex-shrink:0;}
-.hdr-right{text-align:right;opacity:.75;color:#fff;font-size:11px;line-height:1.5;padding-bottom:4px;}
+.hdr-right{text-align:right;opacity:.75;color:#fff;font-size:11px;line-height:normal;}
 .hdr-right strong{font-size:13px;font-weight:700;opacity:1;}
-.hdr-right em{font-size:10px;color:#a5f3fc;font-style:normal;}
+.hdr-right em{font-size:10px;color:#7dd3fc;font-style:normal;display:block;margin-top:4px;}
 .hdr-btns{display:flex;gap:5px;flex-shrink:0;}
 .btn-g{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
 .btn-g:hover{border-color:#fff;color:#0e7490;background:#fff;}
@@ -214,28 +215,30 @@ input[type="number"]{-moz-appearance:textfield;}
 }
 @media(max-width:640px){
   .hdr-h1{font-size:18px;}   /* v5.0 — 마스터 모바일 규격 */
-  /* v5.0 — 모바일에서 eyebrow 를 접는다. 고시 근거는 부제·계산서 제목부에 이미 있다. */
-  .hdr-eyebrow{display:none;}
-  .hdr-sub{font-size:10.5px;margin-top:6px;line-height:1.65;}
-  .hdr-manmin{font-size:11px;}
+  /* v5.0-HDR (2026-09-02 확정) — eyebrow 표시 · sub 11px · 각인 12px 유지 · 좌우 14px : 01 마스터 실측 */
+  .header-inner{padding:20px 14px 16px;}
+  .tab-bar-inner{padding:4px 14px 0;}
   .btn-g .btn-txt,.btn-b .btn-txt{display:none;}
   .hdr-btns{gap:3px;}
   .btn-g,.btn-b{padding:6px 8px;}
 }
-@media(max-width:420px){
-  .header-inner{padding:20px 14px 16px;}
-  .tab-bar-inner{padding:4px 14px 0;}
-}
+/* v5.0-HDR — 420px 축소 규칙은 640px 블록으로 이동 */
 
 /* TAB BAR */
 /* v5.0 — 헤더와 같은 단일색. 간격 16px 은 헤더 padding-bottom 이 담당하므로 margin-top 은 두지 않는다. */
 .tab-bar{background:transparent;overflow-x:auto;scrollbar-width:none;}   /* 배경은 .hdr-shell 이 담당 */
 .tab-bar::-webkit-scrollbar{display:none;}
 .tab-bar-inner{max-width:1300px;margin:0 auto;padding:4px 24px 0;display:flex;}
-.tb{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.75);font-family:inherit;padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.02em;position:relative;transition:color .15s,background .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
+/* v5.0-HDR — 마스터 구조 : border-bottom 3px(투명) + line-height normal → 44px. 활성은 단색 배경 + 강조색 바 */
+.tb{background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;color:rgba(255,255,255,.75);font-family:inherit;padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.02em;line-height:normal;transition:all .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
 .tb:hover{color:#fff;background:rgba(255,255,255,.09);}
-.tb.active{color:#fff;background:rgba(255,255,255,.12);}
-.tb.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:#f97316;border-radius:2px 2px 0 0;}
+.tb.active{color:#fff;background:#0e7490;border-bottom-color:#7dd3fc;}
+/* v5.0-HDR — 요약 스트립 (마스터 3층) */
+.sum-bar-wrap{background:#0f172a;padding:10px 0;}
+.sum-bar{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:14px;}
+.sum-item{font-size:12px;color:#94a3b8;}
+.sum-item b{font-family:'JetBrains Mono','Noto Sans KR',monospace;font-weight:700;color:#7dd3fc;}
+@media(max-width:640px){.sum-bar{padding:0 14px;}.sum-item{font-size:11px;}}
 
 /* LAYOUT */
 .main-wrap{max-width:1300px;margin:0 auto;padding:13px 13px 80px;}
@@ -731,7 +734,8 @@ input[type="number"]{-moz-appearance:textfield;}
       <!-- v5.0 — 헤더 로고 심벌 삭제. 소방 마스터와 동일하게 텍스트 3단만 둔다. -->
       <!-- v5.0 — 소방 마스터 3단 구조 (eyebrow · h1 · 부제+각인) §4-7 -->
       <div class="brand-texts">
-        <div class="hdr-eyebrow">Sanitary Piping Sizing · 기계설비 기술기준 [별표 4·5·6·8]</div>
+        <!-- v5.0-HDR — 375px 에서 1줄 유지(≤40자). 별표 번호는 hdr-right·계산서에 있다 -->
+        <div class="hdr-eyebrow">Sanitary Piping Sizing · 기계설비 기술기준</div>
         <h1 class="hdr-h1">위생배관 관경 산정 시스템</h1>
         <div class="hdr-sub">
           FU 기구부하단위법 · 급수 · 급탕 · 환탕 · 오배수 · 통기 관경 자동 산정
@@ -764,6 +768,17 @@ input[type="number"]{-moz-appearance:textfield;}
   </div>
 </nav>
 </div><!-- /.hdr-shell -->
+<!-- v5.0-HDR : 요약 스트립 (헤더 3층) — 값은 하단 스크립트가 STATE.result 에서 읽어 채운다 -->
+<div class="sum-bar-wrap no-print">
+  <div class="sum-bar">
+    <span class="sum-item">🚰 급수 FU: <b id="sb-fu">—</b></span>
+    <span class="sum-item">⬆️ 급수주관: <b id="sb-sup">—</b></span>
+    <span class="sum-item">♨️ 급탕주관: <b id="sb-hot">—</b></span>
+    <span class="sum-item">🚽 배수횡주관: <b id="sb-dh">—</b></span>
+    <span class="sum-item">🔽 배수입상관: <b id="sb-dv">—</b></span>
+    <span class="sum-item">💨 통기: <b id="sb-vent">—</b></span>
+  </div>
+</div>
 
 <div class="main-wrap">
 
@@ -3444,6 +3459,22 @@ document.addEventListener('keydown', function(e){
       if(btn){ btn.textContent = label || '🖼️ JPG 저장'; btn.disabled = false; }
     });
   };
+})();
+</script>
+<script>
+/* v5.0-HDR — 요약 스트립 갱신. 계산 함수는 건드리지 않고 liveCalc/resetAll 을 감싸 STATE.result 를 읽기만 한다 */
+(function(){
+  function setSum(){
+    var R=(typeof STATE!=='undefined'&&STATE.result)||null;
+    var f=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};
+    if(!R){['sb-fu','sb-sup','sb-hot','sb-dh','sb-dv','sb-vent'].forEach(function(id){f(id,'—');});return;}
+    f('sb-fu',R.fuS); f('sb-sup',R.supplyMain+'A'); f('sb-hot',R.fuH>0?R.hotMain+'A':'—');
+    f('sb-dh',R.drainHoriz+'A'); f('sb-dv',R.drainVert+'A'); f('sb-vent',R.ventLoop+'A');
+  }
+  var _lc=window.liveCalc,_ra=window.resetAll;
+  if(typeof _lc==='function'){window.liveCalc=function(){var r=_lc.apply(this,arguments);setSum();return r;};}
+  if(typeof _ra==='function'){window.resetAll=function(){var r=_ra.apply(this,arguments);setSum();return r;};}
+  setSum();
 })();
 </script>
 </body>

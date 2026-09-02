@@ -6,7 +6,11 @@
           로컬 폴백 폰트(assets/fonts)를 사전 캐시에 편입한다.
    ══════════════════════════════════════════════════════════ */
 
-const SW_VER      = 'manmin-v5.0.1';
+/* §17-1 — 도구 고유 접두어. 종전 'manmin-v5.0.1' 은 필터 'sanpipe-' 와 어긋나 자기 구캐시를 못 지웠다 */
+const PREFIX      = 'sanpipe-';
+const SW_VER      = 'sanpipe-v5.0.2';
+/* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
+const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
 const CACHE_FONTS = `${SW_VER}-fonts`;
 const CACHE_CDN   = `${SW_VER}-cdn`;
@@ -62,7 +66,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
-        keys.filter(k => k.startsWith('sanpipe-') && !keep.includes(k))
+        keys.filter(k => (k.startsWith(PREFIX) || ORPHAN.includes(k)) && !keep.includes(k))
             .map(k => { console.log('[SW] delete old cache:', k); return caches.delete(k); })
       ))
       .then(() => self.clients.claim())
