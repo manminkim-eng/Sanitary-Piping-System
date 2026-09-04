@@ -725,6 +725,20 @@ input[type="number"]{-moz-appearance:textfield;}
 <style id="mm-r1">/* R1 (2026-09-04 · 지시서 §20-1 · S10 소급) — 인쇄 PDF 하단 각인 MANMIN · Ver 비표시. 버전은 A4 푸터 [MANMIN-Ver5.0] 이 담당 */
 #dev-stamp,#dev-stamp-print,#mm-print-stamp,.dev-stamp{display:none!important;}
 @media print{#dev-stamp,#dev-stamp-print,#mm-print-stamp,.dev-stamp{display:none!important;}}</style>
+<style id="mm-r24b">/* R24 ①② (2026-09-05 · S10 단계 4′ 20·21 소급 · 지시서 §21-1 R24·R2) — 인쇄 시 collapse 표의 우측 세로선 소실 → separate + 셀 자체 선. 화면·JPG·PDF 동일 DOM(§2②). 선색은 기존 값 유지. */
+.a4-tbl{border-collapse:separate;border-spacing:0;border:0;}
+.a4-tbl th{border:0;border-right:1px solid #a5f3fc;border-bottom:1px solid #a5f3fc;}
+.a4-tbl th:first-child{border-left:1px solid #a5f3fc;}
+.a4-tbl tr:first-child th{border-top:1px solid #a5f3fc;}
+.a4-tbl td{border:0;border-right:1px solid #e0f2fe;border-bottom:1px solid #e0f2fe;}
+.a4-tbl td:first-child{border-left:1px solid #e0f2fe;}
+.a4-tbl tr:first-child td{border-top:1px solid #e0f2fe;}
+/* R24 ② — 고정폭 셀 한글 폴백. JPG v5.4 캡처 페이지는 .a4-page 밖이라 전역 셀렉터 · 기존 !important 규칙보다 뒤 */
+.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Noto Sans KR','Noto Sans KR Local','Malgun Gothic',monospace!important;}
+@media print{.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Noto Sans KR','Noto Sans KR Local','Malgun Gothic',Consolas,monospace!important;}}
+/* R2 (§3-4-1) — 미리보기 padding 을 인쇄 여백(14/12/22/14mm)과 일치 → 내용폭 696px = 184mm. 인쇄는 #a4-print-target .a4-page{padding:0}+@page, JPG v5.4 는 자체 mm 여백이라 출력 불변 */
+.a4-page{padding:53px 45px 83px 53px;}
+</style>
 </head>
 <body>
 <div id="root-app">
