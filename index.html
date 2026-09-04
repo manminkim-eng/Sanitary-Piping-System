@@ -738,6 +738,7 @@ input[type="number"]{-moz-appearance:textfield;}
 @media print{.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Noto Sans KR','Noto Sans KR Local','Malgun Gothic',Consolas,monospace!important;}}
 /* R2 (§3-4-1) — 미리보기 padding 을 인쇄 여백(14/12/22/14mm)과 일치 → 내용폭 696px = 184mm. 인쇄는 #a4-print-target .a4-page{padding:0}+@page, JPG v5.4 는 자체 mm 여백이라 출력 불변 */
 .a4-page{padding:53px 45px 83px 53px;}
+@media print{.no-print,.sum-bar-wrap{display:none!important;}}   /* S8 — print 블록에 .no-print 규칙 부재 → 요약 스트립 인쇄 (2026-09-05 PDF 실측) */
 </style>
 </head>
 <body>
