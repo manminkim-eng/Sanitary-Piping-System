@@ -216,7 +216,8 @@ input[type="number"]{-moz-appearance:textfield;}
 @media(max-width:640px){
   .hdr-h1{font-size:18px;}   /* v5.0 — 마스터 모바일 규격 */
   /* v5.0-HDR (2026-09-02 확정) — eyebrow 표시 · sub 11px · 각인 12px 유지 · 좌우 14px : 01 마스터 실측 */
-  .header-inner{padding:20px 14px 16px;}
+  .header-inner{padding:20px 14px 16px;row-gap:0;}   /* 빈 우측 래퍼가 줄바꿈되며 생기는 유령 16px 제거 → 168.6 */
+  .hdr-right-wrap{padding-bottom:0;}
   .tab-bar-inner{padding:4px 14px 0;}
   .btn-g .btn-txt,.btn-b .btn-txt{display:none;}
   .hdr-btns{gap:3px;}
@@ -261,7 +262,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
 /* FORM */
 .flbl{font-size:9.5px;font-weight:700;color:#5c7a8a;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px;display:block;}
-.finput{width:100%;padding:7px 10px;background:#f0fdfe;border:1.5px solid #b2ebf2;border-radius:7px;color:#0c1a2e;font-size:12.5px;font-weight:600;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;}
+.finput{width:100%;padding:7px 10px;background:#f0fdfe;border:1.5px solid #b2ebf2;border-radius:7px;color:#0c1a2e;font-size:12.5px;font-weight:600;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;height:38px;box-sizing:border-box;}
 .finput:focus{border-color:#0e7490;box-shadow:0 0 0 3px rgba(14,116,144,.12);background:#fff;}
 .fselect{width:100%;padding:7px 24px 7px 9px;background:#f0fdfe;border:1.5px solid #b2ebf2;border-radius:7px;color:#0c1a2e;font-size:11.5px;font-weight:700;font-family:inherit;outline:none;cursor:pointer;transition:border-color .15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%230e7490' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
 .fselect:focus{border-color:#0e7490;box-shadow:0 0 0 3px rgba(14,116,144,.12);}
@@ -721,6 +722,9 @@ input[type="number"]{-moz-appearance:textfield;}
 .flow-arrow{color:#94a3b8;font-size:12px;}
 .flow-pipe{font-size:9px;font-weight:800;color:#0e7490;font-family:'JetBrains Mono',monospace!important;background:#fff;border:1px solid #a5f3fc;padding:1px 5px;border-radius:4px;}
 </style>
+<style id="mm-r1">/* R1 (2026-09-04 · 지시서 §20-1 · S10 소급) — 인쇄 PDF 하단 각인 MANMIN · Ver 비표시. 버전은 A4 푸터 [MANMIN-Ver5.0] 이 담당 */
+#dev-stamp,#dev-stamp-print,.dev-stamp{display:none!important;}
+@media print{#dev-stamp,#dev-stamp-print,.dev-stamp{display:none!important;}}</style>
 </head>
 <body>
 <div id="root-app">
@@ -1211,7 +1215,6 @@ input[type="number"]{-moz-appearance:textfield;}
 </div>
 
 <!-- v5.0 하단 각인 — 인쇄 시 매 페이지 우측 하단 -->
-<div id="dev-stamp">MANMIN · Ver-5.0</div>
 
 <!-- ════ 설계기준 종합 안내 모달 ════ -->
 <div class="modal-ov" id="guideModal" style="display:none" onclick="if(event.target===this)closeGuideModal()">
@@ -3477,5 +3480,7 @@ document.addEventListener('keydown', function(e){
   setSum();
 })();
 </script>
+<script>/* R26 (2026-09-04 · 지시서 §20-15 ③ · S10 소급) — 인쇄 중 문서 제목을 비워 PDF 머리글의 페이지 제목을 지운다. 쪽번호·URL 은 브라우저 옵션 */
+(function(){var t=null;window.addEventListener('beforeprint',function(){if(t===null){t=document.title;}document.title=' ';});window.addEventListener('afterprint',function(){if(t!==null){document.title=t;t=null;}});})();</script>
 </body>
 </html>
