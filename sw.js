@@ -1,4 +1,6 @@
 /* ══════════════════════════════════════════════════════════
+   S4 회차 2026-09-04 — R1b #mm-print-stamp 인쇄 비표시 동반 캐시명 v5.0.6
+   S3-0 회차 2026-09-04 — R27 html2canvas 클론 정화 동반 캐시명 v5.0.5
    S2 회차 2026-09-04 — index 소급(R1·R21·R26 등) 동반 캐시명 v5.0.4
    R25 회차 2026-09-04 — 자기 접두어 캐시 조회 · cors 프리캐시 · opaque 가드 · 캐시명 v5.0.3 (S10)
    위생배관 관경 산정 시스템 — Service Worker Ver-5.0
@@ -23,7 +25,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const SW_VER      = 'sanpipe-v5.0.4';
+const SW_VER      = 'sanpipe-v5.0.6';
 /* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
 const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
