@@ -1,4 +1,5 @@
 /* ══════════════════════════════════════════════════════════
+   R25 회차 2026-09-04 — 자기 접두어 캐시 조회 · cors 프리캐시 · opaque 가드 · 캐시명 v5.0.3 (S10)
    위생배관 관경 산정 시스템 — Service Worker Ver-5.0
    MANMIN Engineering · 기계설비 기술기준 2021-851
    ㈜대성건축사사무소 · 건축사 김만민
@@ -8,7 +9,20 @@
 
 /* §17-1 — 도구 고유 접두어. 종전 'manmin-v5.0.1' 은 필터 'sanpipe-' 와 어긋나 자기 구캐시를 못 지웠다 */
 const PREFIX      = 'sanpipe-';
-const SW_VER      = 'sanpipe-v5.0.2';
+/* ═ R25 (2026-09-04) — SW 캐시 origin 오염 차단 (S10 · 지시서 §21-1 R25)
+   전역 caches 의 match 는 origin 전체를 검색한다. manminkim-eng.github.io 는 34종이 한 origin 이라
+   다른 도구 캐시의 opaque 응답이 <script crossorigin>(cors) 요청에 돌아가 스크립트가 폐기됐다
+   (30 #root 빈 화면 · 40 html2canvas undefined). 자기 접두어 캐시만 조회하고, cross-origin
+   프리캐시는 cors 로 받으며, opaque↔cors 불일치 시 캐시를 쓰지 않는다. */
+const MM_EXCLUDE = [];   /* 내 접두어로 시작하지만 남의 캐시인 이름 (§17-1 충돌) */
+const mmOwn   = (k) => k.indexOf(PREFIX) === 0 && !MM_EXCLUDE.some((x) => k.indexOf(x) === 0);
+const mmReq   = (u) => (typeof u === 'string' && u.indexOf('http') === 0) ? new Request(u, { mode: 'cors' }) : u;
+const mmMatch = (req, opt) => caches.keys()
+  .then((ks) => ks.filter(mmOwn))
+  .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
+  .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
+
+const SW_VER      = 'sanpipe-v5.0.3';
 /* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
 const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
@@ -52,7 +66,7 @@ self.addEventListener('install', e => {
     caches.open(CACHE_CORE).then(cache =>
       Promise.allSettled(
         PRECACHE.map(url =>
-          cache.add(url).catch(err => console.warn('[SW] precache skip:', url, err))
+          cache.add(mmReq(url)).catch(err => console.warn('[SW] precache skip:', url, err))
         )
       )
     ).then(() => self.skipWaiting())
@@ -66,7 +80,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
-        keys.filter(k => (k.startsWith(PREFIX) || ORPHAN.includes(k)) && !keep.includes(k))
+        keys.filter(k => (mmOwn(k) || ORPHAN.includes(k)) && !keep.includes(k))
             .map(k => { console.log('[SW] delete old cache:', k); return caches.delete(k); })
       ))
       .then(() => self.clients.claim())
