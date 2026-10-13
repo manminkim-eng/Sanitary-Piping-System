@@ -1146,7 +1146,7 @@ input[type="number"]{-moz-appearance:textfield;}
         <div class="card-head"><div class="card-ico">🔥</div><span class="card-tit">급탕 설계 기준</span><span class="cbadge org">별표 5 · KDS 31 30 20</span></div>
         <div class="card-body">
           <div class="nb org"><div class="nb-tit">🔥 15m 규정</div><div class="nb-txt">• 급탕 열원 → 급탕 기구 배관 길이 : <b>15m 이하</b> (별표 5 2.2.2(3) — 환탕관·가열관은 열원으로 간주)<br>• 중앙식 30 m 이상 : 환탕관·순환펌프 또는 가열장치 (KDS 31 30 20 1.6.6)<br>• 본 시스템 길이는 층수×층높이×1.3 <b>추정값</b></div></div>
-          <div class="nb blue"><div class="nb-tit">🌡️ 급탕 온도</div><div class="nb-txt">• 급탕 설비 출구 온도 : <b>55~60°C</b><br>• 화상 방지용 혼합 밸브 설치 권장<br>• 급탕 저장탱크 내 최저온도 60°C 유지</div></div>
+          <div class="nb blue"><div class="nb-tit">🌡️ 급탕 온도 (별표 5)</div><div class="nb-txt">• 난방 겸용 급탕가열장치 : 60℃ 이상 공급 시 온도조절밸브로 급탕배관 <b>60℃ 이하</b> 제한 (2.2.3(1))<br>• 탱크 없는 순간 급탕가열장치 : <b>60℃ 이하</b>로 설정 가능 (2.2.3(3))<br>• 위생기구 급탕 : 온도제한장치·혼합장치로 <b>43℃ 이하</b> 제한 가능 (2.2.7(2)) — 가열장치 온도조절기로 대신할 수 없음 (2.2.7(1))</div></div>
         </div>
       </div>
     </div>
@@ -1173,21 +1173,45 @@ input[type="number"]{-moz-appearance:textfield;}
 
   <!-- 배관 지지간격 -->
   <div class="card" style="margin-top:4px">
-    <div class="card-head"><div class="card-ico">🔗</div><span class="card-tit">배관 지지 간격 기준표</span><span class="cbadge">별표 8 표 1</span></div>
+    <div class="card-head"><div class="card-ico">🔗</div><span class="card-tit">배관 지지 간격 기준표</span><span class="cbadge">별표 8 3.1.4 표 1</span></div>
     <div class="card-body">
       <div class="tbl-hint">좌우로 밀어서 표 전체 보기</div>
 <div class="twrap">
         <table class="gtbl">
-          <thead><tr><th>호칭지름</th><th>강관 (수평)</th><th>동관 (수평)</th><th>스테인리스강관</th><th>PVC/합성수지관</th><th>강관 (수직)</th></tr></thead>
+          <thead><tr><th>배관</th><th>관종</th><th>적요</th><th>간격</th></tr></thead>
           <tbody>
-            <tr><td>20A 이하</td><td>1.8m 이내</td><td>1.0m 이내</td><td>1.0m 이내</td><td>1.0m 이내</td><td>3.0m 이내</td></tr>
-            <tr><td>25A ~ 40A</td><td>2.0m 이내</td><td>1.5m 이내</td><td>1.5m 이내</td><td>1.5m 이내</td><td>3.0m 이내</td></tr>
-            <tr><td>50A</td><td>3.0m 이내</td><td>2.0m 이내</td><td>2.0m 이내</td><td>2.0m 이내</td><td>4.0m 이내</td></tr>
-            <tr><td>65A ~ 100A</td><td>4.0m 이내</td><td>2.5m 이내</td><td>2.5m 이내</td><td>2.5m 이내</td><td>4.0m 이내</td></tr>
-            <tr><td>125A 이상</td><td>5.0m 이내</td><td>3.0m 이내</td><td>3.0m 이내</td><td>3.0m 이내</td><td>5.0m 이내</td></tr>
+            <tr><td rowspan="5"><b>수직관</b></td><td rowspan="3">주철관</td><td>직관</td><td>1개에 1개소</td></tr>
+            <tr><td>이형관 2개</td><td>어느 쪽이든 1개소</td></tr>
+            <tr><td>이형관 3개</td><td>중앙부에 1개소</td></tr>
+            <tr><td colspan="2">강관</td><td rowspan="2">각 층에 1개소 이상</td></tr>
+            <tr><td colspan="2">연관 · 경질 염화 비닐관 · 동관 · 스테인리스강관</td></tr>
+            <tr><td rowspan="23"><b>수평<br>배관</b></td><td rowspan="2">주철관</td><td>직관</td><td>1개에 1개소</td></tr>
+            <tr><td>이형관</td><td>1개에 1개소</td></tr>
+            <tr><td rowspan="5">강관</td><td>20A 이하</td><td>1.8 m 이내</td></tr>
+            <tr><td>25A ~ 40A</td><td>2.0 m 이내</td></tr>
+            <tr><td>50A ~ 80A</td><td>3.0 m 이내</td></tr>
+            <tr><td>100A ~ 150A</td><td>4.0 m 이내</td></tr>
+            <tr><td>200A 이상</td><td>5.0 m 이내</td></tr>
+            <tr><td rowspan="5">동관</td><td>20A 이하</td><td>1.0 m 이내</td></tr>
+            <tr><td>25A ~ 40A</td><td>1.5 m 이내</td></tr>
+            <tr><td>50A</td><td>2.0 m 이내</td></tr>
+            <tr><td>65A ~ 100A</td><td>2.5 m 이내</td></tr>
+            <tr><td>125A 이상</td><td>3.0 m 이내</td></tr>
+            <tr><td rowspan="5">경질 염화 비닐관</td><td>16A 이하</td><td>0.75 m 이내</td></tr>
+            <tr><td>20A ~ 40A</td><td>1.0 m 이내</td></tr>
+            <tr><td>50A</td><td>1.2 m 이내</td></tr>
+            <tr><td>65A ~ 125A</td><td>1.5 m 이내</td></tr>
+            <tr><td>150A 이상</td><td>2.0 m 이내</td></tr>
+            <tr><td rowspan="5">스테인리스관</td><td>20A 이하</td><td>1.0 m 이내</td></tr>
+            <tr><td>25A ~ 40A</td><td>1.5 m 이내</td></tr>
+            <tr><td>50A</td><td>2.0 m 이내</td></tr>
+            <tr><td>65A ~ 100A</td><td>2.5 m 이내</td></tr>
+            <tr><td>125A 이상</td><td>3.0 m 이내</td></tr>
+            <tr><td>연관 (길이 0.5 m 초과)</td><td colspan="2">변형 우려 곳은 두께 0.4 mm 이상 아연도철판 반원형 받침대, 1.5 m 이내마다 지지</td></tr>
           </tbody>
         </table>
       </div>
+      <div style="font-size:10px;color:#475569;margin-top:6px;line-height:1.6">• 출처: 기계설비 기술기준 별표 8 3.1.4 표 1 (KCS 31 20 15 표 3.4-1 준용) — 급탕배관은 3.4.2(3)으로 같은 표 적용<br>• 실내 수직관 각 층 1개소 흔들림 방지철물(3.1.4(2)) · 동관·스테인리스강관 지지 시 절연조치(3.1.4(3))</div>
     </div>
   </div>
 </div>
@@ -1341,9 +1365,9 @@ input[type="number"]{-moz-appearance:textfield;}
           <div class="nb org">
             <div class="nb-tit">🔥 급탕 온도</div>
             <div class="nb-txt">
-              급탕 설정 온도는 입력값으로 반영<br>
-              55°C 미만 입력 시 주의 표시<br>
-              위생기구 급탕 온도 제한 : 별표 5 확인
+              가열장치 급탕 : <b>60℃ 이하</b> 제한 (별표 5 2.2.3)<br>
+              위생기구 급탕 : <b>43℃ 이하</b> 제한장치 (2.2.7(2))<br>
+              60℃ 초과 입력 시 주의 표시
             </div>
           </div>
           <div class="nb blue">
@@ -1503,18 +1527,19 @@ input[type="number"]{-moz-appearance:textfield;}
             </div>
             <div style="font-size:10px;color:#475569;line-height:1.7">
               • 잔류압 &lt; 최저 필요수압(세정밸브 100 · 샤워 70 · 일반 55 kPa) → 가압 또는 기구 변경<br>
-              • ≥ 550 kPa : 감압밸브 또는 조닝 (KDS 31 30 15 4.7)
+              • 최하층 ≥ 550 kPa : 감압밸브 또는 조닝 (KDS 31 30 15 4.7) — 가압·직결은 공급압, 고가탱크는 정수두로 판정
             </div>
           </div>
 
         </div>
 
         <div class="nb grn">
-          <div class="nb-tit">📋 관재질별 배관 지지 간격 기준 (별표 8 표 1)</div>
+          <div class="nb-tit">📋 수평배관 지지 간격 (별표 8 3.1.4 표 1)</div>
           <div class="nb-txt">
-            <b>강관:</b> 20A↓=1.8m · 25~40A=2.0m · 50A=3.0m · 65~100A=4.0m · 125A↑=5.0m<br>
-            <b>동관/STS:</b> 20A↓=1.0m · 25~40A=1.5m · 50A=2.0m · 65~100A=2.5m · 125A↑=3.0m<br>
-            <b>PVC관:</b> 동관/STS와 동일 기준 적용
+            <b>강관:</b> 20A↓ 1.8 · 25~40A 2.0 · 50~80A 3.0 · 100~150A 4.0 · 200A↑ 5.0 m<br>
+            <b>동관 · 스테인리스관:</b> 20A↓ 1.0 · 25~40A 1.5 · 50A 2.0 · 65~100A 2.5 · 125A↑ 3.0 m<br>
+            <b>경질 염화 비닐관:</b> 16A↓ 0.75 · 20~40A 1.0 · 50A 1.2 · 65~125A 1.5 · 150A↑ 2.0 m<br>
+            <b>수직관:</b> 강관·동관·스테인리스·PVC 각 층 1개소 이상 · 주철관 직관 1개에 1개소
           </div>
         </div>
       </div>
@@ -1659,7 +1684,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
 <script>
 /* ════════════════════════════════════════════════════
-   MANMIN 위생배관 관경 산정 시스템  Ver-5.0 (v5.0.10 계산 근거 교체)
+   MANMIN 위생배관 관경 산정 시스템  Ver-5.0 (v5.0.10 계산 근거 교체 · v5.0.11 지지간격·급탕온도·감압판정 정리)
    급수 : IPC 2021 Appendix E 표 E103.3(2)·(3) (KDS 31 30 15 1.3.2(2) 참고기준) · 수압 KDS 31 30 15 표 4.3-1
    배수·통기 : KDS 31 30 25 표 4.1-1~4.1-5 · 4.3.4
    기계설비 기술기준 국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행)
@@ -1843,8 +1868,10 @@ function topFloorPressure(supplyKpa, floors, floorHt, qLpm, dA, C){
   return Math.round(supplyKpa - staticHead(floors, floorHt) - frictionLoss(qLpm, dA, C, floors, floorHt));
 }
 
-/* ⑦ 최하층 급수압 — 공급압 기준 */
-function bottomFloorPressure(supplyKpa, floors, floorHt){
+/* ⑦ 최하층 급수압 — 급수 방식별
+   가압·직결 : 공급압(수전 기준 입력값) · 고가탱크 : 건물 높이 정수두(수조 설치 높이 미반영 — 추정) */
+function bottomFloorPressure(supplyKpa, floors, floorHt, method){
+  if(method === 'gravity') return staticHead(floors, floorHt);
   return Math.round(supplyKpa);
 }
 
@@ -1855,16 +1882,9 @@ function circJudge(floors, floorHt, manualCirc){
   return floors * floorHt * 1.3 > 15;
 }
 
-/* ⑨ 감압밸브 — KDS 31 30 15 4.7 (= 별표 5 2.1.7) 550 kPa */
-function prvNeeded(supplyKpa, floors, floorHt){
-  const botP = bottomFloorPressure(supplyKpa, floors, floorHt);
-  const extraP = floors > 10 ? floors * floorHt * 9.81 * 0.3 : 0;
-  return (botP + extraP) > 550 || supplyKpa > 550;
-}
-
-/* ⑩ 급탕온도 보정 계수 (유속 산정용 표시 계수) */
-function hwViscosityFactor(tempC){
-  return tempC >= 55 ? 1.0 : 1.02;
+/* ⑨ 감압밸브 — KDS 31 30 15 4.7 (= 별표 5 2.1.7) 위생기구 수압 550 kPa 이상이면 감압밸브 또는 조닝 */
+function prvNeeded(supplyKpa, floors, floorHt, method){
+  return bottomFloorPressure(supplyKpa, floors, floorHt, method) >= 550;
 }
 
 /* ── 부하 합산 ──
@@ -1950,6 +1970,7 @@ function liveCalc(){
   STATE.pressure    = parseInt(document.getElementById('inp-pressure').value)||300;
   STATE.hwTemp      = parseInt(document.getElementById('inp-hwtemp').value)||60;
   STATE.circ        = document.getElementById('sel-circ').value;
+  STATE.supplyMethod= (document.getElementById('sel-supply')||{}).value || 'pressure';
   STATE.usage       = document.getElementById('sel-usage').value;
   STATE.projName    = document.getElementById('inp-projname').value;
   STATE.projDate    = document.getElementById('inp-projdate').value;
@@ -1963,7 +1984,7 @@ function liveCalc(){
   const totalH   = Math.round(STATE.floors * STATE.floorHeight * 10) / 10;
   const sh       = staticHead(STATE.floors, STATE.floorHeight);
   const isCirc   = circJudge(STATE.floors, STATE.floorHeight, STATE.circ);
-  const isPRV    = prvNeeded(STATE.pressure, STATE.floors, STATE.floorHeight);
+  const isPRV    = prvNeeded(STATE.pressure, STATE.floors, STATE.floorHeight, STATE.supplyMethod);
   const estHWLen = Math.round(STATE.floors * STATE.floorHeight * 1.3 * 10) / 10;
 
   setEl('p-totalHeight', `${totalH} m (${STATE.floors}층 × ${STATE.floorHeight}m)`);
@@ -1973,7 +1994,7 @@ function liveCalc(){
     : `✅ 환탕 불필요 (추정 ${estHWLen}m ≤ 15m)`);
   setEl('p-prvNeeded', isPRV
     ? '🔴 감압밸브 설치 필요'
-    : '✅ 감압밸브 불필요 (550kPa 이하)');
+    : '✅ 감압밸브 불필요 (550kPa 미만)');
 
   if(fuS === 0 && fuH === 0 && fuD === 0){
     setEl('p-topPressure', '—');
@@ -1991,12 +2012,12 @@ function liveCalc(){
   const dH = demandFlow(fuH, false);
   const qwS = dS.lpm, qwH = dH.lpm;
   const supplyMain = pipeByVelocity(qwS, STATE.velSupply);
-  const hotMain    = pipeByVelocity(qwH * hwViscosityFactor(STATE.hwTemp), STATE.velSupply);
+  const hotMain    = pipeByVelocity(qwH, STATE.velSupply);
   const vS = velocityOf(qwS, supplyMain), vH = velocityOf(qwH, hotMain);
 
   const frlS = frictionLoss(qwS, supplyMain, C, STATE.floors, STATE.floorHeight);
   const topP = topFloorPressure(STATE.pressure, STATE.floors, STATE.floorHeight, qwS, supplyMain, C);
-  const botP = bottomFloorPressure(STATE.pressure, STATE.floors, STATE.floorHeight);
+  const botP = bottomFloorPressure(STATE.pressure, STATE.floors, STATE.floorHeight, STATE.supplyMethod);
   const pressOk = topP >= T.reqP;
 
   /* ── 배수·통기 : KDS 31 30 25 ── */
@@ -2005,7 +2026,7 @@ function liveCalc(){
   const Djab = sizeDrain(fuJabsu, STATE.floors, false,   T.trapJab);
 
   setEl('p-topPressure', `${topP} kPa — ${pressOk ? '✅ 적정' : '🔴 부족'} (필요 ${T.reqP} kPa)`);
-  setEl('p-botPressure', `${botP} kPa — ${botP > 550 ? '🔴 초과 (감압밸브)' : '✅ 적정'}`);
+  setEl('p-botPressure', `${botP} kPa — ${botP >= 550 ? '🔴 550 kPa 이상 (감압밸브)' : '✅ 550 kPa 미만'}${STATE.supplyMethod==='gravity'?' · 고가탱크 정수두 추정':''}`);
 
   STATE.result = {
     fuS, fuH, fuD, fuOsu, fuJabsu, col:T.col, colNm:DRAIN_COL_NM[T.col],
@@ -2074,7 +2095,7 @@ function renderResult(r){
     banner = `<div class="nb red" style="margin-bottom:10px"><div class="nb-tit">🔴 최상층 급수압 부족 (${r.topP} kPa &lt; ${r.reqP} kPa)</div><div class="nb-txt">필요 수압 ${r.reqP} kPa — ${r.reqFix} (KDS 31 30 15 표 4.3-1 최저 필요수압)<br>→ 가압(부스터) 펌프·급수압 상향 또는 기구 변경 검토</div></div>`;
   }
   if(r.isPRV){
-    banner += `<div class="nb red" style="margin-bottom:10px"><div class="nb-tit">🔴 감압밸브 (PRV) 설치 필요</div><div class="nb-txt">급수압 또는 층수 조건으로 하층 압력 550 kPa 초과 우려<br>→ KDS 31 30 15 4.7 · 기술기준 별표 5 2.1.7 (감압밸브 또는 조닝)</div></div>`;
+    banner += `<div class="nb red" style="margin-bottom:10px"><div class="nb-tit">🔴 감압밸브 (PRV) 설치 필요</div><div class="nb-txt">최하층 급수압 ${r.botP} kPa ≥ 550 kPa<br>→ KDS 31 30 15 4.7 · 기술기준 별표 5 2.1.7 (감압밸브 또는 조닝)</div></div>`;
   }
   if(r.isCirc){
     banner += `<div class="nb org" style="margin-bottom:10px"><div class="nb-tit">🔥 환탕 배관 설치 필요 (추정 ${r.estHWLen}m &gt; 15m)</div><div class="nb-txt">급탕 열원 → 급탕 기구 배관 길이 15 m 이하 — 기술기준 별표 5 2.2.2(3)<br>배관 길이는 층수×층높이×1.3 추정값 — 실제 배관 경로로 확인</div></div>`;
@@ -2186,7 +2207,6 @@ function buildSupplyTable(r, which){
     ['마찰손실 (추정)', `${r.frlS} kPa`, `Hazen-Williams C=${r.C} · 배관 길이 ${Math.round(STATE.floors*STATE.floorHeight*1.5)}m 추정`],
     ['최상층 잔류압', `<b>${r.topP} kPa</b> ${r.pressOk?'✅':'🔴'}`, `필요 ${r.reqP} kPa (${r.reqFix||'-'}) — KDS 31 30 15 표 4.3-1`]
   );
-  if(!S) rows.push(['급탕 온도 보정', `× ${hwViscosityFactor(STATE.hwTemp)}`, `${STATE.hwTemp}°C`]);
   return '<thead><tr><th>항목</th><th>값</th><th>근거</th></tr></thead><tbody>'
     + rows.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td></tr>`).join('') + '</tbody>';
 }
@@ -2293,7 +2313,7 @@ function renderA4(r){
   const usageText  = STATE.usage==='private' ? '주거용(Private)' : '공용(Public)';
   const circText   = r.isCirc ? '⚠️ 설치 필요' : '✅ 불필요';
   const prvText    = r.isPRV  ? '🔴 설치 필요' : '✅ 불필요';
-  const tempOkText = STATE.hwTemp>=55 ? '✅ 55°C 이상' : '⚠️ 55°C 미만';
+  const tempOkText = STATE.hwTemp>60 ? '⚠️ 60℃ 초과 — 온도조절밸브로 60℃ 이하 제한 (별표 5 2.2.3(1))' : '✅ 60℃ 이하 (별표 5 2.2.3)';
   const floorLen   = Math.round(STATE.floors * STATE.floorHeight * 1.5);
   const D = r.Dall;
   const sysRow = (nm, X, color, wc) => X ? `<tr>
@@ -2344,7 +2364,7 @@ function renderA4(r){
       <tr><td class="a4-th">정수두</td><td style="font-weight:900;text-align:center">${r.sh} kPa</td><td>${STATE.floors}층 × ${STATE.floorHeight}m × 9.81 kPa/m</td></tr>
       <tr><td class="a4-th">마찰손실 (추정)</td><td style="font-weight:900;text-align:center">${r.frlS} kPa</td><td>Hazen-Williams C=${r.C} · 배관 길이 ${floorLen}m 추정</td></tr>
       <tr><td class="a4-th">최상층 잔류 급수압</td><td style="font-weight:900;text-align:center;color:${r.pressOk?'#0e7490':'#dc2626'}">${r.topP} kPa</td><td>${r.pressOk?'✅':'🔴'} 필요 ${r.reqP} kPa — ${r.reqFix||'-'} (KDS 31 30 15 표 4.3-1)</td></tr>
-      <tr><td class="a4-th">최하층 급수압</td><td style="font-weight:900;text-align:center">${r.botP} kPa</td><td>${r.isPRV?'🔴 감압밸브 필요 (550 kPa — KDS 31 30 15 4.7)':'✅ 550 kPa 이내'}</td></tr>
+      <tr><td class="a4-th">최하층 급수압</td><td style="font-weight:900;text-align:center">${r.botP} kPa</td><td>${r.isPRV?'🔴 감압밸브 필요 (550 kPa 이상 — KDS 31 30 15 4.7)':'✅ 550 kPa 미만'}${STATE.supplyMethod==='gravity'?' · 고가탱크 정수두(추정)':' · 공급압 기준'}</td></tr>
       <tr><td class="a4-th">환탕 배관 (추정 길이)</td><td style="font-weight:900;text-align:center">${r.estHWLen}m</td><td>${r.isCirc?'⚠️ 15 m 초과':'✅ 15 m 이하'} — 별표 5 2.2.2(3) · 층수×층높이×1.3 추정</td></tr>
     </table>
 
@@ -2383,9 +2403,9 @@ function renderA4(r){
     <table class="a4-tbl">
       <colgroup><col style="width:28%"><col style="width:72%"></colgroup>
       <tr><td class="a4-th">급수 압력 적정성</td><td>${STATE.pressure} kPa 공급 — 최상층 잔류 ${r.topP} kPa / 필요 ${r.reqP} kPa ${r.pressOk?'✅ 적정':'🔴 부족 — 가압 검토'}</td></tr>
-      <tr><td class="a4-th">감압밸브 설치</td><td>${r.isPRV ? '🔴 설치 필요 — 550 kPa 초과 우려' : '✅ 불필요 (550 kPa 이내)'}</td></tr>
+      <tr><td class="a4-th">감압밸브 설치</td><td>${r.isPRV ? '🔴 설치 필요 — 최하층 '+r.botP+' kPa ≥ 550 kPa (감압밸브 또는 조닝)' : '✅ 불필요 (최하층 '+r.botP+' kPa < 550 kPa)'}</td></tr>
       <tr><td class="a4-th">환탕 배관</td><td>${r.isCirc ? `⚠️ 설치 필요 — 추정 배관길이 ${r.estHWLen}m > 15m` : '✅ 불필요 — 추정 15 m 이하'} (실제 경로로 확인)</td></tr>
-      <tr><td class="a4-th">급탕 온도</td><td>${STATE.hwTemp}°C — ${tempOkText}</td></tr>
+      <tr><td class="a4-th">급탕 온도</td><td>${STATE.hwTemp}°C — ${tempOkText} · 위생기구는 온도제한장치·혼합장치로 43℃ 이하 (2.2.7(2))</td></tr>
       <tr><td class="a4-th">통기 길이 조건</td><td>통기관 12 m 이상 시 전 길이 1단계 상향(4.3.4(2)) · 통기수직관은 표 4.3-1(길이·DFU) 대조</td></tr>
     </table>
 

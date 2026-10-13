@@ -1,4 +1,5 @@
 /* ══════════════════════════════════════════════════════════
+   S12 회차 2026-10-13 — 지지간격표·급탕온도 원문화 · 감압 판정 급수방식별 · 점도계수 삭제 동반 캐시명 v5.0.11
    S11 회차 2026-10-13 — 계산 근거 교체(IPC 부록 E · KDS 31 30 25 · KDS 31 30 15 표 4.3-1) 동반 캐시명 v5.0.10
    S9 회차 2026-09-05 — R28 JPG v5.5 소제목 동반 이관 동반 캐시명 v5.0.9
    S8 회차 2026-09-05 — 20 #a4-content 패딩 / 21 .no-print 인쇄 숨김 동반 캐시명 v5.0.8
@@ -29,7 +30,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const SW_VER      = 'sanpipe-v5.0.10';
+const SW_VER      = 'sanpipe-v5.0.11';
 /* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
 const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
