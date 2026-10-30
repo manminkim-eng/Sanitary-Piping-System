@@ -23,7 +23,7 @@
 <meta name="twitter:description" content="건축물 용도별 급수·급탕·오배수·통기 관경 산정 — KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 (국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행))">
 <meta name="twitter:image" content="https://manminkim-eng.github.io/Sanitary-Piping-System/og-card.jpg">
 <meta name="description" content="건축물 용도별 급수·급탕·오배수·통기 관경 산정 — KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 (국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행))"/>
-<meta name="theme-color" content="#0e7490"/>
+<meta name="theme-color" content="#2d5186"/>
 <!-- PWA -->
 <link rel="manifest" href="./manifest.json"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -35,21 +35,23 @@
 <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
 <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png"/>
-<meta name="msapplication-TileColor" content="#0e7490"/>
+<meta name="msapplication-TileColor" content="#2d5186"/>
 <meta name="msapplication-TileImage" content="./icons/icon-144x144.png"/>
 <!-- MANMIN Ver-5.0 폰트 체계 : 로컬 폴백 우선 → CDN 보조 (오프라인·차단망 대응) -->
 <link rel="stylesheet" href="./assets/fonts/manmin-fonts.css"/>
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
+<style>:root{--d:#5a9ae8;--d-deep:#2d5186;--d-lt:#9cc3f5;--d-tint:#dbeafe;--d-rgb:90,154,232;--fs-badge:11px;--fs-cap:11.5px;--fs-sm:12.5px;--fs-desc:13px;--fs-body:14px;--fs-sec:16px;--fs-card:17px;--fs-stat:20px;}
+
 /* MANMIN Ver-5.0 : 유니버설 폰트 강제(*) 를 태그 목록으로 축소 — 고정폭(JetBrains Mono) 선언이 화면에서 실제 적용되도록 함 */
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body,div,span,p,a,button,label,li,td,th,h1,h2,h3,h4,h5,h6,section,article,header,footer,nav,small,strong,b,em{
-  font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
-html,body{min-height:100vh;background:#ecfeff;color:#0c1a2e;}
+  font-family:'Pretendard Variable',Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
+html,body{min-height:100vh;background:#eff5fd;color:#0c1a2e;}
 ::-webkit-scrollbar{width:5px;height:5px;}
-::-webkit-scrollbar-track{background:#ecfeff;}
-::-webkit-scrollbar-thumb{background:#a5f3fc;border-radius:10px;}
+::-webkit-scrollbar-track{background:#eff5fd;}
+::-webkit-scrollbar-thumb{background:#c2d9f7;border-radius:10px;}
 input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
 input[type="number"]{-moz-appearance:textfield;}
 .mono{font-family:'JetBrains Mono','Courier New',monospace!important;}
@@ -57,48 +59,48 @@ input[type="number"]{-moz-appearance:textfield;}
 /* ── PWA 설치 버튼 ── */
 #pwa-install-btn{
   display:none;align-items:center;gap:5px;
-  background:linear-gradient(135deg,#0e7490,#06b6d4);
+  background:linear-gradient(135deg,#2d5186,#5a9ae8);
   color:#fff;border:none;padding:6px 12px;border-radius:8px;
   font-size:11px;font-weight:800;cursor:pointer;
   font-family:inherit;white-space:nowrap;flex-shrink:0;
   transition:all .15s;animation:pwa-glow 2.2s ease-in-out infinite;
 }
 #pwa-install-btn.visible{display:flex;}
-#pwa-install-btn:hover{background:linear-gradient(135deg,#155e75,#0e7490);transform:translateY(-1px);}
+#pwa-install-btn:hover{background:linear-gradient(135deg,#244168,#2d5186);transform:translateY(-1px);}
 @keyframes pwa-glow{
-  0%,100%{box-shadow:0 0 0 0 rgba(6,182,212,.5);}
-  50%{box-shadow:0 0 0 7px rgba(6,182,212,0);}
+  0%,100%{box-shadow:0 0 0 0 rgba(90,154,232,.5);}
+  50%{box-shadow:0 0 0 7px rgba(90,154,232,0);}
 }
 @media(max-width:480px){#pwa-install-btn .pwa-txt{display:none;}}
 /* ══ PWA 설치 버튼 강화 (급배수관경 Edition) ══ */
 #pwa-install-btn{
   display:none;align-items:center;gap:5px;
-  background:linear-gradient(135deg,#0e7490,#06b6d4) !important;
+  background:linear-gradient(135deg,#2d5186,#5a9ae8) !important;
   color:#fff !important;border:none;padding:7px 13px;border-radius:8px;
   font-size:11px;font-weight:800;cursor:pointer;
   font-family:inherit;white-space:nowrap;flex-shrink:0;
   transition:all .2s;
-  box-shadow:0 2px 12px rgba(6,182,212,.4);
+  box-shadow:0 2px 12px rgba(90,154,232,.4);
   animation:san-pwa-glow 2.5s ease-in-out infinite;
 }
 #pwa-install-btn.visible{display:flex !important;}
 #pwa-install-btn:hover{
-  background:linear-gradient(135deg,#155e75,#0e7490) !important;
+  background:linear-gradient(135deg,#244168,#2d5186) !important;
   transform:translateY(-1px) !important;
-  box-shadow:0 4px 18px rgba(6,182,212,.65) !important;
+  box-shadow:0 4px 18px rgba(90,154,232,.65) !important;
   animation:none !important;
 }
 @keyframes san-pwa-glow{
-  0%,100%{box-shadow:0 2px 12px rgba(6,182,212,.4);}
-  50%{box-shadow:0 2px 22px rgba(6,182,212,.75),0 0 10px rgba(14,116,144,.25);}
+  0%,100%{box-shadow:0 2px 12px rgba(90,154,232,.4);}
+  50%{box-shadow:0 2px 22px rgba(90,154,232,.75),0 0 10px rgba(45,81,134,.25);}
 }
 
 /* ══ 배너 강화 ══ */
 #pwa-banner{
-  background:linear-gradient(135deg,#164e63 0%,#0e7490 70%,#155e75 100%) !important;
-  border-top:2px solid rgba(165,243,252,.4) !important;
+  background:linear-gradient(135deg,#1b3150 0%,#2d5186 70%,#244168 100%) !important;
+  border-top:2px solid rgba(194,217,247,.4) !important;
   border-radius:20px 20px 0 0 !important;
-  box-shadow:0 -6px 32px rgba(14,116,144,.55) !important;
+  box-shadow:0 -6px 32px rgba(45,81,134,.55) !important;
   padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px)) !important;
   animation:san-banner-up .35s cubic-bezier(.22,.61,.36,1) !important;
 }
@@ -106,8 +108,8 @@ input[type="number"]{-moz-appearance:textfield;}
 .pwa-icon{
   width:52px !important;height:52px !important;
   border-radius:13px !important;
-  border:1.5px solid rgba(165,243,252,.4) !important;
-  box-shadow:0 2px 12px rgba(14,116,144,.35) !important;
+  border:1.5px solid rgba(194,217,247,.4) !important;
+  box-shadow:0 2px 12px rgba(45,81,134,.35) !important;
   overflow:hidden;flex-shrink:0;
 }
 .pwa-ok{
@@ -122,24 +124,24 @@ input[type="number"]{-moz-appearance:textfield;}
 .pwa-ok:hover{background:#fff !important;transform:translateY(-1px) !important;}
 .pwa-no{
   background:rgba(255,255,255,.12) !important;
-  color:#a5f3fc !important;
-  border:1px solid rgba(165,243,252,.3) !important;
+  color:#c2d9f7 !important;
+  border:1px solid rgba(194,217,247,.3) !important;
   padding:10px 13px !important;border-radius:10px !important;
   font-size:13px !important;font-weight:700 !important;
   cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;
   transition:all .15s !important;
 }
-.pwa-no:hover{color:#cffafe !important;}
+.pwa-no:hover{color:#dbeafe !important;}
 
 /* iOS 안내 모달 (추가) */
 #ios-guide-modal-san{
   position:fixed;bottom:0;left:0;right:0;z-index:10000;
-  background:linear-gradient(135deg,#164e63,#0e7490);
-  border-top:2px solid rgba(165,243,252,.5);
+  background:linear-gradient(135deg,#1b3150,#2d5186);
+  border-top:2px solid rgba(194,217,247,.5);
   border-radius:20px 20px 0 0;
   padding:22px 20px calc(18px + env(safe-area-inset-bottom,0px));
   display:none;
-  box-shadow:0 -8px 40px rgba(14,116,144,.55);
+  box-shadow:0 -8px 40px rgba(45,81,134,.55);
   animation:san-banner-up .35s cubic-bezier(.22,.61,.36,1);
 }
 #ios-guide-modal-san.show{display:block;}
@@ -151,12 +153,12 @@ input[type="number"]{-moz-appearance:textfield;}
 .sg-step{display:flex;align-items:flex-start;gap:12px;
   background:rgba(255,255,255,.07);border-radius:10px;padding:12px;margin-bottom:8px;}
 .sg-num{min-width:26px;height:26px;border-radius:50%;
-  background:rgba(14,116,144,.5);border:1px solid rgba(165,243,252,.5);
-  color:#a5f3fc;font-size:11px;font-weight:800;
+  background:rgba(45,81,134,.5);border:1px solid rgba(194,217,247,.5);
+  color:#c2d9f7;font-size:11px;font-weight:800;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.sg-txt{font-size:13px;color:#cffafe;line-height:1.5;}
+.sg-txt{font-size:13px;color:#dbeafe;line-height:1.5;}
 .sg-txt strong{color:#fff;}
-.sg-foot{text-align:center;font-size:11px;color:#67e8f9;margin-top:12px;}
+.sg-foot{text-align:center;font-size:11px;color:#9cc3f5;margin-top:12px;}
 
 @media(max-width:480px){
   #pwa-install-btn .pwa-txt{display:none;}
@@ -168,25 +170,25 @@ input[type="number"]{-moz-appearance:textfield;}
 /* ── PWA 설치 배너 ── */
 #pwa-banner{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;
-  background:linear-gradient(135deg,#164e63,#0e7490);
-  border-top:1px solid rgba(6,182,212,.35);
+  background:linear-gradient(135deg,#1b3150,#2d5186);
+  border-top:1px solid rgba(90,154,232,.35);
   padding:14px 18px;border-radius:16px 16px 0 0;
-  box-shadow:0 -6px 28px rgba(14,116,144,.45);
+  box-shadow:0 -6px 28px rgba(45,81,134,.45);
   animation:banner-up .35s cubic-bezier(.16,1,.3,1);
 }
 #pwa-banner.visible{display:block;}
 @keyframes banner-up{from{transform:translateY(100%);}to{transform:translateY(0);}}
 .pwa-inner{max-width:540px;margin:0 auto;display:flex;align-items:center;gap:12px;}
-.pwa-icon{width:50px;height:50px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1.5px solid rgba(6,182,212,.4);}
+.pwa-icon{width:50px;height:50px;border-radius:12px;overflow:hidden;flex-shrink:0;border:1.5px solid rgba(90,154,232,.4);}
 .pwa-icon img{width:100%;height:100%;object-fit:cover;}
 .pwa-texts{flex:1;min-width:0;}
-.pwa-title{font-size:.88rem;font-weight:900;color:#cffafe;margin-bottom:2px;}
-.pwa-desc{font-size:.72rem;color:#a5f3fc;line-height:1.5;}
+.pwa-title{font-size:.88rem;font-weight:900;color:#dbeafe;margin-bottom:2px;}
+.pwa-desc{font-size:.72rem;color:#c2d9f7;line-height:1.5;}
 .pwa-btns{display:flex;gap:7px;flex-shrink:0;}
 .pwa-ok{background:#06b6d4;color:#fff;border:none;padding:9px 16px;border-radius:7px;font-size:.8rem;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .15s;}
 .pwa-ok:hover{background:#0891b2;}
-.pwa-no{background:rgba(255,255,255,.1);color:#a5f3fc;border:1px solid rgba(6,182,212,.3);padding:9px 11px;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
-.pwa-no:hover{color:#cffafe;}
+.pwa-no{background:rgba(255,255,255,.1);color:#c2d9f7;border:1px solid rgba(90,154,232,.3);padding:9px 11px;border-radius:7px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.pwa-no:hover{color:#dbeafe;}
 @media(max-width:420px){.pwa-desc{display:none;}}
 
 /* ── THEME COLORS (Cyan/Teal — Sanitary Pipe) ── */
@@ -205,7 +207,7 @@ input[type="number"]{-moz-appearance:textfield;}
 /* v5.0.1 — 헤더+탭바를 하나의 그라데이션 면으로 통합한다.
    135deg 대각 그라데이션은 하단 가장자리 색이 좌우로 변하는데 탭바를 끝색 단색으로 두면
    좌측에서 색이 어긋나 띠가 둘로 갈라진다. 소방 마스터(탭이 header 안)와 같은 1면 구조로 되돌린다. */
-.hdr-shell{background:linear-gradient(135deg,#083344 0%,#0e7490 50%,#0891b2 100%);box-shadow:0 2px 20px rgba(14,116,144,.35);}
+.hdr-shell{background:linear-gradient(135deg,#0f1a2e 0%,#1b3150 50%,#2d5186 100%);box-shadow:0 2px 20px rgba(45,81,134,.35);}
 .app-header{background:transparent;color:#fff;}
 /* v5.0 — 본문↔탭 간격 16px 은 .tab-bar 의 margin-top 이 아니라 헤더의 padding-bottom 으로 둔다.
    margin 으로 두면 그 구간에 body 배경이 비쳐 진한 헤더 한가운데 밝은 띠가 생긴다.
@@ -217,16 +219,16 @@ input[type="number"]{-moz-appearance:textfield;}
 .hdr-h1{font-size:26px;font-weight:900;color:#fff;letter-spacing:.04em;line-height:1.2;}
 /* v5.0-HDR — line-height normal(17px). 1.7 이면 20.4px 가 되어 마스터 78.2/162.2 가 안 나온다 */
 .hdr-sub{font-size:11px;margin-top:8px;color:#fff;opacity:.85;letter-spacing:.02em;line-height:normal;}
-.hdr-manmin{font-family:'Orbitron',sans-serif!important;font-weight:900;font-size:12px;color:#7dd3fc;letter-spacing:.08em;text-shadow:0 0 8px rgba(125,211,252,.6);white-space:nowrap;display:inline-block;}
+.hdr-manmin{font-family:'Orbitron',sans-serif!important;font-weight:900;font-size:12px;color:#9cc3f5;letter-spacing:.08em;text-shadow:0 0 8px rgba(156,195,245,.6);white-space:nowrap;display:inline-block;}
 .hdr-right-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding-bottom:2px;flex-shrink:0;}
 .hdr-right{text-align:right;opacity:.75;color:#fff;font-size:11px;line-height:normal;}
 .hdr-right strong{font-size:13px;font-weight:700;opacity:1;}
-.hdr-right em{font-size:10px;color:#7dd3fc;font-style:normal;display:block;margin-top:4px;}
+.hdr-right em{font-size:11px;color:#9cc3f5;font-style:normal;display:block;margin-top:4px;}
 .hdr-btns{display:flex;gap:5px;flex-shrink:0;}
 .btn-g{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
-.btn-g:hover{border-color:#fff;color:#0e7490;background:#fff;}
-.btn-b{background:#0e7490;color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
-.btn-b:hover{background:#155e75;}
+.btn-g:hover{border-color:#fff;color:#2d5186;background:#fff;}
+.btn-b{background:#2d5186;color:#fff;border:none;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:all .15s;white-space:nowrap;}
+.btn-b:hover{background:#244168;}
 @media(max-width:768px){
   .hdr-right{display:none;}
   .hdr-right-wrap{gap:0;}
@@ -251,13 +253,13 @@ input[type="number"]{-moz-appearance:textfield;}
 /* v5.0-HDR — 마스터 구조 : border-bottom 3px(투명) + line-height normal → 44px. 활성은 단색 배경 + 강조색 바 */
 .tb{background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;color:rgba(255,255,255,.75);font-family:inherit;padding:11px 16px;font-size:13px;font-weight:700;letter-spacing:.02em;line-height:normal;transition:all .15s;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
 .tb:hover{color:#fff;background:rgba(255,255,255,.09);}
-.tb.active{color:#fff;background:#0e7490;border-bottom-color:#7dd3fc;}
+.tb.active{color:#fff;background:#2d5186;border-bottom-color:#9cc3f5;}
 .tb.tb-manual{margin-left:auto;text-decoration:none;white-space:nowrap;}   /* v5.0.12 — 사용자 매뉴얼(탭 막대 오른쪽 끝) */
 /* v5.0-HDR — 요약 스트립 (마스터 3층) */
 .sum-bar-wrap{background:#0f172a;padding:10px 0;}
 .sum-bar{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:14px;}
 .sum-item{font-size:12px;color:#94a3b8;}
-.sum-item b{font-family:'JetBrains Mono','Noto Sans KR',monospace;font-weight:700;color:#7dd3fc;}
+.sum-item b{font-family:'JetBrains Mono','Pretendard Variable',Pretendard,'Noto Sans KR',monospace;font-weight:700;color:#9cc3f5;}
 @media(max-width:640px){.sum-bar{padding:0 14px;}.sum-item{font-size:11px;}}
 
 /* LAYOUT */
@@ -268,11 +270,11 @@ input[type="number"]{-moz-appearance:textfield;}
 @media(max-width:768px){.two-col{grid-template-columns:1fr;}}
 
 /* CARD */
-.card{background:#fff;border:1px solid #e0f7fa;border-radius:12px;box-shadow:0 1px 4px rgba(14,116,144,.07);overflow:hidden;margin-bottom:12px;}
-.card-head{display:flex;align-items:center;gap:8px;padding:10px 13px;border-bottom:1px solid #e0f2fe;}
-.card-ico{width:25px;height:25px;border-radius:6px;background:#ecfeff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
+.card{background:#fff;border:1px solid #dbeafe;border-radius:12px;box-shadow:0 1px 4px rgba(45,81,134,.07);overflow:hidden;margin-bottom:12px;}
+.card-head{display:flex;align-items:center;gap:8px;padding:10px 13px;border-bottom:1px solid #dbeafe;}
+.card-ico{width:25px;height:25px;border-radius:6px;background:#eff5fd;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;}
 .card-tit{font-size:11px;font-weight:800;color:#0c1a2e;letter-spacing:.04em;flex:1;}
-.cbadge{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:20px;background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc;white-space:nowrap;}
+.cbadge{font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;background:#eff5fd;color:#2d5186;border:1px solid #c2d9f7;white-space:nowrap;}
 .cbadge.org{background:#fff7ed;color:#c2410c;border-color:#fed7aa;}
 .cbadge.grn{background:#f0fdf4;color:#15803d;border-color:#bbf7d0;}
 .cbadge.red{background:#fef2f2;color:#dc2626;border-color:#fecaca;}
@@ -280,11 +282,11 @@ input[type="number"]{-moz-appearance:textfield;}
 .card-body{padding:12px 13px;}
 
 /* FORM */
-.flbl{font-size:9.5px;font-weight:700;color:#5c7a8a;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px;display:block;}
-.finput{width:100%;padding:7px 10px;background:#f0fdfe;border:1.5px solid #b2ebf2;border-radius:7px;color:#0c1a2e;font-size:12.5px;font-weight:600;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;height:38px;box-sizing:border-box;}
-.finput:focus{border-color:#0e7490;box-shadow:0 0 0 3px rgba(14,116,144,.12);background:#fff;}
-.fselect{width:100%;padding:7px 24px 7px 9px;background:#f0fdfe;border:1.5px solid #b2ebf2;border-radius:7px;color:#0c1a2e;font-size:11.5px;font-weight:700;font-family:inherit;outline:none;cursor:pointer;transition:border-color .15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%230e7490' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
-.fselect:focus{border-color:#0e7490;box-shadow:0 0 0 3px rgba(14,116,144,.12);}
+.flbl{font-size:11px;font-weight:700;color:#5c7a8a;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px;display:block;}
+.finput{width:100%;padding:7px 10px;background:#eff5fd;border:1.5px solid #9cc3f5;border-radius:7px;color:#0c1a2e;font-size:12.5px;font-weight:600;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;height:38px;box-sizing:border-box;}
+.finput:focus{border-color:#2d5186;box-shadow:0 0 0 3px rgba(45,81,134,.12);background:#fff;}
+.fselect{width:100%;padding:7px 24px 7px 9px;background:#eff5fd;border:1.5px solid #9cc3f5;border-radius:7px;color:#0c1a2e;font-size:11.5px;font-weight:700;font-family:inherit;outline:none;cursor:pointer;transition:border-color .15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%230e7490' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;}
+.fselect:focus{border-color:#2d5186;box-shadow:0 0 0 3px rgba(45,81,134,.12);}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
 @media(max-width:420px){.frow{grid-template-columns:1fr;}}
 .frow-author{grid-template-columns:1fr 1fr;}
@@ -295,63 +297,63 @@ input[type="number"]{-moz-appearance:textfield;}
 .fgrp.full{grid-column:1/-1;}
 .input-sfx{display:flex;}
 .input-sfx .finput{border-radius:7px 0 0 7px;}
-.sfx{padding:7px 10px;background:#ecfeff;border:1.5px solid #b2ebf2;border-left:none;border-radius:0 7px 7px 0;font-size:11.5px;font-weight:700;color:#0891b2;white-space:nowrap;display:flex;align-items:center;}
+.sfx{padding:7px 10px;background:#eff5fd;border:1.5px solid #9cc3f5;border-left:none;border-radius:0 7px 7px 0;font-size:11.5px;font-weight:700;color:#4375b7;white-space:nowrap;display:flex;align-items:center;}
 
 /* STEP BAR */
-.step-bar{display:flex;align-items:center;margin-bottom:13px;background:#fff;border:1px solid #e0f2fe;border-radius:10px;padding:8px 12px;overflow-x:auto;gap:0;scrollbar-width:none;}
+.step-bar{display:flex;align-items:center;margin-bottom:13px;background:#fff;border:1px solid #dbeafe;border-radius:10px;padding:8px 12px;overflow-x:auto;gap:0;scrollbar-width:none;}
 .step-bar::-webkit-scrollbar{display:none;}
 .step-item{display:flex;align-items:center;gap:5px;flex-shrink:0;}
-.sc{width:22px;height:22px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all .2s;}
+.sc{width:22px;height:22px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#94a3b8;flex-shrink:0;transition:all .2s;}
 .sc.done{background:#22c55e;color:#fff;}
-.sc.active{background:#0e7490;color:#fff;box-shadow:0 0 0 3px rgba(14,116,144,.2);}
-.sl{font-size:10.5px;font-weight:700;color:#94a3b8;white-space:nowrap;}
-.sl.active{color:#0e7490;}.sl.done{color:#16a34a;}
+.sc.active{background:#2d5186;color:#fff;box-shadow:0 0 0 3px rgba(45,81,134,.2);}
+.sl{font-size:11px;font-weight:700;color:#94a3b8;white-space:nowrap;}
+.sl.active{color:#2d5186;}.sl.done{color:#16a34a;}
 .sdiv{width:16px;height:2px;background:#e2e8f0;margin:0 3px;flex-shrink:0;transition:background .2s;}
 .sdiv.done{background:#22c55e;}
 
 /* NOTICE */
 .nb{border-radius:9px;padding:9px 11px;margin-bottom:9px;}
-.nb.blue{background:#ecfeff;border:1.5px solid #a5f3fc;}
+.nb.blue{background:#eff5fd;border:1.5px solid #c2d9f7;}
 .nb.org{background:#fff7ed;border:1.5px solid #fed7aa;}
 .nb.grn{background:#f0fdf4;border:1.5px solid #bbf7d0;}
 .nb.red{background:#fef2f2;border:1.5px solid #fecaca;}
-.nb-tit{font-size:10.5px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
-.nb.blue .nb-tit{color:#155e75;}.nb.org .nb-tit{color:#c2410c;}.nb.grn .nb-tit{color:#15803d;}.nb.red .nb-tit{color:#dc2626;}
-.nb-txt{font-size:10.5px;line-height:1.75;}
-.nb.blue .nb-txt{color:#164e63;}.nb.org .nb-txt{color:#78350f;}.nb.grn .nb-txt{color:#14532d;}.nb.red .nb-txt{color:#7f1d1d;}
+.nb-tit{font-size:11px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.nb.blue .nb-tit{color:#244168;}.nb.org .nb-tit{color:#c2410c;}.nb.grn .nb-tit{color:#15803d;}.nb.red .nb-tit{color:#dc2626;}
+.nb-txt{font-size:11px;line-height:1.75;}
+.nb.blue .nb-txt{color:#1b3150;}.nb.org .nb-txt{color:#78350f;}.nb.grn .nb-txt{color:#14532d;}.nb.red .nb-txt{color:#7f1d1d;}
 
 /* FIXTURE GRID (기구 입력) */
 .fixture-grid{display:grid;grid-template-columns:1fr;gap:5px;margin-bottom:8px;}
-.fixture-row{display:grid;grid-template-columns:1fr 88px 88px;gap:6px;align-items:center;padding:7px 10px;background:#f0fdfe;border:1px solid #cffafe;border-radius:8px;transition:border-color .15s;}
-.fixture-row:hover{border-color:#06b6d4;}
-.fixture-row.active{border-color:#0e7490;background:#ecfeff;}
+.fixture-row{display:grid;grid-template-columns:1fr 88px 88px;gap:6px;align-items:center;padding:7px 10px;background:#eff5fd;border:1px solid #dbeafe;border-radius:8px;transition:border-color .15s;}
+.fixture-row:hover{border-color:#5a9ae8;}
+.fixture-row.active{border-color:#2d5186;background:#eff5fd;}
 .fx-name{font-size:11px;font-weight:700;color:#0c1a2e;display:flex;align-items:center;gap:5px;min-width:0;}
 .fx-ico{font-size:14px;flex-shrink:0;}
-.fx-fu-badge{font-size:8.5px;font-weight:800;padding:1px 5px;border-radius:5px;background:#cffafe;color:#0e7490;border:1px solid #a5f3fc;white-space:nowrap;flex-shrink:0;}
-.fx-input{width:100%;padding:5px 3px;background:#fff;border:1.5px solid #b2ebf2;border-radius:6px;font-size:12px;font-weight:800;color:#0e7490;font-family:'JetBrains Mono',monospace!important;text-align:center;outline:none;min-width:0;}
-.fx-input:focus{border-color:#0e7490;box-shadow:0 0 0 2px rgba(14,116,144,.15);}
+.fx-fu-badge{font-size:11px;font-weight:800;padding:1px 5px;border-radius:5px;background:#dbeafe;color:#2d5186;border:1px solid #c2d9f7;white-space:nowrap;flex-shrink:0;}
+.fx-input{width:100%;padding:5px 3px;background:#fff;border:1.5px solid #9cc3f5;border-radius:6px;font-size:12px;font-weight:800;color:#2d5186;font-family:'JetBrains Mono',monospace!important;text-align:center;outline:none;min-width:0;}
+.fx-input:focus{border-color:#2d5186;box-shadow:0 0 0 2px rgba(45,81,134,.15);}
 .fx-input:disabled{opacity:.3;cursor:not-allowed;}
-.fx-lbl{font-size:9.5px;font-weight:700;color:#5c7a8a;text-align:center;}
+.fx-lbl{font-size:11px;font-weight:700;color:#5c7a8a;text-align:center;}
 
 /* RESULT HERO */
 .result-hero{padding:17px;border-radius:12px;color:#fff;text-align:center;margin-bottom:12px;}
-.rh-supply{background:linear-gradient(135deg,#164e63,#0e7490);}
+.rh-supply{background:linear-gradient(135deg,#1b3150,#2d5186);}
 .rh-hwsupply{background:linear-gradient(135deg,#7c2d12,#b45309);}
 .rh-drain{background:linear-gradient(135deg,#1a2e05,#365314);}
-.rh-sub{font-size:10px;opacity:.7;margin-bottom:3px;font-weight:600;}
+.rh-sub{font-size:11px;opacity:.7;margin-bottom:3px;font-weight:600;}
 .rh-pipe{font-size:42px;font-weight:900;color:#fde047;line-height:1;font-family:'JetBrains Mono',monospace!important;}
 .rh-unit{font-size:14px;font-weight:700;opacity:.85;margin-top:2px;}
-.rh-desc{font-size:10px;opacity:.7;margin-top:5px;line-height:1.5;}
+.rh-desc{font-size:11px;opacity:.7;margin-top:5px;line-height:1.5;}
 
 /* PIPE RESULT TABLE */
 .pipe-result-section{margin-bottom:14px;}
 .prs-tit{font-size:11px;font-weight:800;letter-spacing:.05em;display:flex;align-items:center;gap:6px;margin-bottom:7px;}
-.prs-tit.supply{color:#0e7490;}
+.prs-tit.supply{color:#2d5186;}
 .prs-tit.hotwater{color:#b45309;}
 .prs-tit.drain{color:#365314;}
 .prs-tit.vent{color:#7e22ce;}
 .pipe-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11.5px;font-weight:900;font-family:'JetBrains Mono',monospace!important;}
-.pipe-tag.supply{background:#0e7490;color:#fff;}
+.pipe-tag.supply{background:#2d5186;color:#fff;}
 .pipe-tag.hotwater{background:#b45309;color:#fff;}
 .pipe-tag.drain{background:#365314;color:#fff;}
 .pipe-tag.vent{background:#7e22ce;color:#fff;}
@@ -359,13 +361,13 @@ input[type="number"]{-moz-appearance:textfield;}
 /* STAT GRID */
 .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
 @media(max-width:420px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
-.sbox{background:#fff;border:1px solid #e0f2fe;border-radius:10px;padding:10px;text-align:center;}
+.sbox{background:#fff;border:1px solid #dbeafe;border-radius:10px;padding:10px;text-align:center;}
 .sico{font-size:16px;margin-bottom:3px;}
-.sval{font-size:19px;font-weight:900;color:#0e7490;font-family:'JetBrains Mono',monospace!important;line-height:1.1;}
-.slbl{font-size:9.5px;color:#5c7a8a;font-weight:700;margin-top:2px;}
+.sval{font-size:19px;font-weight:900;color:#2d5186;font-family:'JetBrains Mono',monospace!important;line-height:1.1;}
+.slbl{font-size:11px;color:#5c7a8a;font-weight:700;margin-top:2px;}
 
 /* TABLE */
-.twrap{overflow-x:auto;border-radius:9px;border:1px solid #e0f2fe;position:relative;}
+.twrap{overflow-x:auto;border-radius:9px;border:1px solid #dbeafe;position:relative;}
 .rtbl{width:100%;border-collapse:collapse;font-size:11px;}
 /* ═══ v5.0 ⑮ 표 스크롤 — 2026-08-31 재적용 ═══
    1차에서 .rtbl,.gtbl{min-width:560px} 를 넣었다가 모바일에서 문서 폭이 385→611px 로
@@ -381,61 +383,61 @@ input[type="number"]{-moz-appearance:textfield;}
   .rtbl,.gtbl{min-width:560px;}
   .tbl-hint{display:block;}
 }
-.tbl-hint{display:none;font-size:9.5px;font-weight:700;color:#0891b2;
+.tbl-hint{display:none;font-size:11px;font-weight:700;color:#4375b7;
   padding:3px 2px 5px;letter-spacing:-.01em;}
 .tbl-hint::before{content:'↔ ';font-weight:900;}
-.rtbl th{background:#ecfeff;padding:7px 8px;text-align:center;font-weight:800;color:#155e75;border:1px solid #a5f3fc;font-size:10px;}
-.rtbl td{padding:7px 8px;text-align:center;border:1px solid #e0f2fe;color:#0c1a2e;font-weight:600;}
-.rtbl tr:nth-child(even) td{background:#f0fdfe;}
-.rtbl .highlight td{background:#cffafe!important;border-color:#67e8f9;font-weight:900;}
-.rtbl tfoot td{background:#ecfeff!important;font-weight:900;}
+.rtbl th{background:#eff5fd;padding:7px 8px;text-align:center;font-weight:800;color:#244168;border:1px solid #c2d9f7;font-size:11px;}
+.rtbl td{padding:7px 8px;text-align:center;border:1px solid #dbeafe;color:#0c1a2e;font-weight:600;}
+.rtbl tr:nth-child(even) td{background:#eff5fd;}
+.rtbl .highlight td{background:#dbeafe!important;border-color:#9cc3f5;font-weight:900;}
+.rtbl tfoot td{background:#eff5fd!important;font-weight:900;}
 
 /* CALC BOX */
-.cbox{background:#f0fdfe;border:1px solid #cffafe;border-radius:8px;padding:10px;margin-top:9px;}
-.cbox-tit{font-size:9.5px;font-weight:800;color:#5c7a8a;letter-spacing:.06em;margin-bottom:7px;}
-.crow{display:flex;justify-content:space-between;font-size:10.5px;padding:3px 0;border-bottom:1px dashed #a5f3fc;}
-.crow:last-child{border-bottom:none;font-weight:800;color:#0e7490;}
+.cbox{background:#eff5fd;border:1px solid #dbeafe;border-radius:8px;padding:10px;margin-top:9px;}
+.cbox-tit{font-size:11px;font-weight:800;color:#5c7a8a;letter-spacing:.06em;margin-bottom:7px;}
+.crow{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px dashed #c2d9f7;}
+.crow:last-child{border-bottom:none;font-weight:800;color:#2d5186;}
 .ck{color:#475569;font-weight:600;}
 .cv{font-weight:700;font-family:'JetBrains Mono',monospace!important;}
 
 /* REF BOX */
-.ref-box{background:#f0fdfe;border:1px solid #cffafe;border-radius:8px;padding:11px;margin-top:12px;}
-.ref-tit{font-size:10.5px;font-weight:800;color:#475569;margin-bottom:6px;}
-.ref-item{font-size:10px;color:#64748b;line-height:1.8;display:flex;gap:5px;}
-.ref-item::before{content:'•';color:#06b6d4;flex-shrink:0;}
+.ref-box{background:#eff5fd;border:1px solid #dbeafe;border-radius:8px;padding:11px;margin-top:12px;}
+.ref-tit{font-size:11px;font-weight:800;color:#475569;margin-bottom:6px;}
+.ref-item{font-size:11px;color:#64748b;line-height:1.8;display:flex;gap:5px;}
+.ref-item::before{content:'•';color:#5a9ae8;flex-shrink:0;}
 
 /* GUIDE MODAL TABS */
-.gm-tab{background:none;border:none;padding:9px 13px;font-size:10.5px;font-weight:700;color:#5c7a8a;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:all .15s;}
-.gm-tab:hover{color:#0e7490;background:rgba(14,116,144,.06);}
-.gm-tab.active{color:#0e7490;border-bottom-color:#0e7490;background:#fff;}
+.gm-tab{background:none;border:none;padding:9px 13px;font-size:11px;font-weight:700;color:#5c7a8a;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;border-bottom:2px solid transparent;transition:all .15s;}
+.gm-tab:hover{color:#2d5186;background:rgba(45,81,134,.06);}
+.gm-tab.active{color:#2d5186;border-bottom-color:#2d5186;background:#fff;}
 .gm-panel{display:none;}
 .gm-panel.active{display:block;}
 @media print{.modal-ov,.fab-wrap,.fab-calc{display:none!important;}}
 
 /* TOAST */
-.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(14px);background:#164e63;color:#fff;padding:8px 16px;border-radius:16px;font-size:12px;font-weight:700;opacity:0;transition:all .28s;z-index:999;pointer-events:none;white-space:nowrap;}
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(14px);background:#1b3150;color:#fff;padding:8px 16px;border-radius:16px;font-size:12px;font-weight:700;opacity:0;transition:all .28s;z-index:999;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(12,26,46,.55);z-index:200;display:flex;align-items:center;justify-content:center;padding:12px;}
-.modal-box{background:#fff;border-radius:15px;max-width:720px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(14,116,144,.2);}
+.modal-box{background:#fff;border-radius:15px;max-width:720px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(45,81,134,.2);}
 @media(max-width:480px){
   .modal-ov{padding:6px;}
   .modal-box{border-radius:12px;max-height:95vh;}
   .modal-head{padding:12px 14px 10px;}
   .modal-tit{font-size:13px;}
 }
-.modal-head{padding:15px 17px 13px;border-bottom:1px solid #e0f2fe;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;border-radius:15px 15px 0 0;}
-.modal-tit{font-size:14px;font-weight:900;color:#155e75;}
-.modal-cls{width:29px;height:29px;border:none;background:#ecfeff;border-radius:7px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
-.modal-cls:hover{background:#cffafe;}
+.modal-head{padding:15px 17px 13px;border-bottom:1px solid #dbeafe;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;border-radius:15px 15px 0 0;}
+.modal-tit{font-size:14px;font-weight:900;color:#244168;}
+.modal-cls{width:29px;height:29px;border:none;background:#eff5fd;border-radius:7px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.modal-cls:hover{background:#dbeafe;}
 .modal-body{padding:15px 17px;}
 
 /* GUIDE TABLE */
 .gtbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px;}
-.gtbl th{background:#ecfeff;padding:7px 8px;text-align:center;font-weight:800;color:#155e75;border:1px solid #a5f3fc;font-size:10px;}
-.gtbl td{padding:6px 8px;text-align:center;border:1px solid #e0f2fe;font-weight:600;color:#0c1a2e;}
-.gtbl tr:nth-child(even) td{background:#f0fdfe;}
+.gtbl th{background:#eff5fd;padding:7px 8px;text-align:center;font-weight:800;color:#244168;border:1px solid #c2d9f7;font-size:11px;}
+.gtbl td{padding:6px 8px;text-align:center;border:1px solid #dbeafe;font-weight:600;color:#0c1a2e;}
+.gtbl tr:nth-child(even) td{background:#eff5fd;}
 
 /* A4 PREVIEW */
 .a4-wrap{background:#78909c;padding:24px 20px 40px;min-height:calc(100vh - 162.2px);overflow-y:auto;overflow-x:hidden;position:relative;display:flex;justify-content:flex-start;align-items:flex-start;}
@@ -446,19 +448,19 @@ input[type="number"]{-moz-appearance:textfield;}
    화면 미리보기가 실제 인쇄 결과와 같은 폭으로 보이게 한다. */
 .a4-page{background:#fff;width:794px;min-height:1122px;margin:0;padding:15px 23px 28px;box-shadow:0 8px 40px rgba(0,0,0,.28);font-size:11px;color:#111827;display:block;}
 /* v5.0 : .a4-page * 의 Pretendard !important 강제를 해제 — 계산서 안 숫자에 JetBrains Mono 가 실제 적용된다 */
-.a4-page{font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
+.a4-page{font-family:'Pretendard Variable',Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
 .a4-page .mono,.a4-page .num,.a4-page td.num,.a4-page .a4-val{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
 /* v5.0 제목부 표준 서식 — 3px double + 프로젝트명 12px */
-.a4-tit{font-size:22px;font-weight:900;color:#164e63;text-align:center;border-bottom:2.5px solid #0e7490;padding-bottom:9px;margin-bottom:12px;letter-spacing:-.02em;}
-.a4-sub{font-size:13px;font-weight:800;color:#0e7490;margin-bottom:4px;margin-top:9px;padding-left:7px;border-left:3px solid #0e7490;text-align:left;}
+.a4-tit{font-size:22px;font-weight:900;color:#1b3150;text-align:center;border-bottom:2.5px solid #2d5186;padding-bottom:9px;margin-bottom:12px;letter-spacing:-.02em;}
+.a4-sub{font-size:13px;font-weight:800;color:#2d5186;margin-bottom:4px;margin-top:9px;padding-left:7px;border-left:3px solid #2d5186;text-align:left;}
 .a4-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:7px;}
-.a4-tbl th{background:#cffafe;padding:5px 6px;text-align:center;font-weight:700;font-size:11px;color:#155e75;border:1px solid #a5f3fc;}
-.a4-tbl td{padding:5px 7px;text-align:left;border:1px solid #e0f2fe;font-weight:600;color:#111827;}
-.a4-tbl tr:nth-child(even) td{background:#f0fdfe;}
-.a4-tbl tfoot td{background:#cffafe!important;font-weight:900;}
-.a4-tbl .hl td{background:#cffafe!important;font-weight:900;}
-.a4-th{background:#ecfeff!important;font-weight:800!important;}
-.a4-footer{border-top:1px solid #e0f2fe;padding-top:8px;font-size:9px;color:#9ca3af;margin-top:16px;line-height:1.6;display:flex;justify-content:space-between;font-weight:600;}
+.a4-tbl th{background:#dbeafe;padding:5px 6px;text-align:center;font-weight:700;font-size:11px;color:#244168;border:1px solid #c2d9f7;}
+.a4-tbl td{padding:5px 7px;text-align:left;border:1px solid #dbeafe;font-weight:600;color:#111827;}
+.a4-tbl tr:nth-child(even) td{background:#eff5fd;}
+.a4-tbl tfoot td{background:#dbeafe!important;font-weight:900;}
+.a4-tbl .hl td{background:#dbeafe!important;font-weight:900;}
+.a4-th{background:#eff5fd!important;font-weight:800!important;}
+.a4-footer{border-top:1px solid #dbeafe;padding-top:8px;font-size:9px;color:#9ca3af;margin-top:16px;line-height:1.6;display:flex;justify-content:space-between;font-weight:600;}
 /* v5.0 — 쪽나눔 제어 (20 건물우수 규격) */
 .a4-section{break-inside:avoid;page-break-inside:avoid;}
 .a4-section.allow-break{break-inside:auto!important;page-break-inside:auto!important;}
@@ -472,18 +474,18 @@ input[type="number"]{-moz-appearance:textfield;}
 .fab-wrap{position:fixed;right:16px;bottom:20px;z-index:150;display:flex;flex-direction:column;gap:9px;align-items:flex-end;}
 .fab-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
   width:58px;min-height:58px;padding:7px 4px;border:none;border-radius:14px;cursor:pointer;
-  background:#0e7490;color:#fff;box-shadow:0 4px 18px rgba(14,116,144,.55);
+  background:#2d5186;color:#fff;box-shadow:0 4px 18px rgba(45,81,134,.55);
   font-family:inherit;transition:background .15s,box-shadow .2s,transform .12s;}
-.fab-item:hover{background:#155e75;box-shadow:0 6px 22px rgba(14,116,144,.65);}
+.fab-item:hover{background:#244168;box-shadow:0 6px 22px rgba(45,81,134,.65);}
 .fab-item:active{transform:translateY(1px);}
 .fab-ico{font-size:20px;line-height:1;}
-.fab-lbl{font-size:10px;font-weight:800;letter-spacing:-.02em;}
-.fab-sub{font-size:9px;font-weight:600;opacity:.8;letter-spacing:-.03em;}
+.fab-lbl{font-size:11px;font-weight:800;letter-spacing:-.02em;}
+.fab-sub{font-size:11px;font-weight:600;opacity:.8;letter-spacing:-.03em;}
 /* 구 단일 FAB — 잔존 방어 */
-.fab-calc{position:fixed;right:16px;bottom:20px;width:50px;height:50px;border-radius:50%;background:#0e7490;color:#fff;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 18px rgba(14,116,144,.55);z-index:150;display:flex;align-items:center;justify-content:center;transition:box-shadow .2s,transform .15s;}
+.fab-calc{position:fixed;right:16px;bottom:20px;width:50px;height:50px;border-radius:50%;background:#2d5186;color:#fff;border:none;font-size:22px;cursor:pointer;box-shadow:0 4px 18px rgba(45,81,134,.55);z-index:150;display:flex;align-items:center;justify-content:center;transition:box-shadow .2s,transform .15s;}
 /* 화면측 각인 (인쇄 시 @media print 가 fixed 로 재정의) */
 #dev-stamp{display:none;}
-.fab-calc:hover{box-shadow:0 6px 24px rgba(14,116,144,.65);transform:scale(1.08);}
+.fab-calc:hover{box-shadow:0 6px 24px rgba(45,81,134,.65);transform:scale(1.08);}
 /* v5.0 : .fab-tooltip 삭제 (드래그 FAB 폐지에 따른 고아 규칙) */
 
 /* PRINT — A4 ISO 규격: 상하 20mm, 좌우 20mm */
@@ -528,7 +530,7 @@ input[type="number"]{-moz-appearance:textfield;}
   .a4-section.allow-break,.a4-tbl.long{break-inside:auto!important;page-break-inside:auto!important;}
   /* v5.0 — footer 3분할. flex 는 인쇄에서 어긋나므로 table-cell 로 고정한다. */
   .a4-footer{
-    margin-top:14px;border-top:1px solid #e0f2fe!important;padding-top:6px;
+    margin-top:14px;border-top:1px solid #dbeafe!important;padding-top:6px;
     display:table!important;width:100%!important;
     font-size:9px;color:#9ca3af!important;font-weight:600;
     break-inside:avoid;page-break-inside:avoid;page-break-before:avoid;
@@ -540,7 +542,7 @@ input[type="number"]{-moz-appearance:textfield;}
 }
 
 /* A4 내보내기 툴바 */
-.a4-export-bar{display:flex;gap:8px;padding:10px 14px;background:#fff;border-bottom:1px solid #e0f2fe;flex-wrap:wrap;align-items:center;}
+.a4-export-bar{display:flex;gap:8px;padding:10px 14px;background:#fff;border-bottom:1px solid #dbeafe;flex-wrap:wrap;align-items:center;}
 .a4-export-bar .bar-lbl{font-size:10.5px;font-weight:800;color:#5c7a8a;margin-right:4px;}
 /* ═══ .mm-btn 규격 v5.1 — 전 39종 공통 출력 버튼 ═══ */
 .mm-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
@@ -549,8 +551,8 @@ input[type="number"]{-moz-appearance:textfield;}
   transition:background .15s,box-shadow .15s,transform .1s;}
 .mm-btn:active{transform:translateY(1px);}
 .mm-btn:disabled{cursor:not-allowed;}
-.mm-btn-print{background:#0e7490;color:#fff;}
-.mm-btn-print:hover{background:#155e75;box-shadow:0 3px 12px rgba(14,116,144,.4);}
+.mm-btn-print{background:#2d5186;color:#fff;}
+.mm-btn-print:hover{background:#244168;box-shadow:0 3px 12px rgba(45,81,134,.4);}
 .mm-btn-jpg{background:#7e22ce;color:#fff;}
 .mm-btn-jpg:hover{background:#6b21a8;box-shadow:0 3px 12px rgba(126,34,206,.4);}
 /* 480px 이하 세로 전환 */
@@ -558,10 +560,10 @@ input[type="number"]{-moz-appearance:textfield;}
   .a4-export-bar{flex-direction:column;align-items:stretch;}
   .mm-btn{width:100%;}
 }
-.export-status{font-size:10px;font-weight:700;color:#0e7490;margin-left:4px;}
+.export-status{font-size:11px;font-weight:700;color:#2d5186;margin-left:4px;}
 /* 구 .btn-export 계열 — 잔존 마크업 방어용 별칭 (v5.0 에서 신규 사용 금지) */
 .btn-export{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;border:none;font-family:inherit;transition:all .15s;white-space:nowrap;}
-.btn-print{background:#0e7490;color:#fff;}
+.btn-print{background:#2d5186;color:#fff;}
 
 /* 모바일 저장 툴바 */
 
@@ -598,12 +600,12 @@ input[type="number"]{-moz-appearance:textfield;}
   #panel-guide .guide-grid-2col{grid-template-columns:1fr!important;}
   /* 세그먼트 줄바꿈 */
   .seg-ctrl{flex-wrap:wrap;}
-  .seg-btn{flex:0 0 auto;font-size:10px;padding:4px 8px;}
+  .seg-btn{flex:0 0 auto;font-size:11px;padding:4px 8px;}
   /* 건물 용도 축소 */
   .bld-grid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr));}
   .psh-val{font-size:28px;}
   /* 테이블 스크롤 */
-  .rtbl,.gtbl{font-size:10px;}
+  .rtbl,.gtbl{font-size:11px;}
   .rtbl th,.rtbl td,.gtbl th,.gtbl td{padding:5px 5px;}
 }
 
@@ -615,57 +617,57 @@ input[type="number"]{-moz-appearance:textfield;}
   /* v5.0 — Ver2.0 의 탭 축소 규칙 제거. 20 건물우수는 모바일에서도 13px/41px 를 유지하는데
      21번만 10px/29px 로 줄어 두 도구가 어긋나 있었다. .tb 는 전 구간 13px 규격이다. */
   .step-bar{padding:6px 8px;}
-  .sc{width:20px;height:20px;font-size:9px;}
-  .sl{font-size:9px;}
+  .sc{width:20px;height:20px;font-size:11px;}
+  .sl{font-size:11px;}
   .sdiv{width:10px;}
   .card-body{padding:10px 10px;}
   .card-head{padding:8px 10px;}
-  .card-tit{font-size:10px;}
+  .card-tit{font-size:11px;}
   /* 건물 용도 */
   .bld-grid{grid-template-columns:repeat(auto-fill,minmax(66px,1fr));gap:4px;}
   .bld-ico{font-size:16px;}
-  .bld-nm{font-size:9.5px;}
-  .bld-cat{font-size:8.5px;}
+  .bld-nm{font-size:11px;}
+  .bld-cat{font-size:11px;}
   /* 폼 */
   .frow{grid-template-columns:1fr 1fr;gap:6px;}
   .finput{padding:6px 8px;}
-  .flbl{font-size:9px;}
+  .flbl{font-size:11px;}
   /* 위생기구 그리드 */
   .fixture-row{grid-template-columns:1fr 75px 75px!important;gap:4px;padding:6px 8px;}
-  .fx-name{font-size:10px;}
-  .fx-fu-badge{font-size:7.5px;padding:1px 3px;}
-  .fx-lbl{font-size:8.5px;}
+  .fx-name{font-size:11px;}
+  .fx-fu-badge{font-size:11px;padding:1px 3px;}
+  .fx-lbl{font-size:11px;}
   /* 파이프 결과 히어로 */
   .pipe-size-hero{grid-template-columns:1fr 1fr!important;gap:6px;}
   .psh-val{font-size:26px!important;}
-  .psh-lbl{font-size:8px!important;}
-  .psh-fu{font-size:7.5px!important;}
+  .psh-lbl{font-size:11px!important;}
+  .psh-fu{font-size:11px!important;}
   /* 플로우 다이어그램 */
   .flow-diagram{padding:9px;}
   .flow-line{flex-wrap:wrap;gap:3px;margin-bottom:6px;}
-  .flow-node{font-size:9px;padding:2px 6px;}
-  .flow-pipe{font-size:8px;}
+  .flow-node{font-size:11px;padding:2px 6px;}
+  .flow-pipe{font-size:11px;}
   /* 공지 박스 */
-  .nb-txt{font-size:10px;}
-  .nb-tit{font-size:10px;}
+  .nb-txt{font-size:11px;}
+  .nb-tit{font-size:11px;}
   /* 결과 테이블 */
-  .rtbl,.gtbl{font-size:9.5px;}
+  .rtbl,.gtbl{font-size:11px;}
   .rtbl th,.rtbl td,.gtbl th,.gtbl td{padding:4px 4px;}
   /* calc box */
-  .crow{font-size:9.5px;}
-  .ck{font-size:9px;}
+  .crow{font-size:11px;}
+  .ck{font-size:11px;}
   /* FAB */
   .fab-calc{width:44px;height:44px;font-size:19px;right:10px;bottom:14px;}
   /* A4 export bar */
   .a4-export-bar{padding:8px 10px;gap:5px;}
-  .btn-export{padding:5px 8px;font-size:10px;}
+  .btn-export{padding:5px 8px;font-size:11px;}
   .bar-lbl{display:none;}
   /* 모달 */
   .modal-body{padding:10px 12px;}
-  .gm-tab{font-size:9.5px;padding:7px 8px;}
+  .gm-tab{font-size:11px;padding:7px 8px;}
   /* STEP3 파라미터 박스 */
-  .cbox .crow{font-size:9px;}
-  .cbox .cv{font-size:9px;}
+  .cbox .crow{font-size:11px;}
+  .cbox .cv{font-size:11px;}
 }
 
 /* ─ 초소형 (≤360px) ─ */
@@ -675,7 +677,7 @@ input[type="number"]{-moz-appearance:textfield;}
   .fixture-row{grid-template-columns:1fr 68px 68px!important;}
   .pipe-size-hero{grid-template-columns:1fr!important;}
   .seg-ctrl{gap:1px;}
-  .seg-btn{font-size:9px;padding:4px 5px;}
+  .seg-btn{font-size:11px;padding:4px 5px;}
 }
 
 /* ─ 터치 디바이스 공통 ─ */
@@ -686,8 +688,8 @@ input[type="number"]{-moz-appearance:textfield;}
   .finput,.fselect{min-height:40px;}
   .fx-input{min-height:38px;}
   /* hover 고착 방지 */
-  .bld-card:hover{border-color:#cffafe;background:#f0fdfe;}
-  .fixture-row:hover{border-color:#cffafe;}
+  .bld-card:hover{border-color:#dbeafe;background:#eff5fd;}
+  .fixture-row:hover{border-color:#dbeafe;}
   .btn-g:hover{border-color:#cbd5e1;color:#374151;background:#fff;}
 }
 
@@ -696,68 +698,82 @@ input[type="number"]{-moz-appearance:textfield;}
 @media(max-width:768px){.guide-grid-2col{grid-template-columns:1fr;}}
 
 /* SEGMENT CONTROL */
-.seg-ctrl{display:flex;background:#f0fdfe;border:1.5px solid #b2ebf2;border-radius:9px;padding:2px;gap:2px;margin-bottom:10px;}
-.seg-btn{flex:1;padding:5px 8px;border:none;border-radius:6px;background:none;font-size:10.5px;font-weight:700;color:#5c7a8a;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;}
-.seg-btn.active{background:#0e7490;color:#fff;box-shadow:0 2px 6px rgba(14,116,144,.3);}
+.seg-ctrl{display:flex;background:#eff5fd;border:1.5px solid #9cc3f5;border-radius:9px;padding:2px;gap:2px;margin-bottom:10px;}
+.seg-btn{flex:1;padding:5px 8px;border:none;border-radius:6px;background:none;font-size:11px;font-weight:700;color:#5c7a8a;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;}
+.seg-btn.active{background:#2d5186;color:#fff;box-shadow:0 2px 6px rgba(45,81,134,.3);}
 
 /* BUILDING TYPE GRID */
 .bld-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:5px;margin-bottom:10px;}
-.bld-card{border:1.5px solid #cffafe;border-radius:9px;padding:7px 5px;cursor:pointer;transition:all .15s;text-align:center;background:#f0fdfe;}
-.bld-card:hover{border-color:#06b6d4;background:#ecfeff;}
-.bld-card.sel{border-color:#0e7490;background:#cffafe;box-shadow:0 0 0 2px rgba(14,116,144,.15);}
+.bld-card{border:1.5px solid #dbeafe;border-radius:9px;padding:7px 5px;cursor:pointer;transition:all .15s;text-align:center;background:#eff5fd;}
+.bld-card:hover{border-color:#5a9ae8;background:#eff5fd;}
+.bld-card.sel{border-color:#2d5186;background:#dbeafe;box-shadow:0 0 0 2px rgba(45,81,134,.15);}
 .bld-ico{font-size:18px;margin-bottom:3px;}
-.bld-nm{font-size:10px;font-weight:800;color:#0c1a2e;}
-.bld-cat{font-size:9px;color:#0891b2;font-weight:700;margin-top:1px;}
+.bld-nm{font-size:11px;font-weight:800;color:#0c1a2e;}
+.bld-cat{font-size:11px;color:#4375b7;font-weight:700;margin-top:1px;}
 
 /* PIPE SIZE DISPLAY */
 .pipe-size-hero{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
 @media(max-width:420px){.pipe-size-hero{grid-template-columns:1fr;}}
 .psh-box{border-radius:11px;padding:13px;text-align:center;color:#fff;}
-.psh-box.supply{background:linear-gradient(135deg,#164e63,#0e7490);}
+.psh-box.supply{background:linear-gradient(135deg,#1b3150,#2d5186);}
 .psh-box.hot{background:linear-gradient(135deg,#7c2d12,#b45309);}
 .psh-box.drain{background:linear-gradient(135deg,#1a2e05,#365314);}
 .psh-box.vent{background:linear-gradient(135deg,#3b0764,#7e22ce);}
-.psh-lbl{font-size:9.5px;font-weight:700;opacity:.7;margin-bottom:3px;}
+.psh-lbl{font-size:11px;font-weight:700;opacity:.7;margin-bottom:3px;}
 .psh-val{font-size:34px;font-weight:900;font-family:'JetBrains Mono',monospace!important;color:#fde047;line-height:1;}
 .psh-unit{font-size:11px;font-weight:700;opacity:.8;margin-top:2px;}
-.psh-fu{font-size:9.5px;opacity:.65;margin-top:3px;}
+.psh-fu{font-size:11px;opacity:.65;margin-top:3px;}
 
 /* STANDARD TABLE PIPE TAG */
-.std-pipe{display:inline-block;padding:2px 7px;border-radius:5px;font-size:10.5px;font-weight:800;font-family:'JetBrains Mono',monospace!important;}
+.std-pipe{display:inline-block;padding:2px 7px;border-radius:5px;font-size:11px;font-weight:800;font-family:'JetBrains Mono',monospace!important;}
 .std-ok{background:#cffafe;color:#0e7490;}
 .std-ov{background:#fef2f2;color:#dc2626;}
 
 /* PIPE FLOW DIAGRAM (simplified) */
-.flow-diagram{background:#f0fdfe;border:1px solid #cffafe;border-radius:10px;padding:12px;margin-bottom:10px;}
-.flow-title{font-size:10.5px;font-weight:800;color:#155e75;margin-bottom:8px;display:flex;align-items:center;gap:4px;}
-.flow-line{display:flex;align-items:center;gap:4px;margin-bottom:5px;font-size:10px;font-weight:700;}
-.flow-node{padding:3px 8px;border-radius:5px;font-size:10px;font-weight:800;white-space:nowrap;}
-.fn-src{background:#0e7490;color:#fff;}
-.fn-main{background:#0891b2;color:#fff;}
-.fn-branch{background:#06b6d4;color:#fff;}
-.fn-fix{background:#cffafe;color:#0e7490;border:1px solid #a5f3fc;}
+.flow-diagram{background:#eff5fd;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin-bottom:10px;}
+.flow-title{font-size:11px;font-weight:800;color:#244168;margin-bottom:8px;display:flex;align-items:center;gap:4px;}
+.flow-line{display:flex;align-items:center;gap:4px;margin-bottom:5px;font-size:11px;font-weight:700;}
+.flow-node{padding:3px 8px;border-radius:5px;font-size:11px;font-weight:800;white-space:nowrap;}
+.fn-src{background:#2d5186;color:#fff;}
+.fn-main{background:#4375b7;color:#fff;}
+.fn-branch{background:#5a9ae8;color:#fff;}
+.fn-fix{background:#dbeafe;color:#2d5186;border:1px solid #c2d9f7;}
 .fn-drain{background:#365314;color:#fff;}
 .fn-vent{background:#7e22ce;color:#fff;}
 .flow-arrow{color:#94a3b8;font-size:12px;}
-.flow-pipe{font-size:9px;font-weight:800;color:#0e7490;font-family:'JetBrains Mono',monospace!important;background:#fff;border:1px solid #a5f3fc;padding:1px 5px;border-radius:4px;}
+.flow-pipe{font-size:11px;font-weight:800;color:#2d5186;font-family:'JetBrains Mono',monospace!important;background:#fff;border:1px solid #c2d9f7;padding:1px 5px;border-radius:4px;}
 </style>
 <style id="mm-r1">/* R1 (2026-09-04 · 지시서 §20-1 · S10 소급) — 인쇄 PDF 하단 각인 MANMIN · Ver 비표시. 버전은 A4 푸터 [MANMIN-Ver5.0] 이 담당 */
 #dev-stamp,#dev-stamp-print,#mm-print-stamp,.dev-stamp{display:none!important;}
 @media print{#dev-stamp,#dev-stamp-print,#mm-print-stamp,.dev-stamp{display:none!important;}}</style>
 <style id="mm-r24b">/* R24 ①② (2026-09-05 · S10 단계 4′ 20·21 소급 · 지시서 §21-1 R24·R2) — 인쇄 시 collapse 표의 우측 세로선 소실 → separate + 셀 자체 선. 화면·JPG·PDF 동일 DOM(§2②). 선색은 기존 값 유지. */
 .a4-tbl{border-collapse:separate;border-spacing:0;border:0;}
-.a4-tbl th{border:0;border-right:1px solid #a5f3fc;border-bottom:1px solid #a5f3fc;}
-.a4-tbl th:first-child{border-left:1px solid #a5f3fc;}
-.a4-tbl tr:first-child th{border-top:1px solid #a5f3fc;}
-.a4-tbl td{border:0;border-right:1px solid #e0f2fe;border-bottom:1px solid #e0f2fe;}
-.a4-tbl td:first-child{border-left:1px solid #e0f2fe;}
-.a4-tbl tr:first-child td{border-top:1px solid #e0f2fe;}
+.a4-tbl th{border:0;border-right:1px solid #c2d9f7;border-bottom:1px solid #c2d9f7;}
+.a4-tbl th:first-child{border-left:1px solid #c2d9f7;}
+.a4-tbl tr:first-child th{border-top:1px solid #c2d9f7;}
+.a4-tbl td{border:0;border-right:1px solid #dbeafe;border-bottom:1px solid #dbeafe;}
+.a4-tbl td:first-child{border-left:1px solid #dbeafe;}
+.a4-tbl tr:first-child td{border-top:1px solid #dbeafe;}
 /* R24 ② — 고정폭 셀 한글 폴백. JPG v5.4 캡처 페이지는 .a4-page 밖이라 전역 셀렉터 · 기존 !important 규칙보다 뒤 */
-.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Noto Sans KR','Noto Sans KR Local','Malgun Gothic',monospace!important;}
-@media print{.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Noto Sans KR','Noto Sans KR Local','Malgun Gothic',Consolas,monospace!important;}}
+.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Pretendard Variable',Pretendard,'Noto Sans KR','Noto Sans KR Local','Malgun Gothic',monospace!important;}
+@media print{.mono,.a4-iv,.a4-rnum,.num,td.num,.a4-val{font-family:'JetBrains Mono','Pretendard Variable',Pretendard,'Noto Sans KR','Noto Sans KR Local','Malgun Gothic',Consolas,monospace!important;}}
 /* R2 (§3-4-1) — 미리보기 padding 을 인쇄 여백(14/12/22/14mm)과 일치 → 내용폭 696px = 184mm. 인쇄는 #a4-print-target .a4-page{padding:0}+@page, JPG v5.4 는 자체 mm 여백이라 출력 불변 */
 .a4-page{padding:53px 45px 83px 53px;}
 @media print{.no-print,.sum-bar-wrap{display:none!important;}}   /* S8 — print 블록에 .no-print 규칙 부재 → 요약 스트립 인쇄 (2026-09-05 PDF 실측) */
+</style>
+<style id="mm-foot-css">/* 하단 버전 표시 — 건축 도구와 같은 형식 · 화면 폭 전체 (2026-10-31) */
+footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;background:#fff;padding:20px;margin-top:10px;width:100%;box-sizing:border-box;align-self:stretch;font-family:'Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif}
+.mm-foot .foot-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.mm-foot .foot-nm{font-weight:900;font-size:13px;color:#2d5186;letter-spacing:.06em}
+.mm-foot .foot-desc{font-size:11px;color:#64748b;line-height:1.6}
+.mm-foot .foot-copy{font-size:11px;color:#64748b;font-family:'DM Mono',ui-monospace,monospace}
+@media screen{sub,sup{font-size:max(.75em,11px)}[class*="a4"] sub,[class*="a4"] sup,#report-zone sub,#report-zone sup{font-size:smaller}}
+/* Pretendard 전환 후 헤더 높이를 종전(Noto 기본 줄 높이 1.45)과 같게 */
+.hdr-pad>div:first-child>div:first-child>div:first-child,.hdr-row>div:first-child>div:first-child,.hdr-eyebrow,.tab-bar-wrap>button,.tab-bar-wrap>a,.tab-bar-scroll>button,.tab-bar-scroll>a,.tab-btn,.tb-manual{line-height:1.45}
+.hdr-pad>div:first-child>div:first-child>div:last-child,.hdr-row>div:first-child>div:last-child,.hdr-sub{line-height:1.45}
+.hdr-manmin{line-height:1.3}
+@media(max-width:640px){.hdr-manmin{line-height:1.45}}
+@media print{footer.mm-foot{display:none!important}}
 </style>
 </head>
 <body>
@@ -958,7 +974,7 @@ input[type="number"]{-moz-appearance:textfield;}
             <div class="input-sfx"><input type="number" class="finput" id="inp-hwtemp" value="60" min="40" max="90" oninput="liveCalc()"><span class="sfx">°C</span></div>
           </div>
           <div class="fgrp">
-            <label class="flbl">환탕 배관 여부 <span id="circ-auto-badge" style="font-size:8.5px;font-weight:800;padding:1px 5px;border-radius:4px;margin-left:3px;background:#fed7aa;color:#c2410c;">자동판정</span></label>
+            <label class="flbl">환탕 배관 여부 <span id="circ-auto-badge" style="font-size:11px;font-weight:800;padding:1px 5px;border-radius:4px;margin-left:3px;background:#fed7aa;color:#c2410c;">자동판정</span></label>
             <select class="fselect" id="sel-circ" onchange="liveCalc()">
               <option value="auto">자동 (층수×층높이 기준)</option>
               <option value="no">강제 — 환탕 없음</option>
@@ -1024,25 +1040,25 @@ input[type="number"]{-moz-appearance:textfield;}
             <div class="prs-tit drain" style="justify-content:space-between">
               <span>🔩 오배수 분류별 관경 산정표</span>
               <div style="display:flex;gap:5px">
-                <span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca">🚽 오수 계통</span>
-                <span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0">🚿 잡배수 계통</span>
+                <span style="font-size:11px;font-weight:800;padding:2px 7px;border-radius:10px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca">🚽 오수 계통</span>
+                <span style="font-size:11px;font-weight:800;padding:2px 7px;border-radius:10px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0">🚿 잡배수 계통</span>
               </div>
             </div>
             <!-- 오수 분류표 -->
             <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:9px;padding:9px;margin-bottom:7px">
-              <div style="font-size:10px;font-weight:800;color:#dc2626;margin-bottom:6px">🚽 오수 계통 (양변기·소변기) — KDS 31 30 25 산정</div>
+              <div style="font-size:11px;font-weight:800;color:#dc2626;margin-bottom:6px">🚽 오수 계통 (양변기·소변기) — KDS 31 30 25 산정</div>
               <div class="tbl-hint">좌우로 밀어서 표 전체 보기</div>
 <div class="twrap"><table class="rtbl" id="tbl-drain-osu"></table></div>
             </div>
             <!-- 잡배수 분류표 -->
             <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:9px;padding:9px;margin-bottom:7px">
-              <div style="font-size:10px;font-weight:800;color:#15803d;margin-bottom:6px">🚿 잡배수 계통 (세면·주방·욕실) — KDS 31 30 25 산정</div>
+              <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:6px">🚿 잡배수 계통 (세면·주방·욕실) — KDS 31 30 25 산정</div>
               <div class="tbl-hint">좌우로 밀어서 표 전체 보기</div>
 <div class="twrap"><table class="rtbl" id="tbl-drain-jab"></table></div>
             </div>
             <!-- 합류식 합계표 -->
-            <div style="background:#ecfeff;border:1.5px solid #a5f3fc;border-radius:9px;padding:9px">
-              <div style="font-size:10px;font-weight:800;color:#0e7490;margin-bottom:6px">🔩 합류식 배수 (전체 합산) — KDS 31 30 25 산정</div>
+            <div style="background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:9px;padding:9px">
+              <div style="font-size:11px;font-weight:800;color:#2d5186;margin-bottom:6px">🔩 합류식 배수 (전체 합산) — KDS 31 30 25 산정</div>
               <div class="tbl-hint">좌우로 밀어서 표 전체 보기</div>
 <div class="twrap"><table class="rtbl" id="tbl-drain"></table></div>
             </div>
@@ -1107,7 +1123,7 @@ input[type="number"]{-moz-appearance:textfield;}
           <tbody id="stdTblSupply"></tbody>
         </table>
       </div>
-      <div style="font-size:10px;color:#475569;margin-top:6px;line-height:1.6">• 표 사이 값은 선형 보간 · 1 gpm = 3.785 L/min · 세정밸브 기구(대·소변기)가 있으면 세정밸브 주체 곡선 적용<br>• 출처: IPC 2021 Appendix E 표 E103.3(3) — KDS 31 30 15 1.3.2(2) 참고기준</div>
+      <div style="font-size:11px;color:#475569;margin-top:6px;line-height:1.6">• 표 사이 값은 선형 보간 · 1 gpm = 3.785 L/min · 세정밸브 기구(대·소변기)가 있으면 세정밸브 주체 곡선 적용<br>• 출처: IPC 2021 Appendix E 표 E103.3(3) — KDS 31 30 15 1.3.2(2) 참고기준</div>
     </div>
   </div>
 
@@ -1124,7 +1140,7 @@ input[type="number"]{-moz-appearance:textfield;}
           <tbody id="stdTblDrain"></tbody>
         </table>
       </div>
-      <div style="font-size:10px;color:#475569;margin-top:6px;line-height:1.6">• 최소 기울기 표 4.1-1 (DN65 이하 1/50 · DN80~150 1/100 · DN200 이상 1/200) · 대변기 연결 건물배수수평주관 DN80 이상(표 4.1-4 주1) · 흐름 방향 관경 축소 금지(4.1.5(2))<br>• 통기관 4.3.4 — 통기수직관: 담당 배수관 1/2 보다 크고 DN32 이상 · 각개·루프통기관: 1/2 이상, DN32 이상, 12 m 이상이면 1단계 상향</div>
+      <div style="font-size:11px;color:#475569;margin-top:6px;line-height:1.6">• 최소 기울기 표 4.1-1 (DN65 이하 1/50 · DN80~150 1/100 · DN200 이상 1/200) · 대변기 연결 건물배수수평주관 DN80 이상(표 4.1-4 주1) · 흐름 방향 관경 축소 금지(4.1.5(2))<br>• 통기관 4.3.4 — 통기수직관: 담당 배수관 1/2 보다 크고 DN32 이상 · 각개·루프통기관: 1/2 이상, DN32 이상, 12 m 이상이면 1단계 상향</div>
     </div>
   </div>
 
@@ -1141,7 +1157,7 @@ input[type="number"]{-moz-appearance:textfield;}
           <tbody id="fuTable"></tbody>
         </table>
       </div>
-      <div style="font-size:10px;color:#475569;margin-top:6px;line-height:1.6">• * 원문 빈 칸 — 일반 건물 값, 그래도 없으면 표 4.1-3(트랩 DN별: 32→1 · 40→2 · 50→3 · 65→4 · 80→5 · 100→6) 적용 (앱 적용 원칙)<br>• 최저수압: KDS 31 30 15 표 4.3-1 (= 기술기준 별표 5 표 2) · 소변기는 세정밸브식 기준</div>
+      <div style="font-size:11px;color:#475569;margin-top:6px;line-height:1.6">• * 원문 빈 칸 — 일반 건물 값, 그래도 없으면 표 4.1-3(트랩 DN별: 32→1 · 40→2 · 50→3 · 65→4 · 80→5 · 100→6) 적용 (앱 적용 원칙)<br>• 최저수압: KDS 31 30 15 표 4.3-1 (= 기술기준 별표 5 표 2) · 소변기는 세정밸브식 기준</div>
     </div>
   </div>
 </div>
@@ -1231,7 +1247,7 @@ input[type="number"]{-moz-appearance:textfield;}
           </tbody>
         </table>
       </div>
-      <div style="font-size:10px;color:#475569;margin-top:6px;line-height:1.6">• 출처: 기계설비 기술기준 별표 8 3.1.4 표 1 (KCS 31 20 15 표 3.4-1 준용) — 급탕배관은 3.4.2(3)으로 같은 표 적용<br>• 실내 수직관 각 층 1개소 흔들림 방지철물(3.1.4(2)) · 동관·스테인리스강관 지지 시 절연조치(3.1.4(3))</div>
+      <div style="font-size:11px;color:#475569;margin-top:6px;line-height:1.6">• 출처: 기계설비 기술기준 별표 8 3.1.4 표 1 (KCS 31 20 15 표 3.4-1 준용) — 급탕배관은 3.4.2(3)으로 같은 표 적용<br>• 실내 수직관 각 층 1개소 흔들림 방지철물(3.1.4(2)) · 동관·스테인리스강관 지지 시 절연조치(3.1.4(3))</div>
     </div>
   </div>
 </div>
@@ -1282,17 +1298,17 @@ input[type="number"]{-moz-appearance:textfield;}
   <div class="modal-box" style="max-width:720px">
     <div class="modal-head">
       <div style="display:flex;align-items:center;gap:9px">
-        <div style="width:32px;height:32px;background:#0e7490;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📐</div>
+        <div style="width:32px;height:32px;background:#2d5186;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📐</div>
         <div>
           <div class="modal-tit">위생배관 설계기준 종합 안내</div>
-          <div style="font-size:9px;color:#0891b2;font-weight:700;margin-top:1px">KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행)</div>
+          <div style="font-size:11px;color:#4375b7;font-weight:700;margin-top:1px">KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행)</div>
         </div>
       </div>
       <button class="modal-cls" onclick="closeGuideModal()">✕</button>
     </div>
 
     <!-- 탭 내비게이션 -->
-    <div style="display:flex;background:#f0fdfe;border-bottom:1px solid #cffafe;overflow-x:auto;scrollbar-width:none;">
+    <div style="display:flex;background:#eff5fd;border-bottom:1px solid #dbeafe;overflow-x:auto;scrollbar-width:none;">
       <button class="gm-tab active" id="gmt-0" onclick="switchGuideTab(0)">🏢 용도별 기준</button>
       <button class="gm-tab" id="gmt-1" onclick="switchGuideTab(1)">🚽 부하단위</button>
       <button class="gm-tab" id="gmt-2" onclick="switchGuideTab(2)">💧 급수·급탕</button>
@@ -1313,12 +1329,12 @@ input[type="number"]{-moz-appearance:textfield;}
           <table class="gtbl">
             <thead><tr><th>건물 용도</th><th>급수 WSFU</th><th>배수 DFU 열</th><th>특이사항</th></tr></thead>
             <tbody>
-              <tr><td>🏠 아파트</td><td><span style="background:#f0fdf4;color:#15803d;padding:1px 7px;border-radius:10px;font-weight:800;font-size:10px">주거</span></td><td>3호 이상 공동주택</td><td>세대별 분리 계산</td></tr>
-              <tr><td>🏡 단독주택</td><td><span style="background:#f0fdf4;color:#15803d;padding:1px 7px;border-radius:10px;font-weight:800;font-size:10px">주거</span></td><td>단독주택</td><td>—</td></tr>
-              <tr><td>🏢 사무소 · 🏬 판매 · 🏭 공장</td><td><span style="background:#ecfeff;color:#0e7490;padding:1px 7px;border-radius:10px;font-weight:800;font-size:10px">공 용</span></td><td>일반 건물</td><td>업무·상업·산업용 (주3)</td></tr>
-              <tr><td>🍽️ 음식점 · 🅿️ 주차장</td><td><span style="background:#ecfeff;color:#0e7490;padding:1px 7px;border-radius:10px;font-weight:800;font-size:10px">공 용</span></td><td>일반 건물</td><td>음식점은 급탕 비중 높음</td></tr>
-              <tr><td>🏨 호텔 · 🏥 병원 · 🏫 학교</td><td><span style="background:#ecfeff;color:#0e7490;padding:1px 7px;border-radius:10px;font-weight:800;font-size:10px">공 용</span></td><td>다중 이용시설</td><td>피크 동시사용</td></tr>
-              <tr><td>⛪ 종교시설 · 🏋️ 스포츠</td><td><span style="background:#ecfeff;color:#0e7490;padding:1px 7px;border-radius:10px;font-weight:800;font-size:10px">공 용</span></td><td>다중 이용시설</td><td>—</td></tr>
+              <tr><td>🏠 아파트</td><td><span style="background:#f0fdf4;color:#15803d;padding:1px 7px;border-radius:10px;font-weight:800;font-size:11px">주거</span></td><td>3호 이상 공동주택</td><td>세대별 분리 계산</td></tr>
+              <tr><td>🏡 단독주택</td><td><span style="background:#f0fdf4;color:#15803d;padding:1px 7px;border-radius:10px;font-weight:800;font-size:11px">주거</span></td><td>단독주택</td><td>—</td></tr>
+              <tr><td>🏢 사무소 · 🏬 판매 · 🏭 공장</td><td><span style="background:#eff5fd;color:#2d5186;padding:1px 7px;border-radius:10px;font-weight:800;font-size:11px">공 용</span></td><td>일반 건물</td><td>업무·상업·산업용 (주3)</td></tr>
+              <tr><td>🍽️ 음식점 · 🅿️ 주차장</td><td><span style="background:#eff5fd;color:#2d5186;padding:1px 7px;border-radius:10px;font-weight:800;font-size:11px">공 용</span></td><td>일반 건물</td><td>음식점은 급탕 비중 높음</td></tr>
+              <tr><td>🏨 호텔 · 🏥 병원 · 🏫 학교</td><td><span style="background:#eff5fd;color:#2d5186;padding:1px 7px;border-radius:10px;font-weight:800;font-size:11px">공 용</span></td><td>다중 이용시설</td><td>피크 동시사용</td></tr>
+              <tr><td>⛪ 종교시설 · 🏋️ 스포츠</td><td><span style="background:#eff5fd;color:#2d5186;padding:1px 7px;border-radius:10px;font-weight:800;font-size:11px">공 용</span></td><td>다중 이용시설</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
@@ -1464,16 +1480,16 @@ input[type="number"]{-moz-appearance:textfield;}
         <!-- 연관성 카드들 -->
         <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
 
-          <div style="background:#f0fdfe;border:1.5px solid #a5f3fc;border-radius:10px;padding:11px">
-            <div style="font-size:11px;font-weight:800;color:#0e7490;margin-bottom:7px;display:flex;align-items:center;gap:5px">🏢 건물 용도 + 사용 용도 구분</div>
+          <div style="background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:10px;padding:11px">
+            <div style="font-size:11px;font-weight:800;color:#2d5186;margin-bottom:7px;display:flex;align-items:center;gap:5px">🏢 건물 용도 + 사용 용도 구분</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
-              <span style="background:#0e7490;color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">WSFU·DFU 결정</span>
+              <span style="background:#2d5186;color:#fff;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">WSFU·DFU 결정</span>
               <span style="font-size:12px;color:#94a3b8">→</span>
-              <span style="background:#ecfeff;color:#155e75;border:1px solid #a5f3fc;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">순간최대유량 Q</span>
+              <span style="background:#eff5fd;color:#244168;border:1px solid #c2d9f7;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">순간최대유량 Q</span>
               <span style="font-size:12px;color:#94a3b8">→</span>
-              <span style="background:#ecfeff;color:#155e75;border:1px solid #a5f3fc;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">모든 관경</span>
+              <span style="background:#eff5fd;color:#244168;border:1px solid #c2d9f7;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">모든 관경</span>
             </div>
-            <div style="font-size:10px;color:#475569;line-height:1.7">
+            <div style="font-size:11px;color:#475569;line-height:1.7">
               • 주거 / 공용 선택에 따라 같은 수량이라도 WSFU 가 달라져 급수 관경이 변동됨<br>
               • 건물 용도에 따라 표 4.1-2 DFU 열이 바뀌어 배수 관경이 변동됨
             </div>
@@ -1482,15 +1498,15 @@ input[type="number"]{-moz-appearance:textfield;}
           <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:11px">
             <div style="font-size:11px;font-weight:800;color:#c2410c;margin-bottom:7px">🏗️ 층수 × 층높이</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
-              <span style="background:#b45309;color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">정수두 계산</span>
+              <span style="background:#b45309;color:#fff;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">정수두 계산</span>
               <span style="font-size:12px;color:#94a3b8">→</span>
-              <span style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">최상층 잔류압</span>
+              <span style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">최상층 잔류압</span>
               <span style="font-size:12px;color:#94a3b8">+</span>
-              <span style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">환탕 자동판정</span>
+              <span style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">환탕 자동판정</span>
               <span style="font-size:12px;color:#94a3b8">+</span>
-              <span style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">수직관 브랜치간격</span>
+              <span style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">수직관 브랜치간격</span>
             </div>
-            <div style="font-size:10px;color:#475569;line-height:1.7">
+            <div style="font-size:11px;color:#475569;line-height:1.7">
               • 정수두 = 층수 × 층높이 × 9.81 kPa/m<br>
               • 최상층 잔류압 = 급수압 - 정수두 - 마찰손실(추정) → 설치 기구 최저 필요수압(표 4.3-1) 미만 시 경고<br>
               • 층수×층높이×1.3(추정) > 15m → 환탕 배관 필요 판정<br>
@@ -1501,13 +1517,13 @@ input[type="number"]{-moz-appearance:textfield;}
           <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:11px">
             <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:7px">⚡ 최대 허용 유속 (m/s)</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
-              <span style="background:#15803d;color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">유속기준 관경 역산</span>
+              <span style="background:#15803d;color:#fff;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">유속기준 관경 역산</span>
               <span style="font-size:12px;color:#94a3b8">→</span>
-              <span style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">최소 호칭지름</span>
+              <span style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">최소 호칭지름</span>
               <span style="font-size:12px;color:#94a3b8">→</span>
-              <span style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">실유속 표시</span>
+              <span style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">실유속 표시</span>
             </div>
-            <div style="font-size:10px;color:#475569;line-height:1.7">
+            <div style="font-size:11px;color:#475569;line-height:1.7">
               • D(mm) = √(4Q / π·V) 공식으로 최소 관경 역산<br>
               • 유속 낮출수록 → 관경 증가 / 유속 높일수록 → 관경 감소<br>
               • 유속 한계는 기준 수치가 없어 설계자가 정한다 (기본 1.5 m/s)
@@ -1518,19 +1534,19 @@ input[type="number"]{-moz-appearance:textfield;}
             <div style="font-size:11px;font-weight:800;color:#7e22ce;margin-bottom:7px">🔧 관재질 (Hazen-Williams C값)</div>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:6px">
               <div style="text-align:center;background:#fff;border-radius:6px;padding:5px;border:1px solid #e9d5ff">
-                <div style="font-size:9px;color:#5c7a8a;font-weight:700">강관(SGP)</div>
+                <div style="font-size:11px;color:#5c7a8a;font-weight:700">강관(SGP)</div>
                 <div style="font-size:14px;font-weight:900;color:#7e22ce">C=100</div>
               </div>
               <div style="text-align:center;background:#fff;border-radius:6px;padding:5px;border:1px solid #e9d5ff">
-                <div style="font-size:9px;color:#5c7a8a;font-weight:700">스테인리스/동관</div>
+                <div style="font-size:11px;color:#5c7a8a;font-weight:700">스테인리스/동관</div>
                 <div style="font-size:14px;font-weight:900;color:#7e22ce">C=130</div>
               </div>
               <div style="text-align:center;background:#fff;border-radius:6px;padding:5px;border:1px solid #e9d5ff">
-                <div style="font-size:9px;color:#5c7a8a;font-weight:700">PPR/XL-PE</div>
+                <div style="font-size:11px;color:#5c7a8a;font-weight:700">PPR/XL-PE</div>
                 <div style="font-size:14px;font-weight:900;color:#7e22ce">C=150</div>
               </div>
             </div>
-            <div style="font-size:10px;color:#475569;line-height:1.7">
+            <div style="font-size:11px;color:#475569;line-height:1.7">
               • C값 낮을수록 마찰손실 증가 → 최상층 잔류압 감소 → 관경 상향 필요 가능<br>
               • Hazen-Williams 공식: hf = 10.67·L·Q<sup>1.852</sup> / (C<sup>1.852</sup>·D<sup>4.87</sup>)
             </div>
@@ -1539,13 +1555,13 @@ input[type="number"]{-moz-appearance:textfield;}
           <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:11px">
             <div style="font-size:11px;font-weight:800;color:#dc2626;margin-bottom:7px">🔴 급수압 (kPa)</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
-              <span style="background:#dc2626;color:#fff;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">마찰손실 반영</span>
+              <span style="background:#dc2626;color:#fff;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">마찰손실 반영</span>
               <span style="font-size:12px;color:#94a3b8">→</span>
-              <span style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">최상층 잔류압</span>
+              <span style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">최상층 잔류압</span>
               <span style="font-size:12px;color:#94a3b8">·</span>
-              <span style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700">감압밸브 판정</span>
+              <span style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700">감압밸브 판정</span>
             </div>
-            <div style="font-size:10px;color:#475569;line-height:1.7">
+            <div style="font-size:11px;color:#475569;line-height:1.7">
               • 잔류압 &lt; 최저 필요수압(세정밸브 100 · 샤워 70 · 일반 55 kPa) → 가압 또는 기구 변경<br>
               • 최하층 ≥ 550 kPa : 감압밸브 또는 조닝 (KDS 31 30 15 4.7) — 가압·직결은 공급압, 고가탱크는 정수두로 판정
             </div>
@@ -1578,14 +1594,14 @@ input[type="number"]{-moz-appearance:textfield;}
         </div>
 
         <!-- STEP 흐름 -->
-        <div style="font-size:11px;font-weight:800;color:#0e7490;letter-spacing:.05em;margin-bottom:8px">🗂️ 사용 절차 (4단계)</div>
+        <div style="font-size:11px;font-weight:800;color:#2d5186;letter-spacing:.05em;margin-bottom:8px">🗂️ 사용 절차 (4단계)</div>
         <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px">
 
-          <div style="display:flex;gap:10px;align-items:flex-start;background:#f0fdfe;border:1.5px solid #a5f3fc;border-radius:10px;padding:11px">
-            <div style="width:28px;height:28px;border-radius:50%;background:#0e7490;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">1</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:10px;padding:11px">
+            <div style="width:28px;height:28px;border-radius:50%;background:#2d5186;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">1</div>
             <div>
-              <div style="font-size:11px;font-weight:800;color:#155e75;margin-bottom:4px">🏢 건물 정보 입력</div>
-              <div style="font-size:10.5px;color:#164e63;line-height:1.75">
+              <div style="font-size:11px;font-weight:800;color:#244168;margin-bottom:4px">🏢 건물 정보 입력</div>
+              <div style="font-size:11px;color:#1b3150;line-height:1.75">
                 상단 <b>「급수·급탕 관경」</b> 탭을 선택합니다.<br>
                 ① 건물 용도 선택 (아파트·사무소·호텔·병원 등)<br>
                 ② 사용 용도 구분 선택 → <b>주거용</b>(아파트·단독주택) / <b>공용</b>(그 외 모든 용도)<br>
@@ -1599,7 +1615,7 @@ input[type="number"]{-moz-appearance:textfield;}
             <div style="width:28px;height:28px;border-radius:50%;background:#b45309;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">2</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#c2410c;margin-bottom:4px">🚿 위생기구 수량 입력</div>
-              <div style="font-size:10.5px;color:#78350f;line-height:1.75">
+              <div style="font-size:11px;color:#78350f;line-height:1.75">
                 위생기구 목록에서 각 기구 수량을 입력합니다.<br>
                 • 세면기, 양변기(세정탱크/세정밸브), 소변기, 욕조, 샤워기, 싱크대 등<br>
                 • 급수·급탕 WSFU 와 배수 DFU 가 자동 계산됩니다.<br>
@@ -1612,7 +1628,7 @@ input[type="number"]{-moz-appearance:textfield;}
             <div style="width:28px;height:28px;border-radius:50%;background:#15803d;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">3</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:4px">⚡ 관경 자동 산정</div>
-              <div style="font-size:10.5px;color:#14532d;line-height:1.75">
+              <div style="font-size:11px;color:#14532d;line-height:1.75">
                 <b>「관경 산정」</b> 버튼을 누르면 결과가 즉시 표시됩니다.<br>
                 • 급수관 / 급탕관 / 배수횡관 / 배수수직관 / 통기관 관경 자동 결정<br>
                 • 급수: 순간최대유량 → 유속 기준 관경 · 배수: KDS 표 대조<br>
@@ -1626,7 +1642,7 @@ input[type="number"]{-moz-appearance:textfield;}
             <div style="width:28px;height:28px;border-radius:50%;background:#7e22ce;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;flex-shrink:0">4</div>
             <div>
               <div style="font-size:11px;font-weight:800;color:#7e22ce;margin-bottom:4px">📄 결과 출력 및 저장</div>
-              <div style="font-size:10.5px;color:#4c1d95;line-height:1.75">
+              <div style="font-size:11px;color:#4c1d95;line-height:1.75">
                 상단 탭 <b>「A4 보고서」</b> 또는 <b>「모바일 미리보기」</b>를 선택합니다.<br>
                 • <b>A4 인쇄:</b> 브라우저 인쇄 기능으로 PDF 저장 또는 종이 출력<br>
                 • <b>이미지 저장:</b> 결과를 JPG 이미지로 저장 (모바일 친화적)<br>
@@ -1638,39 +1654,39 @@ input[type="number"]{-moz-appearance:textfield;}
         </div>
 
         <!-- 탭 안내 -->
-        <div style="font-size:11px;font-weight:800;color:#0e7490;letter-spacing:.05em;margin-bottom:8px">🗂️ 상단 탭 기능 안내</div>
-        <div style="background:#fff;border:1px solid #e0f2fe;border-radius:10px;overflow:hidden;margin-bottom:12px">
-          <div style="display:grid;grid-template-columns:auto 1fr;font-size:10.5px">
-            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">💧 급수·급탕 관경</div>
-            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">냉수·온수 공급관 관경 산정 메인 화면</div>
-            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">🔩 오배수 관경</div>
-            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">배수횡관·배수수직관·통기관 관경 산정</div>
-            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">📄 A4 보고서</div>
-            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">인쇄용 A4 설계 보고서 미리보기 · PDF 저장</div>
-            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490;border-bottom:1px solid #e0f2fe">📱 모바일 미리보기</div>
-            <div style="padding:7px 11px;color:#164e63;border-bottom:1px solid #e0f2fe;font-weight:600">모바일 화면 결과 이미지 저장</div>
-            <div style="padding:7px 11px;background:#ecfeff;font-weight:800;color:#0e7490">📖 설계 기준</div>
-            <div style="padding:7px 11px;color:#164e63;font-weight:600">KDS·기술기준 요약 및 부하단위 근거 참조</div>
+        <div style="font-size:11px;font-weight:800;color:#2d5186;letter-spacing:.05em;margin-bottom:8px">🗂️ 상단 탭 기능 안내</div>
+        <div style="background:#fff;border:1px solid #dbeafe;border-radius:10px;overflow:hidden;margin-bottom:12px">
+          <div style="display:grid;grid-template-columns:auto 1fr;font-size:11px">
+            <div style="padding:7px 11px;background:#eff5fd;font-weight:800;color:#2d5186;border-bottom:1px solid #dbeafe">💧 급수·급탕 관경</div>
+            <div style="padding:7px 11px;color:#1b3150;border-bottom:1px solid #dbeafe;font-weight:600">냉수·온수 공급관 관경 산정 메인 화면</div>
+            <div style="padding:7px 11px;background:#eff5fd;font-weight:800;color:#2d5186;border-bottom:1px solid #dbeafe">🔩 오배수 관경</div>
+            <div style="padding:7px 11px;color:#1b3150;border-bottom:1px solid #dbeafe;font-weight:600">배수횡관·배수수직관·통기관 관경 산정</div>
+            <div style="padding:7px 11px;background:#eff5fd;font-weight:800;color:#2d5186;border-bottom:1px solid #dbeafe">📄 A4 보고서</div>
+            <div style="padding:7px 11px;color:#1b3150;border-bottom:1px solid #dbeafe;font-weight:600">인쇄용 A4 설계 보고서 미리보기 · PDF 저장</div>
+            <div style="padding:7px 11px;background:#eff5fd;font-weight:800;color:#2d5186;border-bottom:1px solid #dbeafe">📱 모바일 미리보기</div>
+            <div style="padding:7px 11px;color:#1b3150;border-bottom:1px solid #dbeafe;font-weight:600">모바일 화면 결과 이미지 저장</div>
+            <div style="padding:7px 11px;background:#eff5fd;font-weight:800;color:#2d5186">📖 설계 기준</div>
+            <div style="padding:7px 11px;color:#1b3150;font-weight:600">KDS·기술기준 요약 및 부하단위 근거 참조</div>
           </div>
         </div>
 
         <!-- 기기별 이용 안내 -->
-        <div style="font-size:11px;font-weight:800;color:#0e7490;letter-spacing:.05em;margin-bottom:8px">🖥️ 기기별 이용 환경</div>
+        <div style="font-size:11px;font-weight:800;color:#2d5186;letter-spacing:.05em;margin-bottom:8px">🖥️ 기기별 이용 환경</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
-          <div style="background:#f0fdfe;border:1.5px solid #a5f3fc;border-radius:10px;padding:10px;text-align:center">
+          <div style="background:#eff5fd;border:1.5px solid #c2d9f7;border-radius:10px;padding:10px;text-align:center">
             <div style="font-size:20px;margin-bottom:5px">🖥️</div>
-            <div style="font-size:11px;font-weight:800;color:#155e75;margin-bottom:4px">데스크탑</div>
-            <div style="font-size:10px;color:#164e63;line-height:1.65">입력 패널 + 결과 패널 2컬럼 동시 표시<br>전체 기능 최적화</div>
+            <div style="font-size:11px;font-weight:800;color:#244168;margin-bottom:4px">데스크탑</div>
+            <div style="font-size:11px;color:#1b3150;line-height:1.65">입력 패널 + 결과 패널 2컬럼 동시 표시<br>전체 기능 최적화</div>
           </div>
           <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:10px;text-align:center">
             <div style="font-size:20px;margin-bottom:5px">📱</div>
             <div style="font-size:11px;font-weight:800;color:#c2410c;margin-bottom:4px">태블릿</div>
-            <div style="font-size:10px;color:#78350f;line-height:1.65">가로 2컬럼 유지<br>세로 전환 시 1컬럼</div>
+            <div style="font-size:11px;color:#78350f;line-height:1.65">가로 2컬럼 유지<br>세로 전환 시 1컬럼</div>
           </div>
           <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:10px;text-align:center">
             <div style="font-size:20px;margin-bottom:5px">📲</div>
             <div style="font-size:11px;font-weight:800;color:#15803d;margin-bottom:4px">모바일</div>
-            <div style="font-size:10px;color:#14532d;line-height:1.65">1컬럼 최적화<br>PWA 앱 설치 지원</div>
+            <div style="font-size:11px;color:#14532d;line-height:1.65">1컬럼 최적화<br>PWA 앱 설치 지원</div>
           </div>
         </div>
 
@@ -2139,7 +2155,7 @@ function renderResult(r){
       <span class="flow-node fn-branch">각 층 분기 (${STATE.floors}층)</span>
       <span class="flow-arrow">→</span>
       <span class="flow-node fn-fix">${bld.ico} 위생기구</span>
-      <span style="font-size:9px;color:#94a3b8;margin-left:4px">최상층 ${r.topP}kPa</span>
+      <span style="font-size:11px;color:#94a3b8;margin-left:4px">최상층 ${r.topP}kPa</span>
     </div>`:''}
     ${r.fuH>0?`<div class="flow-line">
       <span class="flow-node" style="background:#b45309;color:#fff">급탕기 ${STATE.hwTemp}°C</span>
@@ -2378,7 +2394,7 @@ function renderA4(r){
       <colgroup><col style="width:32%"><col style="width:22%"><col style="width:46%"></colgroup>
       <tr><td class="a4-th">급수 부하 / 곡선</td><td style="font-weight:900;text-align:center">${r.fuS} WSFU</td><td>${curveNm(r.curveS)} — IPC 표 E103.3(3)</td></tr>
       <tr><td class="a4-th">급수 순간최대유량</td><td style="font-weight:900;text-align:center">${r.qwS} L/min</td><td>${r.gpmS} gpm × 3.785${r.extrapS?' (표 범위 외삽)':''}</td></tr>
-      <tr><td class="a4-th">급수 주관 관경</td><td style="font-weight:900;text-align:center;color:#0e7490">${r.fuS>0?'DN'+r.supplyMain:'—'}</td><td>V ≤ ${STATE.velSupply} m/s · 실유속 ${r.vS} m/s</td></tr>
+      <tr><td class="a4-th">급수 주관 관경</td><td style="font-weight:900;text-align:center;color:#2d5186">${r.fuS>0?'DN'+r.supplyMain:'—'}</td><td>V ≤ ${STATE.velSupply} m/s · 실유속 ${r.vS} m/s</td></tr>
       <tr><td class="a4-th">급탕 부하 / 유량</td><td style="font-weight:900;text-align:center">${r.fuH} WSFU</td><td>${r.qwH} L/min (세정탱크 주체 곡선)</td></tr>
       <tr><td class="a4-th">급탕 주관 관경</td><td style="font-weight:900;text-align:center;color:#b45309">${r.fuH>0?'DN'+r.hotMain:'해당없음'}</td><td>${r.fuH>0?`실유속 ${r.vH} m/s`:'-'}</td></tr>
       <tr><td class="a4-th">정수두</td><td style="font-weight:900;text-align:center">${r.sh} kPa</td><td>${STATE.floors}층 × ${STATE.floorHeight}m × 9.81 kPa/m</td></tr>
@@ -2396,7 +2412,7 @@ function renderA4(r){
       </tr></thead>
       <tbody>${fixRows.length ? fixRows : '<tr><td colspan="10" style="text-align:center;color:#94a3b8;padding:10px">입력된 위생기구 없음</td></tr>'}</tbody>
       <tfoot>
-        <tr style="background:#cffafe">
+        <tr style="background:#dbeafe">
           <td style="font-weight:900">합 계</td>
           <td></td><td></td><td style="font-weight:900;text-align:center">${r.fuS}</td>
           <td></td><td></td><td style="font-weight:900;text-align:center">${r.fuH}</td>
@@ -2414,7 +2430,7 @@ function renderA4(r){
       <tbody>
         ${sysRow('🚽 오 수', r.Dosu, '#dc2626')}
         ${sysRow('🚿 잡배수', r.Djab, '#15803d')}
-        ${sysRow('합류식(합계)', D, '#0e7490')}
+        ${sysRow('합류식(합계)', D, '#2d5186')}
       </tbody>
     </table>
     <div style="font-size:9px;color:#64748b;margin:3px 0 9px">수평지관 표 4.1-5(층당 부하·최대 트랩 이상) · 수직관 표 4.1-5(${STATE.floors}개 브랜치간격, 수평지관 이상) · 횡주관 표 4.1-4(표 4.1-1 최소 기울기, 대변기 연결 DN80 이상) · 통기 4.3.4 — 각개통기 ${D?dnTxt(D.ventIndiv):'-'} · 전 층 균등 분포 가정</div>
@@ -2531,7 +2547,7 @@ function renderFixtureGrid(){
     cats.forEach(cat=>{
       const list = FIXTURES.filter(f=>f.cat===cat.id);
       const hasAny = list.some(f=>{ const q=STATE.fixtureQty[f.id]||{supply:0,hot:0}; return q.supply>0||q.hot>0; });
-      html += `<div style="font-size:10px;font-weight:800;color:#155e75;padding:5px 4px 3px;border-bottom:1px solid #a5f3fc;margin-bottom:4px;margin-top:6px;">${cat.lbl}</div>`;
+      html += `<div style="font-size:11px;font-weight:800;color:#244168;padding:5px 4px 3px;border-bottom:1px solid #c2d9f7;margin-bottom:4px;margin-top:6px;">${cat.lbl}</div>`;
       list.forEach(f=>{
         const qty = STATE.fixtureQty[f.id] || {supply:0, hot:0};
         const fuKey = fxBadge(f);
@@ -2563,19 +2579,19 @@ function renderFixtureGrid(){
     // 전체합산 FU 요약 박스 추가
     const {fuS,fuH,fuD} = calcTotalFU();
     const inputCount = Object.values(STATE.fixtureQty).filter(q=>q.supply>0||q.hot>0).length;
-    html += `<div style="background:linear-gradient(135deg,#ecfeff,#cffafe);border:1.5px solid #06b6d4;border-radius:9px;padding:10px 12px;margin-top:10px;">
-      <div style="font-size:10px;font-weight:800;color:#155e75;margin-bottom:6px;">📊 전체 합산 (입력 기구 ${inputCount}종)</div>
+    html += `<div style="background:linear-gradient(135deg,#eff5fd,#dbeafe);border:1.5px solid #5a9ae8;border-radius:9px;padding:10px 12px;margin-top:10px;">
+      <div style="font-size:11px;font-weight:800;color:#244168;margin-bottom:6px;">📊 전체 합산 (입력 기구 ${inputCount}종)</div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
         <div style="text-align:center;background:#fff;border-radius:7px;padding:6px;">
-          <div style="font-size:9px;font-weight:700;color:#5c7a8a;">급수 WSFU</div>
-          <div style="font-size:18px;font-weight:900;color:#0e7490;font-family:'JetBrains Mono',monospace">${fuS}</div>
+          <div style="font-size:11px;font-weight:700;color:#5c7a8a;">급수 WSFU</div>
+          <div style="font-size:18px;font-weight:900;color:#2d5186;font-family:'JetBrains Mono',monospace">${fuS}</div>
         </div>
         <div style="text-align:center;background:#fff;border-radius:7px;padding:6px;">
-          <div style="font-size:9px;font-weight:700;color:#5c7a8a;">급탕 WSFU</div>
+          <div style="font-size:11px;font-weight:700;color:#5c7a8a;">급탕 WSFU</div>
           <div style="font-size:18px;font-weight:900;color:#b45309;font-family:'JetBrains Mono',monospace">${fuH}</div>
         </div>
         <div style="text-align:center;background:#fff;border-radius:7px;padding:6px;">
-          <div style="font-size:9px;font-weight:700;color:#5c7a8a;">배수 DFU</div>
+          <div style="font-size:11px;font-weight:700;color:#5c7a8a;">배수 DFU</div>
           <div style="font-size:18px;font-weight:900;color:#365314;font-family:'JetBrains Mono',monospace">${fuD}</div>
         </div>
       </div>
@@ -2871,19 +2887,19 @@ document.addEventListener('keydown', function(e){
     bar.id  = 'pwa-update-bar';
     bar.style.cssText=[
       'position:fixed;top:0;left:0;right:0;z-index:10001',
-      'background:linear-gradient(135deg,#0c1a2e,#164e63)',
+      'background:linear-gradient(135deg,#0c1a2e,#1b3150)',
       'color:#fff;padding:10px 16px',
       'display:flex;align-items:center;justify-content:space-between;gap:10px',
-      'box-shadow:0 4px 20px rgba(14,116,144,.5)',
+      'box-shadow:0 4px 20px rgba(45,81,134,.5)',
       'animation:sp-slide-down .35s cubic-bezier(.22,.61,.36,1)',
       'font-family:inherit'
     ].join(';');
     bar.innerHTML=
       '<style>@keyframes sp-slide-down{from{transform:translateY(-100%)}to{transform:translateY(0)}}</style>'
       +'<span style="font-size:13px;font-weight:700;flex:1;">🔄 새 버전이 준비되었습니다</span>'
-      +'<button id="pwa-apply-btn" style="background:linear-gradient(135deg,#ecfeff,#cffafe);color:#0e7490;'
+      +'<button id="pwa-apply-btn" style="background:linear-gradient(135deg,#eff5fd,#dbeafe);color:#2d5186;'
       +'border:none;padding:7px 15px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;">지금 적용</button>'
-      +'<button onclick="this.parentNode.remove()" style="background:rgba(255,255,255,.1);border:none;color:#a5f3fc;'
+      +'<button onclick="this.parentNode.remove()" style="background:rgba(255,255,255,.1);border:none;color:#c2d9f7;'
       +'padding:7px 10px;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;">✕</button>';
     document.body.prepend(bar);
     document.getElementById('pwa-apply-btn').addEventListener('click',function(){
@@ -3139,12 +3155,12 @@ document.addEventListener('keydown', function(e){
     ov.id = 'mm-save-ov';
     ov.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.62);' +
       'display:flex;align-items:center;justify-content:center;padding:16px;' +
-      "font-family:'Noto Sans KR','Noto Sans KR Local',sans-serif;";
+      "font-family:'Pretendard Variable',Pretendard,'Noto Sans KR','Noto Sans KR Local',sans-serif;";
     var bx = document.createElement('div');
     bx.style.cssText = 'background:#fff;border-radius:14px;width:100%;max-width:680px;max-height:88vh;' +
       'display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.32);';
     var hd = document.createElement('div');
-    hd.style.cssText = 'background:#0E7490;color:#fff;padding:14px 18px;display:flex;' +
+    hd.style.cssText = 'background:#2d5186;color:#fff;padding:14px 18px;display:flex;' +
       'align-items:center;justify-content:space-between;flex-shrink:0;';
     hd.innerHTML = '<b style="font-size:14px;font-weight:700;">🖼️ JPG 저장 — 전체 ' + shots.length + '장</b>' +
       '<span style="font-size:11px;opacity:.8;">페이지별로 눌러 저장하세요</span>';
@@ -3159,7 +3175,7 @@ document.addEventListener('keydown', function(e){
       img.style.cssText = 'width:100%;display:block;background:#fff;border-bottom:1px solid #E5E7EB;';
       var btn = document.createElement('button');
       btn.textContent = sh.no + ' / ' + shots.length + '  저장';
-      btn.style.cssText = 'width:100%;border:none;background:#0E7490;color:#fff;padding:9px;' +
+      btn.style.cssText = 'width:100%;border:none;background:#2d5186;color:#fff;padding:9px;' +
         "font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;";
       btn.onclick = function(){ save(sh); btn.textContent = '✓ 저장됨'; btn.style.background = '#15803D'; };
       card.appendChild(img); card.appendChild(btn); bd.appendChild(card);
@@ -3218,7 +3234,7 @@ document.addEventListener('keydown', function(e){
       'color:' + (this.base.color || '#111827') + ';' +          /* 흐린 글자 방지 */
       'font-size:' + (this.base.fontSize || '13px') + ';' +
       'line-height:' + (this.base.lineHeight || '1.7') + ';' +
-      'font-family:' + (this.base.fontFamily || "'Noto Sans KR','Noto Sans KR Local',sans-serif") + ';';
+      'font-family:' + (this.base.fontFamily || "'Pretendard Variable',Pretendard,'Noto Sans KR','Noto Sans KR Local',sans-serif") + ';';
     var b = document.createElement('div');
     b.style.cssText = 'display:flow-root;';                     /* 마진 상쇄 방지 */
     p.appendChild(b); this.stage.appendChild(p);
@@ -3281,7 +3297,7 @@ document.addEventListener('keydown', function(e){
       if(t > 1){                                 /* 2매 이상일 때만 쪽번호 */
         this.pages[i].appendChild(stampEl(
           'left:' + PL + 'px;bottom:' + MM(9) + 'px;' +
-          "font-family:'JetBrains Mono','Noto Sans KR',monospace;" +
+          "font-family:'JetBrains Mono','Pretendard Variable',Pretendard,'Noto Sans KR',monospace;" +
           'font-size:8pt;color:#9ca3af;letter-spacing:0.04em;', (i+1) + ' / ' + t));
       }
     }
@@ -3386,5 +3402,15 @@ document.addEventListener('keydown', function(e){
    처방: 캡처 직전 우리 문서의 light-DOM style/link 에 data-mm-own 을 찍고, 클론에서 표식 없는 style/link 를 제거한다.
    ② 라이브러리가 없으면(구 SW opaque 캐시 · CDN 차단) exportA4Jpg 가 ReferenceError 로 조용히 멈춘다(40 미리보기 미표시) → 지연 로더가 CDN 에서 받아 이어서 실행한다. 계산·출력 함수 무접촉(전역 html2canvas 래핑). */
 (function(){var CDN='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';var raw=window.html2canvas;var cur;function wrap(h){if(!h||h.__mm)return h;function p(el,opt){document.querySelectorAll('style,link[rel=stylesheet]').forEach(function(n){n.setAttribute('data-mm-own','1');});opt=Object.assign({},opt||{});var prev=opt.onclone;opt.onclone=function(doc,x){doc.querySelectorAll('style,link[rel=stylesheet]').forEach(function(n){if(!n.hasAttribute('data-mm-own')&&(n.textContent||'').indexOf('___html2canvas___')<0)n.remove();});return prev?prev(doc,x):undefined;};return h(el,opt);}p.__mm=1;try{Object.keys(h).forEach(function(k){p[k]=h[k];});}catch(e){}return p;}function lazy(el,opt){return new Promise(function(res,rej){var s=document.createElement('script');s.src=CDN;s.onload=function(){if(cur&&cur!==lazy)res(cur(el,opt));else rej(new Error('html2canvas 초기화 실패'));};s.onerror=function(){rej(new Error('html2canvas 로드 실패 — 네트워크·차단 확인'));};document.head.appendChild(s);});}cur=raw?wrap(raw):lazy;try{Object.defineProperty(window,'html2canvas',{configurable:true,get:function(){return cur;},set:function(v){cur=wrap(v);}});}catch(e){window.html2canvas=cur;}})();</script>
+<!-- ══ FOOTER (하단 버전 표시) ══ -->
+<footer class="mm-foot no-print">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-nm">MANMIN Ver-5.0</div>
+      <div class="foot-desc">위생배관 관경 산정 시스템 | KDS 31 30 15 · 헌터곡선</div>
+    </div>
+    <div class="foot-copy">ARCHITECT KIM MANMIN © 2026</div>
+  </div>
+</footer>
 </body>
 </html>
