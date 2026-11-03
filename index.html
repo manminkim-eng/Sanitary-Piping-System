@@ -496,6 +496,8 @@ input[type="number"]{-moz-appearance:textfield;}
 @media print{
   *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
   html,body{margin:0;padding:0;width:100%;height:auto;}
+  /* v5.0.18 (2026-11-03, §25-6-40) MIN 「출력물 여백 배경색 삭제」 — 화면 바탕 #eff5fd 가 위 exact 때문에 인쇄에도 칠해져 내용이 끝난 쪽 아래 빈 곳이 연파랑으로 찍힘 → 인쇄에서만 흰 바탕(다른 15종과 같은 규칙) */
+  html,body{background:#fff!important;}
   .hdr-shell,.app-header,.tab-bar,.main-wrap,.fab-wrap,.fab-calc,.toast,.a4-export-bar,
   .modal-ov,#guideModal{display:none!important;}
   #a4-print-target{display:block!important;margin:0;padding:0;}
