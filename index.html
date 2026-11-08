@@ -497,6 +497,7 @@ input[type="number"]{-moz-appearance:textfield;}
   *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
   html,body{margin:0;padding:0;width:100%;height:auto;}
   /* v5.0.19 (2026-11-08, §25-6-42) 여백 바탕 흰색(v5.0.18)은 공통 인쇄 원본 manmin-print v1.0 으로 옮김 */
+  /* v5.0.20 (2026-11-08, §25-6-43) MIN 「이모지 숨겨주고」 — 결과서 건물 용도 기호(⛪ 등) · 배수 계통 🚽 · 🚿 를 공통 원본 .mm-deco 로 감쌈 → 인쇄에서만 숨김, 화면 · 상태 기호(⚠️ ✅ 🔴) 그대로 */
   .hdr-shell,.app-header,.tab-bar,.main-wrap,.fab-wrap,.fab-calc,.toast,.a4-export-bar,
   .modal-ov,#guideModal{display:none!important;}
   #a4-print-target{display:block!important;margin:0;padding:0;}
@@ -2381,7 +2382,7 @@ function renderA4(r){
     <table class="a4-tbl" style="margin-bottom:9px">
       <colgroup><col style="width:20%"><col style="width:30%"><col style="width:20%"><col style="width:30%"></colgroup>
       <tr><td class="a4-th">공사명</td><td colspan="3">${STATE.projName}</td></tr>
-      <tr><td class="a4-th">건물 용도</td><td>${bld.ico} ${bld.nm}</td><td class="a4-th">급수 부하 구분</td><td>${usageText}</td></tr>
+      <tr><td class="a4-th">건물 용도</td><td><span class="mm-deco">${bld.ico} </span>${bld.nm}</td><td class="a4-th">급수 부하 구분</td><td>${usageText}</td></tr>
       <tr><td class="a4-th">배수 부하 열</td><td>${r.colNm} (표 4.1-2)</td><td class="a4-th">층수 / 층높이</td><td>${STATE.floors}층 / ${STATE.floorHeight}m (총 ${r.totalH}m)</td></tr>
       <tr><td class="a4-th">급수 방식</td><td>${supplyMethodText}</td><td class="a4-th">급수원 압력</td><td>${STATE.pressure} kPa</td></tr>
       <tr><td class="a4-th">급수 관재질 (C값)</td><td>${matName(STATE.matSupply)} (C=${r.C})</td><td class="a4-th">설계 유속 상한</td><td>${STATE.velSupply} m/s</td></tr>
@@ -2429,8 +2430,8 @@ function renderA4(r){
         <th>계통</th><th>부하<br>DFU</th><th>층당<br>DFU</th><th>수평지관</th><th>수직관</th><th>횡주관<br>(최소 기울기)</th><th>통기<br>수직관</th><th>루프<br>통기</th>
       </tr></thead>
       <tbody>
-        ${sysRow('🚽 오 수', r.Dosu, '#dc2626')}
-        ${sysRow('🚿 잡배수', r.Djab, '#15803d')}
+        ${sysRow('<span class="mm-deco">🚽 </span>오 수', r.Dosu, '#dc2626')}
+        ${sysRow('<span class="mm-deco">🚿 </span>잡배수', r.Djab, '#15803d')}
         ${sysRow('합류식(합계)', D, '#2d5186')}
       </tbody>
     </table>
