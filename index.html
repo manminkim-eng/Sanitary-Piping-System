@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-<title>위생배관 관경 산정 시스템 [MANMIN Ver-5.0]</title>
+<title>위생배관 관경 산정 시스템 [MANMIN Ver-6.1]</title>
 <!-- 링크 미리보기(네이버 · 카카오 · SNS) — 2026-10-30 전수 정비 -->
 <link rel="canonical" href="https://manminkim-eng.github.io/Sanitary-Piping-System/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MANMIN ENGINEERING">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="위생배관 관경 산정 시스템 [MANMIN Ver-5.0]">
+<meta property="og:title" content="위생배관 관경 산정 시스템 [MANMIN Ver-6.1]">
 <meta property="og:description" content="건축물 용도별 급수·급탕·오배수·통기 관경 산정 — KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 (국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행))">
 <meta property="og:url" content="https://manminkim-eng.github.io/Sanitary-Piping-System/">
 <meta property="og:image" content="https://manminkim-eng.github.io/Sanitary-Piping-System/og-card.jpg">
@@ -17,9 +17,9 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="위생배관 관경 산정 시스템 [MANMIN Ver-5.0]">
+<meta property="og:image:alt" content="위생배관 관경 산정 시스템 [MANMIN Ver-6.1]">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="위생배관 관경 산정 시스템 [MANMIN Ver-5.0]">
+<meta name="twitter:title" content="위생배관 관경 산정 시스템 [MANMIN Ver-6.1]">
 <meta name="twitter:description" content="건축물 용도별 급수·급탕·오배수·통기 관경 산정 — KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 (국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행))">
 <meta name="twitter:image" content="https://manminkim-eng.github.io/Sanitary-Piping-System/og-card.jpg">
 <meta name="description" content="건축물 용도별 급수·급탕·오배수·통기 관경 산정 — KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 (국토교통부 고시 제2021-851호(제2026-360호로 타법개정, 2026. 7. 8. 시행))"/>
@@ -37,14 +37,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png"/>
 <meta name="msapplication-TileColor" content="#2d5186"/>
 <meta name="msapplication-TileImage" content="./icons/icon-144x144.png"/>
-<!-- MANMIN Ver-5.0 폰트 체계 : 로컬 폴백 우선 → CDN 보조 (오프라인·차단망 대응) -->
+<!-- MANMIN Ver-6.1 폰트 체계 : 로컬 폴백 우선 → CDN 보조 (오프라인·차단망 대응) -->
 <link rel="stylesheet" href="./assets/fonts/manmin-fonts.css"/>
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>:root{--d:#5a9ae8;--d-deep:#2d5186;--d-lt:#9cc3f5;--d-tint:#dbeafe;--d-rgb:90,154,232;--fs-badge:11px;--fs-cap:11.5px;--fs-sm:12.5px;--fs-desc:13px;--fs-body:14px;--fs-sec:16px;--fs-card:17px;--fs-stat:20px;}
 
-/* MANMIN Ver-5.0 : 유니버설 폰트 강제(*) 를 태그 목록으로 축소 — 고정폭(JetBrains Mono) 선언이 화면에서 실제 적용되도록 함 */
+/* MANMIN Ver-6.1 : 유니버설 폰트 강제(*) 를 태그 목록으로 축소 — 고정폭(JetBrains Mono) 선언이 화면에서 실제 적용되도록 함 */
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body,div,span,p,a,button,label,li,td,th,h1,h2,h3,h4,h5,h6,section,article,header,footer,nav,small,strong,b,em{
   font-family:'Pretendard Variable',Pretendard,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
@@ -489,7 +489,7 @@ input[type="number"]{-moz-appearance:textfield;}
 /* v5.0 : .fab-tooltip 삭제 (드래그 FAB 폐지에 따른 고아 규칙) */
 
 /* PRINT — A4 ISO 규격: 상하 20mm, 좌우 20mm */
-/* ═══ MANMIN Ver-5.0 A4 규격 (전 39종 공통) ═══
+/* ═══ MANMIN Ver-6.1 A4 규격 (전 39종 공통) ═══
    용지 A4 portrait 210×297mm · 여백 상14 우12 하22 좌14mm · 유효영역 184×261mm
    여백은 @page 하나로만 일원화한다 (.a4-page 자체 padding 은 인쇄 시 해제) */
 @page{size:A4 portrait;margin:14mm 12mm 22mm 14mm;}
@@ -576,7 +576,7 @@ input[type="number"]{-moz-appearance:textfield;}
 
 /* ═══════════════════════════════════════════════
    반응형 최적화 — 데스크탑 / 태블릿 / 모바일
-   브레이크포인트 — MANMIN Ver-5.0 규격 6종 : 1024 · 860 · 768 · 640 · 480 · 420
+   브레이크포인트 — MANMIN Ver-6.1 규격 6종 : 1024 · 860 · 768 · 640 · 480 · 420
    ≥1024px  : 데스크탑 2컬럼
    768~1023 : 태블릿 가로 2컬럼 균등
    641~767  : 태블릿 세로 1컬럼
@@ -745,7 +745,7 @@ input[type="number"]{-moz-appearance:textfield;}
 .flow-arrow{color:#94a3b8;font-size:12px;}
 .flow-pipe{font-size:11px;font-weight:800;color:#2d5186;font-family:'JetBrains Mono',monospace!important;background:#fff;border:1px solid #c2d9f7;padding:1px 5px;border-radius:4px;}
 </style>
-<style id="mm-r1">/* R1 (2026-09-04 · 지시서 §20-1 · S10 소급) — 인쇄 PDF 하단 각인 MANMIN · Ver 비표시. 버전은 A4 푸터 [MANMIN-Ver5.0] 이 담당 */
+<style id="mm-r1">/* R1 (2026-09-04 · 지시서 §20-1 · S10 소급) — 인쇄 PDF 하단 각인 MANMIN · Ver 비표시. 버전은 A4 푸터 [MANMIN-Ver6.1] 이 담당 */
 #dev-stamp,#dev-stamp-print,#mm-print-stamp,.dev-stamp{display:none!important;}
 @media print{#dev-stamp,#dev-stamp-print,#mm-print-stamp,.dev-stamp{display:none!important;}}</style>
 <style id="mm-r24b">/* R24 ①② (2026-09-05 · S10 단계 4′ 20·21 소급 · 지시서 §21-1 R24·R2) — 인쇄 시 collapse 표의 우측 세로선 소실 → separate + 셀 자체 선. 화면·JPG·PDF 동일 DOM(§2②). 선색은 기존 값 유지. */
@@ -795,7 +795,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
         <h1 class="hdr-h1">위생배관 관경 산정 시스템</h1>
         <div class="hdr-sub">
           FU 기구부하단위법 · 급수 · 급탕 · 환탕 · 오배수 · 통기 관경 자동 산정
-          <span class="hdr-manmin">MANMIN · Ver-5.0</span>
+          <span class="hdr-manmin">MANMIN · Ver-6.1</span>
         </div>
       </div>
     </div>
@@ -2371,7 +2371,7 @@ function renderA4(r){
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:12px;">
       <div style="font-size:12px;font-weight:800;color:#111827;flex:1;text-align:left;">${STATE.projName || ''}</div>
       <div style="text-align:right;white-space:nowrap;flex-shrink:0;">
-        <div style="font-size:9px;color:#64748b;margin-bottom:2px;">KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 · MANMIN Ver-5.0</div>
+        <div style="font-size:9px;color:#64748b;margin-bottom:2px;">KDS 31 30 15·25 · IPC 2021 부록 E · 기계설비 기술기준 · MANMIN Ver-6.1</div>
         <div style="font-size:9px;color:#475569;margin-bottom:1px;">작성일: ${dateStr}</div>
         ${STATE.author?`<div style="font-size:9px;color:#475569;">작성자: ${STATE.author}</div>`:''}
       </div>
@@ -2448,7 +2448,7 @@ function renderA4(r){
     </table>
 
     <div class="a4-footer a4-section">
-      <span>위생배관 관경 산정 시스템 [MANMIN-Ver5.0]</span>
+      <span>위생배관 관경 산정 시스템 [MANMIN-Ver6.1]</span>
       <span>KDS 31 30 15·25 · IPC 2021 부록 E</span>
       <span>작성일: ${dateStr}</span>
     </div>
@@ -2663,7 +2663,7 @@ function switchTab(id, btn){
   if(id==='a4') scaleA4();
 }
 
-/* ── A4 미리보기 스케일 — MANMIN Ver-5.0 마스터 검증식 ──
+/* ── A4 미리보기 스케일 — MANMIN Ver-6.1 마스터 검증식 ──
    기존 방식(transform-origin:top center + clientWidth-48 하드코딩 차감)은
    모바일에서 부동소수 오차로 우측 쏠림이 생긴다. 마스터 검증식은 다음 넷을 지킨다.
      ① getBoundingClientRect().width 로 정밀 실측 (하드코딩 padding 차감 금지)
@@ -3035,7 +3035,7 @@ document.addEventListener('keydown', function(e){
 })();
 </script>
 
-<div id="mm-print-stamp" style="display:none">MANMIN-Ver5.0</div>
+<div id="mm-print-stamp" style="display:none">MANMIN-Ver6.1</div>
 <script>window.MM_JPG_CONFIG={zone:'#a4Page',name:'위생배관관경',prepare:'mmPrepareA4'};</script>
 
 
@@ -3059,7 +3059,7 @@ document.addEventListener('keydown', function(e){
 (function(){
   'use strict';
   var CFG = window.MM_JPG_CONFIG || { zone:'#report-zone', name:'MANMIN', prepare:null };
-  var VER = 'MANMIN-Ver5.0';
+  var VER = 'MANMIN-Ver6.1';
 
   var MM = function(v){ return v * 96 / 25.4; };
   var PAGE_W = MM(210), PAGE_H = MM(297);
@@ -3401,7 +3401,7 @@ document.addEventListener('keydown', function(e){
 <footer class="mm-foot no-print">
   <div class="foot-inner">
     <div>
-      <div class="foot-nm">MANMIN Ver-5.0</div>
+      <div class="foot-nm">MANMIN Ver-6.1</div>
       <div class="foot-desc">위생배관 관경 산정 시스템 | KDS 31 30 15 · 헌터곡선</div>
     </div>
     <div class="foot-copy">ARCHITECT KIM MANMIN © 2026</div>
@@ -3451,10 +3451,10 @@ document.addEventListener('keydown', function(e){
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 </script>
-<!-- MM-PROJECT:BEGIN v1.1 -->
+<!-- MM-PROJECT:BEGIN v1.2 -->
 <script id="mm-project-js" data-tool="위생배관" data-pos="bottom:172px;right:18px" data-map="{&quot;사업명&quot;:&quot;#inp-projname&quot;,&quot;작성자&quot;:&quot;#inp-author&quot;,&quot;위치&quot;:&quot;-&quot;,&quot;발주처&quot;:&quot;-&quot;,&quot;연면적&quot;:&quot;-&quot;,&quot;지상층&quot;:&quot;-&quot;,&quot;지하층&quot;:&quot;-&quot;,&quot;높이&quot;:&quot;-&quot;,&quot;구조&quot;:&quot;-&quot;}">
-/* MANMIN 공통 건물개요 원본 manmin-project.js v1.1 (2026-11-08, 작업지시서 §25-6-51 · v1.0 §25-6-50)
-   정본: Z:\MIN-A\01.만민자료\02.설계자료\11.개발자료\65.개발자료[건물개요]\버전s-1.1\manmin-project-v1.1\
+/* MANMIN 공통 건물개요 원본 manmin-project.js v1.2 (2026-11-09, 작업지시서 §25-6-52 · v1.1 §25-6-51 · v1.0 §25-6-50)
+   정본: Z:\MIN-A\01.만민자료\02.설계자료\11.개발자료\65.개발자료[건물개요]\버전s-1.2\manmin-project-v1.2\
    도구에는 inject.py 가 MM-PROJECT:BEGIN · MM-PROJECT:END 표식 사이에 그대로 끼워 넣음(외부 링크 없음 · 오프라인 · Z: 사본 단독 동작). 도구에서 직접 고치지 말 것.
    하는 일: 같은 현장의 표지 정보 · 건물 수치를 localStorage「MANMIN_PROJECT_V1」에 담고 다른 도구에서 불러옴(같은 주소 manminkim-eng.github.io 아래 공유).
      저장 = 지금 도구 값을 담음(이 도구에 없는 항목은 저장값 그대로) · 불러오기 = 채울 값을 목록으로 먼저 보여 주고 확인하면 채움(이미 입력된 칸은 직접 체크해야 덮어씀)
@@ -3465,7 +3465,7 @@ document.addEventListener('keydown', function(e){
    기타 설정: data-tool(저장한 도구 이름) · data-pos(단추 위치 CSS, 기본 "top:10px;right:12px" — 도구의 머리 글자 · 떠 있는 단추와 겹치지 않는 자리로 지정) */
 (function () {
   var me = document.currentScript; if (!me || window.MMProject) return;
-  var KEYNAME = 'MANMIN_PROJECT_V1', VER = 'v1.1';
+  var KEYNAME = 'MANMIN_PROJECT_V1', VER = 'v1.2';
   var KEYS = ['사업명', '위치', '발주처', '작성자', '연면적', '지상층', '지하층', '높이', '구조'];
   var NUM = { 연면적: 1, 지상층: 1, 지하층: 1, 높이: 1 };
   /* 이름표 정규식 — 사업명은 공통 인쇄 원본 KEY 와 같음 */
@@ -3569,7 +3569,7 @@ document.addEventListener('keydown', function(e){
     + '.mm-proj-back{position:fixed;inset:0;z-index:2147483002;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;padding:12px}'
     + '.mm-proj-dlg{background:#fff;border-radius:12px;max-width:560px;width:100%;max-height:calc(100vh - 24px);overflow:auto;box-shadow:0 12px 40px rgba(0,0,0,.25)}'
     + '.mm-proj-dlg h3{margin:0;padding:14px 16px 4px;font-size:16px;color:' + theme + '}.mm-proj-dlg .mm-proj-note{padding:0 16px 8px;font-size:12px;color:#6b7280}'
-    + '.mm-proj-dlg table{width:100%;min-width:0;max-width:100%;table-layout:auto;border-collapse:collapse;font-size:13px}.mm-proj-dlg th,.mm-proj-dlg td{padding:6px 8px;border-top:1px solid #eef0f3;text-align:left;vertical-align:top;word-break:break-all}'
+    + '.mm-proj-dlg table{width:100%;min-width:0;max-width:100%;table-layout:auto;border-collapse:collapse;font-size:13px}.mm-proj-dlg th,.mm-proj-dlg td{padding:6px 8px;border-top:1px solid #eef0f3;text-align:left;vertical-align:top;white-space:normal;word-break:break-all}'
     + '.mm-proj-dlg th{font-weight:600;color:#374151;white-space:nowrap;background:#f9fafb}.mm-proj-dlg td.mm-proj-old{color:#9ca3af}.mm-proj-dlg .mm-proj-warn{color:#b45309;font-size:11px}'
     + '.mm-proj-foot{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px}.mm-proj-foot button{padding:7px 14px;font-size:13px;border-radius:8px;border:1px solid #d1d5db;background:#fff;cursor:pointer}'
     + '.mm-proj-foot button.mm-proj-ok{background:' + theme + ';border-color:' + theme + ';color:#fff;font-weight:600}'

@@ -1,4 +1,5 @@
 /* ══════════════════════════════════════════════════════════
+   v6.1.0 (2026-11-12) — 건물개요 공통 원본 MM-PROJECT v1.1 → v1.2(불러오기 창 칸 줄바꿈 · 저장값 같음, 정밀검토 B5 · 작업지시서 §25-6-76) · 캐시명 v6.1.0 (종전 sanpipe-v5.0.22)
    S13 회차 2026-10-13 — 사용자 매뉴얼(manual/) 연결 · 탭 막대 매뉴얼 버튼 동반 캐시명 v5.0.12
    S12 회차 2026-10-13 — 지지간격표·급탕온도 원문화 · 감압 판정 급수방식별 · 점도계수 삭제 동반 캐시명 v5.0.11
    S11 회차 2026-10-13 — 계산 근거 교체(IPC 부록 E · KDS 31 30 25 · KDS 31 30 15 표 4.3-1) 동반 캐시명 v5.0.10
@@ -31,7 +32,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const SW_VER      = 'sanpipe-v5.0.22';
+const SW_VER      = 'sanpipe-v6.1.0';
 /* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
 const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
