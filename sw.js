@@ -1,4 +1,5 @@
 /* ══════════════════════════════════════════════════════════
+   v6.1.5 (2026-11-12) — html2canvas 1.4.1 머리 태그 SRI(integrity sha384 · crossorigin) · 공통 인쇄 원본 MM-PRINT v1.0 → v1.1(지연 로더도 SRI)(정밀검토 B8 · html2canvas SRI) — 화면 · 계산 · 인쇄 불변 · 작업지시서 §25-6-87 · 캐시명 v6.1.5 (종전 v6.1.4)
    v6.1.4 (2026-11-12) — Pretendard CSS SRI(integrity · crossorigin)(정밀검토 C2) — 화면 · 계산 · 인쇄 불변 · 작업지시서 §25-6-82 · 캐시명 v6.1.4 (종전 v6.1.3)
    v6.1.3 (2026-11-12) — KDS 31 30 25 : 2026 표기 — 배수 · 통기 DN 375 → 380(표 값 같음, 정밀검토 B12) — 계산 값 불변 · 작업지시서 §25-6-81 · 판 6.1 · 캐시명 v6.1.3 (종전 v6.1.2)
    v6.1.2 (2026-11-12) — 건물개요 공통 원본 MM-PROJECT v1.2 → v1.3(불러오기 창 표 칸 모양 고정 — 도구 CSS 가 새지 않음 · 저장값 같음, 정밀검토 C10) · 작업지시서 §25-6-80 · 판 6.1 · 캐시명 v6.1.2 (종전 v6.1.1)
@@ -36,7 +37,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const SW_VER      = 'sanpipe-v6.1.4';
+const SW_VER      = 'sanpipe-v6.1.5';
 /* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
 const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
