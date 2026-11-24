@@ -926,6 +926,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
         </div>
 
         <div class="fixture-grid" id="fixtureGrid"></div>
+        <div id="fx-neg-box"><input type="hidden" id="fx-neg-proxy" value="1"></div>
 
         <div class="cbox" style="margin-top:8px">
           <div class="cbox-tit">▣ 기구부하단위 합계</div>
@@ -966,7 +967,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
             <div class="input-sfx"><input type="number" class="finput" id="inp-vel-supply" value="1.5" min="0.5" max="3.0" step="0.1" oninput="liveCalc()"><span class="sfx">m/s</span></div>
           </div>
           <div class="fgrp">
-            <label class="flbl">급수원 압력 (수전 기준)</label>
+            <label class="flbl" id="lbl-pressure">급수원 압력 (수전 기준)</label>
             <div class="input-sfx"><input type="number" class="finput" id="inp-pressure" value="300" min="100" max="700" oninput="liveCalc()"><span class="sfx">kPa</span></div>
           </div>
         </div>
@@ -982,6 +983,16 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
               <option value="no">강제 — 환탕 없음</option>
               <option value="yes">강제 — 환탕 설치</option>
             </select>
+          </div>
+        </div>
+        <div class="frow" style="margin-top:9px;margin-bottom:0">
+          <div class="fgrp">
+            <label class="flbl">통기수직관 길이 (KDS 표 4.3-1)</label>
+            <div class="input-sfx"><input type="number" class="finput" id="inp-ventlen" value="" min="0" max="500" step="0.1" placeholder="빈 칸 = 자동" oninput="liveCalc()"><span class="sfx">m</span></div>
+          </div>
+          <div class="fgrp">
+            <label class="flbl">적용 길이</label>
+            <div id="p-ventlen" style="font-size:11px;font-weight:700;color:#244168;line-height:1.45;padding:6px 2px">-</div>
           </div>
         </div>
 
@@ -1142,7 +1153,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
           <tbody id="stdTblDrain"></tbody>
         </table>
       </div>
-      <div style="font-size:11px;color:#475569;margin-top:6px;line-height:1.6">• 최소 기울기 표 4.1-1 (DN65 이하 1/50 · DN80~150 1/100 · DN200 이상 1/200) · 대변기 연결 건물배수수평주관 DN80 이상(표 4.1-4 주1) · 흐름 방향 관경 축소 금지(4.1.5(2))<br>• 통기관 4.3.4 — 통기수직관: 담당 배수관 1/2 보다 크고 DN32 이상 · 각개·루프통기관: 1/2 이상, DN32 이상, 12 m 이상이면 1단계 상향</div>
+      <div style="font-size:11px;color:#475569;margin-top:6px;line-height:1.6">• 최소 기울기 표 4.1-1 (DN65 이하 1/50 · DN80~150 1/100 · DN200 이상 1/200) · 대변기 연결 건물배수수평주관 DN80 이상(표 4.1-4 주1) · 흐름 방향 관경 축소 금지(4.1.5(2))<br>• 통기관 4.3.4 — 통기수직관: 표 4.3-1(통기관 길이 · 총 DFU), 담당 배수관 1/2 보다 크고 DN32 이상 · 각개·루프통기관: 1/2 이상, DN32 이상, 12 m 이상이면 1단계 상향</div>
     </div>
   </div>
 
@@ -1183,8 +1194,8 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
       <div class="card">
         <div class="card-head"><div class="card-ico">🔥</div><span class="card-tit">급탕 설계 기준</span><span class="cbadge org">별표 5 · KDS 31 30 20</span></div>
         <div class="card-body">
-          <div class="nb org"><div class="nb-tit">🔥 15m 규정</div><div class="nb-txt">• 급탕 열원 → 급탕 기구 배관 길이 : <b>15m 이하</b> (별표 5 2.2.2(3) — 환탕관·가열관은 열원으로 간주)<br>• 중앙식 30 m 이상 : 환탕관·순환펌프 또는 가열장치 (KDS 31 30 20 1.6.6)<br>• 본 시스템 길이는 층수×층높이×1.3 <b>추정값</b></div></div>
-          <div class="nb blue"><div class="nb-tit">🌡️ 급탕 온도 (별표 5)</div><div class="nb-txt">• 난방 겸용 급탕가열장치 : 60℃ 이상 공급 시 온도조절밸브로 급탕배관 <b>60℃ 이하</b> 제한 (2.2.3(1))<br>• 탱크 없는 순간 급탕가열장치 : <b>60℃ 이하</b>로 설정 가능 (2.2.3(3))<br>• 위생기구 급탕 : 온도제한장치·혼합장치로 <b>43℃ 이하</b> 제한 가능 (2.2.7(2)) — 가열장치 온도조절기로 대신할 수 없음 (2.2.7(1))</div></div>
+          <div class="nb org"><div class="nb-tit">🔥 15m 규정</div><div class="nb-txt">• 급탕 열원 → 급탕 기구 배관 길이 : <b>15m 이하</b> (별표 5 2.2.2(3) — 환탕관·가열관은 열원으로 간주)<br>• 중앙식 30 m 이상 : 환탕관·순환펌프 또는 가열장치 (KDS 31 30 20 1.6.6)<br>• 중앙급탕방식 : 환탕배관 · 급탕순환펌프 설계 (별표 5 2.2.1(6))<br>• 본 시스템 길이는 층수×층높이×1.3 <b>추정값</b></div></div>
+          <div class="nb blue"><div class="nb-tit">🌡️ 급탕 온도 (별표 5)</div><div class="nb-txt">• 난방 겸용 급탕가열장치 : 60℃ 이상 공급 시 온도조절밸브로 급탕배관 <b>60℃ 이하</b> 제한 (2.2.3(1))<br>• 탱크 없는 순간 급탕가열장치 : <b>60℃ 이하</b>로 설정 가능 (2.2.5(3))<br>• 위생기구 급탕 : 온도제한장치·혼합장치로 <b>43℃ 이하</b> 제한 가능 (2.2.7(2)) — 가열장치 온도조절기로 대신할 수 없음 (2.2.7(1))<br>• 비데 : 물 방출 최대온도 <b>43℃ 이하</b> (별표 4 2.2.8(2))</div></div>
         </div>
       </div>
     </div>
@@ -1203,7 +1214,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
         <div class="card-head"><div class="card-ico">🌀</div><span class="card-tit">통기 설계 기준</span><span class="cbadge pur">KDS 31 30 25 4.3.4</span></div>
         <div class="card-body">
           <div class="nb blue"><div class="nb-tit">🌀 통기 방식</div><div class="nb-txt">• 각개 통기 : 1기구 1통기관<br>• 루프 통기 : 횡지관 최상류 기구<br>• 신정 통기 : 배수 수직관 상부 연장<br>• 습식 통기 : 소규모 건물 적용 가능</div></div>
-          <div class="nb grn"><div class="nb-tit">🟢 통기관 관경</div><div class="nb-txt">• 신정·통기수직관 : 표 4.3-1(길이·DFU), 담당 배수관 <b>1/2 보다 크고 DN32 이상</b><br>• 각개·통기지관·루프·도피 : 담당 배수관 <b>1/2 이상, DN32 이상</b><br>• 통기관 12 m 이상 : 전 길이 1단계 상향</div></div>
+          <div class="nb grn"><div class="nb-tit">🟢 통기관 관경</div><div class="nb-txt">• 신정·통기수직관 : 표 4.3-1(길이·DFU), 담당 배수관 <b>1/2 보다 크고 DN32 이상</b><br>• 각개·통기지관·루프·도피 : 담당 배수관 <b>1/2 이상, DN32 이상</b><br>• 통기관 12 m 이상 : 전 길이 1단계 상향<br>• 루프통기 : 배수 수평지관 기구 <b>8개까지</b> (별표 6 2.1.5(5) · 4.3.12(1))<br>• 연결 높이 : 담당 최고 기구 물 넘침선 위 <b>150 mm 이상</b> (별표 6 2.1.5(1) · 4.3.3(5))</div></div>
         </div>
       </div>
     </div>
@@ -1429,7 +1440,7 @@ footer.mm-foot{position:relative;z-index:1;border-top:1px solid #e4e9f0;backgrou
               <tr><td>배수수평지관</td><td>층당 DFU ≤ 수평지관 열 · 최대 트랩 구경 이상</td><td>표 4.1-5</td></tr>
               <tr><td>배수수직관</td><td>3 이하 간격: 합계 열 / 4 이상: 합계 열 + 1 간격 열 · 수평지관 이상</td><td>표 4.1-5 · 4.1.5(2)</td></tr>
               <tr><td>건물배수수평주관</td><td>최소 기울기 열에서 DFU 허용 · 대변기 연결 DN80 이상 · 수직관 이상</td><td>표 4.1-4 · 4.1-1</td></tr>
-              <tr><td>통기수직관</td><td>배수수직관 1/2 보다 크고 DN32 이상</td><td>4.3.4(1)</td></tr>
+              <tr><td>통기수직관</td><td>표 4.3-1 — 배수수직관 DN · 총 DFU 행에서 통기관 길이 이상인 최소 DN · 배수수직관 1/2 보다 크고 DN32 이상</td><td>4.3.4(1) · 표 4.3-1</td></tr>
               <tr><td>루프·각개통기</td><td>담당 배수관 1/2 이상, DN32 이상 · 12 m 이상 1단계 상향</td><td>4.3.4(2)</td></tr>
             </tbody>
           </table>
@@ -1836,6 +1847,7 @@ let STATE = {
   floors: 5,
   floorHeight: 3.0,
   fixtureQty: {},
+  fixtureNeg: {},
   matSupply: 'stp',
   matDrain: 'vpvc',
   velSupply: 1.5,
@@ -1901,15 +1913,17 @@ function frictionLoss(qLpm, dA, C, floors, floorHt){
   return Math.round(hf * 9.81 * 10) / 10;
 }
 
-/* ⑥ 최상층 잔류압 = 공급압 - 정수두 - 마찰손실 */
-function topFloorPressure(supplyKpa, floors, floorHt, qLpm, dA, C){
+/* ⑥ 최상층 잔류압 — 가압·직결 : 공급압 - 정수두 - 마찰손실
+   고가탱크(v6.1.6, 교차검증 P6) : 입력값 = 수조 수면 ~ 최상층 기구 높이차 수두(kPa) → 수조 수두 - 마찰손실 */
+function topFloorPressure(supplyKpa, floors, floorHt, qLpm, dA, C, method){
+  if(method === 'gravity') return Math.round(supplyKpa - frictionLoss(qLpm, dA, C, floors, floorHt));
   return Math.round(supplyKpa - staticHead(floors, floorHt) - frictionLoss(qLpm, dA, C, floors, floorHt));
 }
 
 /* ⑦ 최하층 급수압 — 급수 방식별
-   가압·직결 : 공급압(수전 기준 입력값) · 고가탱크 : 건물 높이 정수두(수조 설치 높이 미반영 — 추정) */
+   가압·직결 : 공급압(수전 기준 입력값) · 고가탱크(v6.1.6) : 수조 수두 + 건물 정수두(최상층과 같은 급수원 가정 — 산식 통일, 정지 수압) */
 function bottomFloorPressure(supplyKpa, floors, floorHt, method){
-  if(method === 'gravity') return staticHead(floors, floorHt);
+  if(method === 'gravity') return Math.round(supplyKpa + staticHead(floors, floorHt));
   return Math.round(supplyKpa);
 }
 
@@ -1964,7 +1978,34 @@ function ventHalf(dn, strict){
   if(dn == null) return null;
   return smallestDn(32, v => strict ? v > dn/2 : v >= dn/2);
 }
-function sizeDrain(load, floors, hasWC, maxTrap){
+/* v6.1.6 (2026-11-24, 교차검증 P2) — KDS 31 30 25 : 2026 표 4.3-1 신정통기관과 통기수직관의 크기
+   kcsc.re.kr 원문(getCodeDetailInfo.do, 2026-02-23판 last_yn=Y) 4.3.4(1) · 표 4.3-1 대조
+   [오배수 수직관 DN, 총 DFU, {통기관 DN: 최대 통기관 거리 m}] — 거리 = 통기관 연결점 ~ 대기(주 1) */
+const T431 = [
+  [32,2,{32:9}],
+  [40,8,{32:15,40:46}], [40,10,{32:9,40:30}],
+  [50,12,{32:9,40:23,50:61}], [50,20,{32:8,40:15,50:46}],
+  [65,42,{40:9,50:30,65:91}],
+  [80,10,{40:13,50:46,65:110,80:317}], [80,21,{40:10,50:34,65:82,80:247}], [80,53,{40:8,50:29,65:70,80:207}], [80,102,{40:8,50:26,65:64,80:189}],
+  [100,43,{50:11,65:26,80:76,100:299}], [100,140,{50:8,65:20,80:61,100:229}], [100,320,{50:7,65:17,80:52,100:195}], [100,540,{50:6,65:15,80:46,100:177}],
+  [125,190,{65:9,80:25,100:98,125:302}], [125,490,{65:6,80:19,100:76,125:232}], [125,940,{65:5,80:16,100:64,125:204}], [125,1400,{65:5,80:15,100:58,125:180}],
+  [150,500,{80:10,100:40,125:122,150:305}], [150,1100,{80:8,100:30,125:94,150:238}], [150,2000,{80:7,100:26,125:79,150:201}], [150,2900,{80:6,100:23,125:73,150:183}],
+  [200,1800,{100:9,125:29,150:73,200:287}], [200,3400,{100:7,125:22,150:58,200:222}], [200,5600,{100:6,125:19,150:49,200:186}], [200,7600,{100:5,125:17,150:43,200:171}],
+  [250,4000,{125:9,150:24,200:94,250:293}], [250,7200,{125:7,150:18,200:73,250:226}], [250,11000,{125:6,150:16,200:61,250:192}], [250,15000,{125:5,150:14,200:55,250:174}],
+  [300,7300,{150:9,200:37,250:116,300:287}], [300,13000,{150:7,200:29,250:91,300:219}], [300,20000,{150:6,200:24,250:76,300:186}], [300,26000,{150:5,200:22,250:70,300:152}],
+  [380,15000,{200:12,250:40,300:94}], [380,25000,{200:9,250:29,300:73}], [380,38000,{200:8,250:25,300:61}], [380,50000,{200:7,250:23,300:55}],
+];
+/* 통기수직관 최소 DN — 배수수직관 DN 행 중 총 DFU 이상인 첫 행에서, 1/2 하한(4.3.4(1)) 이상이고 최대 거리 ≥ 길이인 최소 DN
+   why: 'dfu' = 그 수직관 DN 행의 DFU 범위 밖 · 'len' = 길이가 표 최대 거리 초과 */
+function ventStackTbl(stack, load, len){
+  if(stack == null) return {dn:null, half:null, row:null, why:''};
+  const half = ventHalf(stack, true);
+  const row = T431.find(r => r[0] === stack && r[1] >= load);
+  if(!row) return {dn:null, half, row:null, why:'dfu'};
+  for(const dn of DN_DRAIN){ if(dn >= half && row[2][dn] != null && row[2][dn] >= len) return {dn, half, row, why:''}; }
+  return {dn:null, half, row, why:'len'};
+}
+function sizeDrain(load, floors, hasWC, maxTrap, ventLen){
   if(load <= 0) return null;
   const n = Math.max(1, floors);
   const perFloor = r2(load / n);
@@ -1981,14 +2022,16 @@ function sizeDrain(load, floors, hasWC, maxTrap){
     const c = T414[dn][minSlopeIdx(dn)];
     return c!=null && c >= load;
   });
-  /* 통기 — 4.3.4 (1) 통기수직관: 담당 배수관의 1/2 보다 크고 DN 32 이상
+  /* 통기 — 4.3.4 (1) 통기수직관: 표 4.3-1(길이 · 총 DFU), 담당 배수관의 1/2 보다 크고 DN 32 이상(v6.1.6)
                 (2) 각개·루프통기관: 담당 배수관의 1/2 이상, DN 32 이상 */
+  if(!(ventLen > 0)) ventLen = r1(n * STATE.floorHeight + 1.0);   /* 길이를 넘기지 않은 호출(검증 도구 등) = 자동 길이 */
+  const VS = ventStackTbl(stack, load, ventLen);
   return {
     load:r2(load), perFloor, n,
     stackCol: n<=3 ? '3 이하 브랜치간격 합계' : '4 이상 브랜치간격 합계 + 1 브랜치간격',
     branch, stack, bldg,
     bldgSlope: bldg!=null ? SLOPE_LBL[minSlopeIdx(bldg)] : '-',
-    ventStack: ventHalf(stack, true),
+    ventStack: VS.dn, ventHalf: VS.half, ventRow: VS.row, ventWhy: VS.why, ventLen,
     ventLoop:  ventHalf(branch, false),
     ventIndiv: ventHalf(maxTrap||32, false),
     over: branch==null || stack==null || bldg==null,
@@ -2000,12 +2043,17 @@ const dnTxt = v => v==null ? '표 범위 초과' : 'DN'+v;
    ★ 메인 계산 (완전 연동)
 ════════════════════════════════════════════════════ */
 function liveCalc(){
-  STATE.floors      = parseInt(document.getElementById('inp-floors').value)||5;
-  STATE.floorHeight = parseFloat(document.getElementById('inp-floorht').value)||3.0;
+  /* v6.1.6 (교차검증 P5) — 층수 1 미만 · 층높이 · 유속 · 압력 0 이하(음수 포함)는 기본값으로 계산(칸 경고 · A4 「입력 확인」 줄) */
+  const _fl = parseInt(document.getElementById('inp-floors').value);
+  const _fh = parseFloat(document.getElementById('inp-floorht').value);
+  const _vs = parseFloat(document.getElementById('inp-vel-supply').value);
+  const _pr = parseInt(document.getElementById('inp-pressure').value);
+  STATE.floors      = _fl >= 1 ? _fl : 5;
+  STATE.floorHeight = _fh > 0 ? _fh : 3.0;
   STATE.matSupply   = document.getElementById('sel-mat-supply').value;
   STATE.matDrain    = document.getElementById('sel-mat-drain').value;
-  STATE.velSupply   = parseFloat(document.getElementById('inp-vel-supply').value)||1.5;
-  STATE.pressure    = parseInt(document.getElementById('inp-pressure').value)||300;
+  STATE.velSupply   = _vs > 0 ? _vs : 1.5;
+  STATE.pressure    = _pr > 0 ? _pr : 300;
   STATE.hwTemp      = parseInt(document.getElementById('inp-hwtemp').value)||60;
   STATE.circ        = document.getElementById('sel-circ').value;
   STATE.supplyMethod= (document.getElementById('sel-supply')||{}).value || 'pressure';
@@ -2013,6 +2061,14 @@ function liveCalc(){
   STATE.projName    = document.getElementById('inp-projname').value;
   STATE.projDate    = document.getElementById('inp-projdate').value;
   STATE.author      = document.getElementById('inp-author').value;
+  /* v6.1.6 (교차검증 P2) — 통기수직관 길이: 빈 칸 · 0 이하 = 자동(층수×층높이 + 1.0 m — 지붕 위 연장 등 가정, 4.3.1(1) 150 mm 이상) */
+  const _vl = parseFloat((document.getElementById('inp-ventlen')||{}).value);
+  STATE.ventLenAuto = !(_vl > 0);
+  STATE.ventLen     = _vl > 0 ? _vl : r1(STATE.floors * STATE.floorHeight + 1.0);
+  setEl('p-ventlen', STATE.ventLenAuto ? `${STATE.ventLen} m — 자동 (${STATE.floors}층 × ${STATE.floorHeight}m + 1.0 m)` : `${STATE.ventLen} m — 입력값`);
+  const isGrav = STATE.supplyMethod === 'gravity';
+  setEl('lbl-pressure', isGrav ? '고가수조 수두 (수면 ~ 최상층 기구, m × 9.81)' : '급수원 압력 (수전 기준)');
+  const isApt = STATE.buildingId === 'apt';
 
   const C = HW_C[STATE.matSupply] || 130;
   const T = calcTotalFU();
@@ -2030,9 +2086,9 @@ function liveCalc(){
   setEl('p-circJudge',  isCirc
     ? `⚠️ 환탕 필요 (추정 배관길이 ${estHWLen}m > 15m)`
     : `✅ 환탕 불필요 (추정 ${estHWLen}m ≤ 15m)`);
-  setEl('p-prvNeeded', isPRV
+  setEl('p-prvNeeded', (isPRV
     ? '🔴 감압밸브 설치 필요'
-    : '✅ 감압밸브 불필요 (550kPa 미만)');
+    : '✅ 감압밸브 불필요 (550kPa 미만)') + (isApt ? ' · 공동주택 세대 수압조절장치 필요' : ''));
 
   if(fuS === 0 && fuH === 0 && fuD === 0){
     setEl('p-topPressure', '—');
@@ -2054,17 +2110,20 @@ function liveCalc(){
   const vS = velocityOf(qwS, supplyMain), vH = velocityOf(qwH, hotMain);
 
   const frlS = frictionLoss(qwS, supplyMain, C, STATE.floors, STATE.floorHeight);
-  const topP = topFloorPressure(STATE.pressure, STATE.floors, STATE.floorHeight, qwS, supplyMain, C);
+  const topP = topFloorPressure(STATE.pressure, STATE.floors, STATE.floorHeight, qwS, supplyMain, C, STATE.supplyMethod);
+  /* v6.1.6 (교차검증 P8) — 필요 내경이 DN300 을 넘으면 경고(관경은 DN300 표시 그대로) */
+  const needD = q => (q > 0 && STATE.velSupply > 0) ? Math.round(Math.sqrt(4 * (q/60000) / STATE.velSupply / Math.PI) * 1000) : 0;
+  const dNeedS = needD(qwS), dNeedH = needD(qwH), PMAX = STD_PIPES[STD_PIPES.length-1];
   const botP = bottomFloorPressure(STATE.pressure, STATE.floors, STATE.floorHeight, STATE.supplyMethod);
   const pressOk = topP >= T.reqP;
 
   /* ── 배수·통기 : KDS 31 30 25 ── */
-  const Dall = sizeDrain(fuD,     STATE.floors, T.wcAll, T.trapAll);
-  const Dosu = sizeDrain(fuOsu,   STATE.floors, T.wcOsu, T.trapOsu);
-  const Djab = sizeDrain(fuJabsu, STATE.floors, false,   T.trapJab);
+  const Dall = sizeDrain(fuD,     STATE.floors, T.wcAll, T.trapAll, STATE.ventLen);
+  const Dosu = sizeDrain(fuOsu,   STATE.floors, T.wcOsu, T.trapOsu, STATE.ventLen);
+  const Djab = sizeDrain(fuJabsu, STATE.floors, false,   T.trapJab, STATE.ventLen);
 
   setEl('p-topPressure', `${topP} kPa — ${pressOk ? '✅ 적정' : '🔴 부족'} (필요 ${T.reqP} kPa)`);
-  setEl('p-botPressure', `${botP} kPa — ${botP >= 550 ? '🔴 550 kPa 이상 (감압밸브)' : '✅ 550 kPa 미만'}${STATE.supplyMethod==='gravity'?' · 고가탱크 정수두 추정':''}`);
+  setEl('p-botPressure', `${botP} kPa — ${botP >= 550 ? '🔴 550 kPa 이상 (감압밸브)' : '✅ 550 kPa 미만'}${isGrav?' · 고가탱크: 수조 수두 + 건물 정수두':''}`);
 
   STATE.result = {
     fuS, fuH, fuD, fuOsu, fuJabsu, col:T.col, colNm:DRAIN_COL_NM[T.col],
@@ -2081,6 +2140,8 @@ function liveCalc(){
     topP, botP, frlS, sh, totalH,
     isCirc, isPRV, estHWLen,
     C, velSupply: STATE.velSupply,
+    dNeedS, dNeedH, overS: fuS>0 && dNeedS > PMAX, overH: fuH>0 && dNeedH > PMAX,
+    isApt, isGrav, ventLen: STATE.ventLen, ventLenAuto: STATE.ventLenAuto,
   };
 
   renderResult(STATE.result);
@@ -2136,7 +2197,16 @@ function renderResult(r){
     banner += `<div class="nb red" style="margin-bottom:10px"><div class="nb-tit">🔴 감압밸브 (PRV) 설치 필요</div><div class="nb-txt">최하층 급수압 ${r.botP} kPa ≥ 550 kPa<br>→ KDS 31 30 15 4.7 · 기술기준 별표 5 2.1.7 (감압밸브 또는 조닝)</div></div>`;
   }
   if(r.isCirc){
-    banner += `<div class="nb org" style="margin-bottom:10px"><div class="nb-tit">🔥 환탕 배관 설치 필요 (추정 ${r.estHWLen}m &gt; 15m)</div><div class="nb-txt">급탕 열원 → 급탕 기구 배관 길이 15 m 이하 — 기술기준 별표 5 2.2.2(3)<br>배관 길이는 층수×층높이×1.3 추정값 — 실제 배관 경로로 확인</div></div>`;
+    banner += `<div class="nb org" style="margin-bottom:10px"><div class="nb-tit">🔥 환탕 배관 설치 필요 (추정 ${r.estHWLen}m &gt; 15m)</div><div class="nb-txt">급탕 열원 → 급탕 기구 배관 길이 15 m 이하 — 기술기준 별표 5 2.2.2(3)<br>중앙급탕방식은 환탕배관 · 급탕순환펌프 설계 — 별표 5 2.2.1(6)<br>배관 길이는 층수×층높이×1.3 추정값 — 실제 배관 경로로 확인</div></div>`;
+  }
+  if(r.isApt){
+    banner += `<div class="nb blue" style="margin-bottom:10px"><div class="nb-tit">🏠 공동주택 세대 수압 조절</div><div class="nb-txt">주택 화장실 급수배관 — 세대별 감압밸브 등 수압조절장치 설치(주택건설기준 등에 관한 규정 제43조②1 · 기술기준 별표 5 2.1.1(3))</div></div>`;
+  }
+  if(r.overS || r.overH){
+    banner += `<div class="nb red" style="margin-bottom:10px"><div class="nb-tit">🔴 급수${r.overS&&r.overH?'·급탕':(r.overH?'(급탕)':'')} 관경 범위 초과 — 계통 분할</div><div class="nb-txt">${r.overS?`급수 필요 내경 ${r.dNeedS} mm`:''}${r.overS&&r.overH?' · ':''}${r.overH?`급탕 필요 내경 ${r.dNeedH} mm`:''} &gt; DN300 (V ≤ ${r.velSupply} m/s) — 표시 관경 DN300 은 유속 상한을 넘음, 주관 복수화 · 계통 분할 후 다시 산정</div></div>`;
+  }
+  if(D && D.stack!=null && D.ventStack==null){
+    banner += `<div class="nb red" style="margin-bottom:10px"><div class="nb-tit">🔴 통기수직관 — KDS 표 4.3-1 범위 밖</div><div class="nb-txt">${D.ventWhy==='len'?`통기관 길이 ${D.ventLen} m 가 배수수직관 DN${D.stack} 행 최대 거리를 넘음`:`배수수직관 DN${D.stack} 의 표 4.3-1 DFU 범위(${D.load} DFU) 밖`} — 배수수직관 상향 또는 계통 분할 검토</div></div>`;
   }
   if(r.extrapS || r.extrapH){
     banner += `<div class="nb org" style="margin-bottom:10px"><div class="nb-tit">⚠️ 급수 부하 5,000 WSFU 초과 — 표 범위 밖 외삽</div><div class="nb-txt">IPC 표 E103.3(3) 마지막 구간 기울기로 외삽한 값 — 별도 검토 필요</div></div>`;
@@ -2221,7 +2291,7 @@ function renderResult(r){
   setEl('res-static-head', `${r.sh} kPa (${r.totalH}m 정수두)`);
   setEl('res-top-press',   `${r.topP} kPa ${r.pressOk?'✅':'🔴'}`);
   setEl('res-circ',        r.isCirc ? `⚠️ 환탕 필요 (추정 ${r.estHWLen}m)` : `✅ 환탕 불필요`);
-  setEl('res-prv',         r.isPRV ? '🔴 감압밸브 필요' : '✅ 불필요');
+  setEl('res-prv',         (r.isPRV ? '🔴 감압밸브 필요' : '✅ 불필요') + (r.isApt ? ' · 세대 수압조절장치 필요(주택)' : ''));
   setEl('res-pressure',    STATE.pressure + ' kPa (급수원)');
 }
 function T_WC(r, which){
@@ -2238,12 +2308,12 @@ function buildSupplyTable(r, which){
     [S?'급수 부하 (WSFU 합계)':'급탕 부하 (WSFU 급탕)', load, 'IPC 2021 표 E103.3(2) × 수량'],
     ['순간최대유량 곡선', S?curveNm(r.curveS):'세정탱크 주체', S?(r.curveS==='valve'?'세정밸브 기구(대·소변기) 포함':'세정밸브 기구 없음'):'급탕에는 세정밸브 없음'],
     ['순간최대유량', `${gpm} gpm = ${q} L/min`, 'IPC 2021 표 E103.3(3) 선형 보간 · 1 gpm = 3.785 L/min'],
-    ['관경 (유속 기준)', `<b>DN${dn}</b>`, `V ≤ ${STATE.velSupply} m/s (설계 입력값) · 호칭지름 = 내경 근사`],
+    ['관경 (유속 기준)', `<b>DN${dn}</b>${(S?r.overS:r.overH)?' ⚠':''}`, `V ≤ ${STATE.velSupply} m/s (설계 입력값) · 호칭지름 = 내경 근사${(S?r.overS:r.overH)?` · ⚠ 필요 내경 ${S?r.dNeedS:r.dNeedH} mm &gt; DN300 — 관경 범위 초과, 계통 분할`:''}`],
     ['실유속', `${v} m/s`, 'Q ÷ (π·D²/4)'],
   ];
   if(S) rows.push(
     ['마찰손실 (추정)', `${r.frlS} kPa`, `Hazen-Williams C=${r.C} · 배관 길이 ${Math.round(STATE.floors*STATE.floorHeight*1.5)}m 추정`],
-    ['최상층 잔류압', `<b>${r.topP} kPa</b> ${r.pressOk?'✅':'🔴'}`, `필요 ${r.reqP} kPa (${r.reqFix||'-'}) — KDS 31 30 15 표 4.3-1`]
+    ['최상층 잔류압', `<b>${r.topP} kPa</b> ${r.pressOk?'✅':'🔴'}`, `필요 ${r.reqP} kPa (${r.reqFix||'-'}) — KDS 31 30 15 표 4.3-1${r.isGrav?' · 고가탱크: 수조 수두 − 마찰손실':''}`]
   );
   return '<thead><tr><th>항목</th><th>값</th><th>근거</th></tr></thead><tbody>'
     + rows.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td></tr>`).join('') + '</tbody>';
@@ -2263,13 +2333,22 @@ function buildDrainTable(D, hasWC){
     + rows.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td></tr>`).join('') + '</tbody>';
 }
 
+/* 통기수직관 근거 문구 — 표 4.3-1 행 · 길이 · 1/2 하한 (v6.1.6) */
+function ventBasis(D){
+  if(D.stack == null) return '배수수직관 표 범위 초과';
+  const h = `1/2 하한 ${dnTxt(D.ventHalf)}(4.3.4(1))`;
+  if(!D.ventRow) return `표 4.3-1 — 배수수직관 DN${D.stack} 행의 DFU 범위 밖(${D.load} DFU) · ${h}`;
+  const lim = D.ventStack!=null ? `DN${D.ventStack} 최대 ${D.ventRow[2][D.ventStack]} m ≥ ${D.ventLen} m` : `통기관 길이 ${D.ventLen} m 가 최대 거리 초과`;
+  return `표 4.3-1 — 수직관 DN${D.stack} · ${D.ventRow[1].toLocaleString()} DFU 행(계통 ${D.load} DFU) · ${lim} · ${h}`;
+}
 /* 통기 산정표 */
 function buildVentTable(D){
   const rows = [
-    ['통기수직관 · 신정통기관', `<b>${dnTxt(D.ventStack)}</b>`, `배수수직관 ${dnTxt(D.stack)}의 1/2 보다 크고 DN32 이상 — 4.3.4(1)`],
+    ['통기수직관 · 신정통기관', `<b>${dnTxt(D.ventStack)}</b>`, ventBasis(D)],
     ['루프통기관 · 통기지관', `<b>${dnTxt(D.ventLoop)}</b>`, `배수수평지관 ${dnTxt(D.branch)}의 1/2 이상, DN32 이상 — 4.3.4(2)`],
     ['각개통기관 (최대 트랩 기구)', `<b>${dnTxt(D.ventIndiv)}</b>`, `트랩 구경의 1/2 이상, DN32 이상 — 4.3.4(2)`],
-    ['길이 조건', '확인 필요', '통기관 길이 12 m 이상이면 전 길이 1단계 상향(4.3.4(2)) · 통기수직관은 표 4.3-1(길이·DFU) 대조'],
+    ['통기수직관 길이', `${D.ventLen} m`, STATE.ventLenAuto ? `자동 — ${STATE.floors}층 × ${STATE.floorHeight}m + 1.0 m(지붕 위 연장 등 가정 · 4.3.1(1) 150 mm 이상) · 실제 길이를 알면 입력` : '설계자 입력값 — 통기관 연결점 ~ 대기(표 4.3-1 주 1)'],
+    ['길이 · 연결 조건', '확인', '각개·루프통기관 12 m 이상이면 전 길이 1단계 상향(4.3.4(2)) · 루프통기 기구 8개까지(별표 6 2.1.5(5) · 4.3.12(1)) · 연결 높이 = 최고 기구 물 넘침선 위 150 mm 이상(별표 6 2.1.5(1) · 4.3.3(5))'],
   ];
   return '<thead><tr><th>통기관</th><th>최소 관경</th><th>근거 (KDS 31 30 25)</th></tr></thead><tbody>'
     + rows.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td></tr>`).join('') + '</tbody>';
@@ -2384,7 +2463,7 @@ function renderA4(r){
       <tr><td class="a4-th">공사명</td><td colspan="3">${STATE.projName}</td></tr>
       <tr><td class="a4-th">건물 용도</td><td><span class="mm-deco">${bld.ico} </span>${bld.nm}</td><td class="a4-th">급수 부하 구분</td><td>${usageText}</td></tr>
       <tr><td class="a4-th">배수 부하 열</td><td>${r.colNm} (표 4.1-2)</td><td class="a4-th">층수 / 층높이</td><td>${STATE.floors}층 / ${STATE.floorHeight}m (총 ${r.totalH}m)</td></tr>
-      <tr><td class="a4-th">급수 방식</td><td>${supplyMethodText}</td><td class="a4-th">급수원 압력</td><td>${STATE.pressure} kPa</td></tr>
+      <tr><td class="a4-th">급수 방식</td><td>${supplyMethodText}</td><td class="a4-th">${r.isGrav?'고가수조 수두':'급수원 압력'}</td><td>${STATE.pressure} kPa${r.isGrav?' (수면 ~ 최상층 기구)':''}</td></tr>
       <tr><td class="a4-th">급수 관재질 (C값)</td><td>${matName(STATE.matSupply)} (C=${r.C})</td><td class="a4-th">설계 유속 상한</td><td>${STATE.velSupply} m/s</td></tr>
       <tr><td class="a4-th">급탕 온도</td><td>${STATE.hwTemp}°C</td><td class="a4-th">환탕 배관</td><td>${circText}</td></tr>
       <tr><td class="a4-th">감압밸브</td><td>${prvText}</td><td class="a4-th">작성자</td><td>${STATE.author||'—'}</td></tr>
@@ -2396,13 +2475,13 @@ function renderA4(r){
       <colgroup><col style="width:32%"><col style="width:22%"><col style="width:46%"></colgroup>
       <tr><td class="a4-th">급수 부하 / 곡선</td><td style="font-weight:900;text-align:center">${r.fuS} WSFU</td><td>${curveNm(r.curveS)} — IPC 표 E103.3(3)</td></tr>
       <tr><td class="a4-th">급수 순간최대유량</td><td style="font-weight:900;text-align:center">${r.qwS} L/min</td><td>${r.gpmS} gpm × 3.785${r.extrapS?' (표 범위 외삽)':''}</td></tr>
-      <tr><td class="a4-th">급수 주관 관경</td><td style="font-weight:900;text-align:center;color:#2d5186">${r.fuS>0?'DN'+r.supplyMain:'—'}</td><td>V ≤ ${STATE.velSupply} m/s · 실유속 ${r.vS} m/s</td></tr>
+      <tr><td class="a4-th">급수 주관 관경</td><td style="font-weight:900;text-align:center;color:#2d5186">${r.fuS>0?'DN'+r.supplyMain:'—'}</td><td>V ≤ ${STATE.velSupply} m/s · 실유속 ${r.vS} m/s${r.overS?` · ⚠ 필요 내경 ${r.dNeedS} mm &gt; DN300 — 계통 분할`:''}</td></tr>
       <tr><td class="a4-th">급탕 부하 / 유량</td><td style="font-weight:900;text-align:center">${r.fuH} WSFU</td><td>${r.qwH} L/min (세정탱크 주체 곡선)</td></tr>
-      <tr><td class="a4-th">급탕 주관 관경</td><td style="font-weight:900;text-align:center;color:#b45309">${r.fuH>0?'DN'+r.hotMain:'해당없음'}</td><td>${r.fuH>0?`실유속 ${r.vH} m/s`:'-'}</td></tr>
+      <tr><td class="a4-th">급탕 주관 관경</td><td style="font-weight:900;text-align:center;color:#b45309">${r.fuH>0?'DN'+r.hotMain:'해당없음'}</td><td>${r.fuH>0?`실유속 ${r.vH} m/s`:'-'}${r.overH?` · ⚠ 필요 내경 ${r.dNeedH} mm &gt; DN300 — 계통 분할`:''}</td></tr>
       <tr><td class="a4-th">정수두</td><td style="font-weight:900;text-align:center">${r.sh} kPa</td><td>${STATE.floors}층 × ${STATE.floorHeight}m × 9.81 kPa/m</td></tr>
       <tr><td class="a4-th">마찰손실 (추정)</td><td style="font-weight:900;text-align:center">${r.frlS} kPa</td><td>Hazen-Williams C=${r.C} · 배관 길이 ${floorLen}m 추정</td></tr>
-      <tr><td class="a4-th">최상층 잔류 급수압</td><td style="font-weight:900;text-align:center;color:${r.pressOk?'#0e7490':'#dc2626'}">${r.topP} kPa</td><td>${r.pressOk?'✅':'🔴'} 필요 ${r.reqP} kPa — ${r.reqFix||'-'} (KDS 31 30 15 표 4.3-1)</td></tr>
-      <tr><td class="a4-th">최하층 급수압</td><td style="font-weight:900;text-align:center">${r.botP} kPa</td><td>${r.isPRV?'🔴 감압밸브 필요 (550 kPa 이상 — KDS 31 30 15 4.7)':'✅ 550 kPa 미만'}${STATE.supplyMethod==='gravity'?' · 고가탱크 정수두(추정)':' · 공급압 기준'}</td></tr>
+      <tr><td class="a4-th">최상층 잔류 급수압</td><td style="font-weight:900;text-align:center;color:${r.pressOk?'#0e7490':'#dc2626'}">${r.topP} kPa</td><td>${r.pressOk?'✅':'🔴'} 필요 ${r.reqP} kPa — ${r.reqFix||'-'} (KDS 31 30 15 표 4.3-1)${r.isGrav?' · 수조 수두 − 마찰':''}</td></tr>
+      <tr><td class="a4-th">최하층 급수압</td><td style="font-weight:900;text-align:center">${r.botP} kPa</td><td>${r.isPRV?'🔴 감압밸브 필요 (550 kPa 이상 — KDS 31 30 15 4.7)':'✅ 550 kPa 미만'}${r.isGrav?' · 수조 수두 + 건물 정수두':' · 공급압 기준'}</td></tr>
       <tr><td class="a4-th">환탕 배관 (추정 길이)</td><td style="font-weight:900;text-align:center">${r.estHWLen}m</td><td>${r.isCirc?'⚠️ 15 m 초과':'✅ 15 m 이하'} — 별표 5 2.2.2(3) · 층수×층높이×1.3 추정</td></tr>
     </table>
 
@@ -2435,17 +2514,18 @@ function renderA4(r){
         ${sysRow('합류식(합계)', D, '#2d5186')}
       </tbody>
     </table>
-    <div style="font-size:9px;color:#64748b;margin:3px 0 9px">수평지관 표 4.1-5(층당 부하·최대 트랩 이상) · 수직관 표 4.1-5(${STATE.floors}개 브랜치간격, 수평지관 이상) · 횡주관 표 4.1-4(표 4.1-1 최소 기울기, 대변기 연결 DN80 이상) · 통기 4.3.4 — 각개통기 ${D?dnTxt(D.ventIndiv):'-'} · 전 층 균등 분포 가정</div>
+    <div style="font-size:9px;color:#64748b;margin:3px 0 9px">수평지관 표 4.1-5(층당 부하·최대 트랩 이상) · 수직관 표 4.1-5(${STATE.floors}개 브랜치간격, 수평지관 이상) · 횡주관 표 4.1-4(표 4.1-1 최소 기울기, 대변기 연결 DN80 이상) · 통기수직관 표 4.3-1(통기관 길이 ${STATE.ventLen} m${STATE.ventLenAuto?' 자동':''} · 총 DFU) · 통기 4.3.4 — 각개통기 ${D?dnTxt(D.ventIndiv):'-'} · 전 층 균등 분포 가정</div>
 
     <div class="a4-sub">5. 설계 검토 의견</div>
     <table class="a4-tbl">
       <colgroup><col style="width:28%"><col style="width:72%"></colgroup>
       <tr><td class="a4-th">급수 압력 적정성</td><td>${STATE.pressure} kPa 공급 — 최상층 잔류 ${r.topP} kPa / 필요 ${r.reqP} kPa ${r.pressOk?'✅ 적정':'🔴 부족 — 가압 검토'}</td></tr>
-      <tr><td class="a4-th">감압밸브 설치</td><td>${r.isPRV ? '🔴 설치 필요 — 최하층 '+r.botP+' kPa ≥ 550 kPa (감압밸브 또는 조닝)' : '✅ 불필요 (최하층 '+r.botP+' kPa < 550 kPa)'}</td></tr>
-      <tr><td class="a4-th">환탕 배관</td><td>${r.isCirc ? `⚠️ 설치 필요 — 추정 배관길이 ${r.estHWLen}m > 15m` : '✅ 불필요 — 추정 15 m 이하'} (실제 경로로 확인)</td></tr>
+      <tr><td class="a4-th">감압밸브 설치</td><td>${r.isPRV ? '🔴 설치 필요 — 최하층 '+r.botP+' kPa ≥ 550 kPa (감압밸브 또는 조닝)' : '✅ 불필요 (최하층 '+r.botP+' kPa < 550 kPa)'}${r.isApt?' · 공동주택: 화장실 급수배관 세대별 감압밸브 등 수압조절장치 설치(주택건설기준 제43조②1 · 별표 5 2.1.1(3))':''}</td></tr>
+      <tr><td class="a4-th">환탕 배관</td><td>${r.isCirc ? `⚠️ 설치 필요 — 추정 배관길이 ${r.estHWLen}m > 15m` : '✅ 불필요 — 추정 15 m 이하'} (실제 경로로 확인) · 중앙급탕방식은 환탕배관 · 순환펌프(별표 5 2.2.1(6))</td></tr>
       <tr><td class="a4-th">급탕 온도</td><td>${STATE.hwTemp}°C — ${tempOkText} · 위생기구는 온도제한장치·혼합장치로 43℃ 이하 (2.2.7(2))</td></tr>
-      <tr><td class="a4-th">통기 길이 조건</td><td>통기관 12 m 이상 시 전 길이 1단계 상향(4.3.4(2)) · 통기수직관은 표 4.3-1(길이·DFU) 대조</td></tr>
+      <tr><td class="a4-th">통기 조건</td><td>통기수직관 표 4.3-1 · 길이 ${STATE.ventLen} m${STATE.ventLenAuto?'(자동 — 실제 길이로 확인)':''} · 각개·루프 12 m 이상 1단계 상향(4.3.4(2)) · 루프통기 기구 8개까지(별표 6 2.1.5(5)) · 연결 높이 물 넘침선 + 150 mm 이상(2.1.5(1))</td></tr>
     </table>
+    <div style="font-size:8.5px;color:#64748b;margin:3px 0 0">※ 한계 — KDS 표 4.3-1 은 kcsc 원문(2026-02-23판) 대조 · 그 밖의 KDS 표 수치는 저장소 추출본 기준 · 통기 · 마찰 · 환탕 길이는 추정(통기 길이는 입력 가능) · 관 내경 = 호칭지름 가정</div>
 
     <div class="a4-footer a4-section">
       <span>위생배관 관경 산정 시스템 [MANMIN-Ver6.1]</span>
@@ -2635,7 +2715,11 @@ function renderFixtureGrid(){
 
 function updateFixture(id, type, val){
   if(!STATE.fixtureQty[id]) STATE.fixtureQty[id] = {supply:0, hot:0};
-  STATE.fixtureQty[id][type] = parseInt(val)||0;
+  /* v6.1.6 (교차검증 P1) — 음수는 0 으로 저장하고 표시(STATE.fixtureNeg) — 숨은 분류 탭에서도 「입력 확인」 줄에 남김 */
+  const _q = parseInt(val)||0;
+  STATE.fixtureQty[id][type] = Math.max(0, _q);
+  if(!STATE.fixtureNeg) STATE.fixtureNeg = {};
+  if(_q < 0) STATE.fixtureNeg[id+'|'+type] = true; else delete STATE.fixtureNeg[id+'|'+type];
 
   // 입력 중 DOM 재생성 금지 — 해당 행 active 클래스만 조용히 갱신
   const input = document.querySelector(`.fx-input[data-id="${id}"][data-type="${type}"]`);
@@ -2702,6 +2786,7 @@ function scaleA4(){
 function resetAll(){
   if(!confirm('모든 입력값을 초기화하시겠습니까?')) return;
   STATE.fixtureQty = {};
+  STATE.fixtureNeg = {};
   STATE.buildingId = 'office';
   STATE.result = null;
   document.getElementById('inp-floors').value = 5;
@@ -2709,6 +2794,7 @@ function resetAll(){
   document.getElementById('inp-pressure').value = 300;
   document.getElementById('inp-vel-supply').value = 1.5;
   document.getElementById('inp-hwtemp').value = 60;
+  document.getElementById('inp-ventlen').value = '';
   document.getElementById('sel-supply').value = 'pressure';
   document.getElementById('sel-circ').value = 'auto';
   document.getElementById('sel-usage').value = 'public';
@@ -3461,9 +3547,12 @@ input[data-mm-warn]{outline:2px solid #d32f2f!important;outline-offset:1px;backg
 .mm-warn-note{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid;}}
 </style>
 <script id="mm-warn-cfg">
-window.MM_WARN_CFG={report:'#a4Page',rules:[
- {sel:'#inp-floors',empty:'5층',zero:'5층',neg:true,int:'층'},{sel:'#inp-floorht',empty:'3.0 m',zero:'3.0 m',neg:true},{sel:'#inp-vel-supply',empty:'1.5 m/s',zero:'1.5 m/s',neg:true},{sel:'#inp-pressure',empty:'300 kPa',zero:'300 kPa',neg:true,int:' kPa'},{sel:'#inp-hwtemp',empty:'60℃',zero:'60℃',neg:true,int:'℃'},
- {sel:'.fx-input',name:function(el){var r=el.closest('tr,.fx-row');var t=r&&r.querySelector('td,.fx-name');return '기구 수량'+(t?'('+t.textContent.replace(/\s+/g,' ').trim().slice(0,14)+')':'');},neg:true}]};
+/* v6.1.6 (2026-11-24, 교차검증 P1 · P5) — all:true(A4 탭 · 숨은 칸도 판정) · 음수 → 기본값/0 적용 문구 · 숨은 분류 탭 음수는 #fx-neg-proxy 규칙(extra)으로 표시 */
+window.MM_WARN_CFG={report:'#a4Page',all:true,rules:[
+ {sel:'#inp-floors',empty:'5층',zero:'5층',neg:'음수 → 기본값 5층 적용',extra:function(el,n){return n<1?'1 미만 → 기본값 5층 적용':(n%1?'소수 → '+Math.floor(n)+'층 적용':null);}},{sel:'#inp-floorht',empty:'3.0 m',zero:'3.0 m',neg:'음수 → 기본값 3.0 m 적용'},{sel:'#inp-vel-supply',empty:'1.5 m/s',zero:'1.5 m/s',neg:'음수 → 기본값 1.5 m/s 적용'},{sel:'#inp-pressure',empty:'300 kPa',zero:'300 kPa',neg:'음수 → 기본값 300 kPa 적용',extra:function(el,n){return n<1?'1 미만 → 기본값 300 kPa 적용':(n%1?'소수 → '+Math.floor(n)+' kPa 적용':null);}},{sel:'#inp-hwtemp',empty:'60℃',zero:'60℃',neg:true,int:'℃'},
+ {sel:'#inp-ventlen',name:'통기수직관 길이',zero:'자동 길이',neg:'음수 → 자동 길이 적용'},
+ {sel:'.fx-input',name:function(el){var f=(typeof FIXTURES!=='undefined')&&FIXTURES.filter(function(x){return x.id===el.getAttribute('data-id');})[0];var C={wc:'화장실',kitchen:'주방',bath:'욕실',util:'기타'};return '기구 수량'+(f?'('+C[f.cat]+' · '+f.nm+(el.getAttribute('data-type')==='hot'?' 급탕':' 급수')+')':'');},neg:'음수 → 0 적용'},
+ {sel:'#fx-neg-proxy',name:'기구 수량',extra:function(){if(typeof STATE==='undefined'||!STATE.fixtureNeg||typeof FIXTURES==='undefined')return null;var C={wc:'화장실',kitchen:'주방',bath:'욕실',util:'기타'},L=[];Object.keys(STATE.fixtureNeg).forEach(function(k){var p=k.split('|'),e=document.querySelector('.fx-input[data-id="'+p[0]+'"][data-type="'+p[1]+'"]');if(e&&parseFloat(e.value)<0)return;var f=FIXTURES.filter(function(x){return x.id===p[0];})[0];if(f)L.push(C[f.cat]+' · '+f.nm+(p[1]==='hot'?' 급탕':' 급수'));});return L.length?'음수 입력 → 0 적용(분류 탭): '+L.join(', '):null;}}]};
 </script>
 <script id="mm-warn-js">
 (function(){
