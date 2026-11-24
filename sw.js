@@ -1,4 +1,5 @@
 /* ══════════════════════════════════════════════════════════
+   v6.1.7 (2026-11-24) — 기계 9종 판단 항목 결정 21-P3: 「통기수직관 · 신정통기관」 행 분리 — 신정통기관 = 배수수직관 호칭지름 이상(기계설비 기술기준 별표 6 3.2.1(2)⑤, 고시 제2026-360호 · 시행 2026-07-08) · 예제 A DN100 · B DN125 · 통기수직관 값 불변 · 캐시명 v6.1.7 (종전 v6.1.6)
    v6.1.6 (2026-11-24) — 기계 1차 교차검증 반영: 기구 수량 음수 → 0 · 숨은 분류 탭 경고(P1) · 통기수직관 KDS 31 30 25 : 2026 표 4.3-1(kcsc 원문) 길이 입력 · 판정(P2) · 공동주택 세대 수압조절장치(P4) · 층수 · 층높이 · 유속 · 압력 0 이하 기본값(P5) · 고가탱크 압력 산식 통일(P6) · 순간식 인용 2.2.5(3) · 비데 43℃(P7) · DN300 초과 경고(P8) · 환탕 2.2.1(6)(P9) · 통기 체크리스트(P10) · A4 한계 표기(P11) — P3 보류 · 캐시명 v6.1.6 (종전 v6.1.5)
    v6.1.5 (2026-11-12) — html2canvas 1.4.1 머리 태그 SRI(integrity sha384 · crossorigin) · 공통 인쇄 원본 MM-PRINT v1.0 → v1.1(지연 로더도 SRI)(정밀검토 B8 · html2canvas SRI) — 화면 · 계산 · 인쇄 불변 · 작업지시서 §25-6-87 · 캐시명 v6.1.5 (종전 v6.1.4)
    v6.1.4 (2026-11-12) — Pretendard CSS SRI(integrity · crossorigin)(정밀검토 C2) — 화면 · 계산 · 인쇄 불변 · 작업지시서 §25-6-82 · 캐시명 v6.1.4 (종전 v6.1.3)
@@ -38,7 +39,7 @@ const mmMatch = (req, opt) => caches.keys()
   .then((ks) => ks.reduce((p, k) => p.then((r) => r || caches.open(k).then((c) => c.match(req, opt))), Promise.resolve(undefined)))
   .then((r) => (r && r.type === 'opaque' && req && req.mode === 'cors') ? undefined : r);
 
-const SW_VER      = 'sanpipe-v6.1.6';
+const SW_VER      = 'sanpipe-v6.1.7';
 /* 종전 접두어 잔재 — 한 번 지우고 나면 무해하다 */
 const ORPHAN      = ['manmin-v5.0.1-core','manmin-v5.0.1-fonts','manmin-v5.0.1-cdn','manmin-v5.0.1-dynamic','manmin-v5.0.0-core','manmin-v5.0.0-fonts','manmin-v5.0.0-cdn','manmin-v5.0.0-dynamic'];
 const CACHE_CORE  = `${SW_VER}-core`;
