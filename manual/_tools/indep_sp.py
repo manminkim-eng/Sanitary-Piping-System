@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""위생배관 v6.1.6~ 독립 구현(통기수직관 표 4.3-1 · 고가탱크 산식 v6.1.6) — usage: python3 indep_sp.py <raw폴더>(cases.json · app_out.json)
+"""위생배관 v6.1.6~ 독립 구현(통기수직관 표 4.3-1 · 고가탱크 산식 v6.1.6 · v6.1.7 신정통기관 = 배수수직관 DN 이상, 기술기준 별표 6 3.2.1(2)⑤) — usage: python3 indep_sp.py <raw폴더>(cases.json · app_out.json)
     — 근거표(IPC 2021 부록 E · KDS 31 30 25 · KDS 31 30 15)에서 직접 다시 짠 계산.
 앱 코드는 참조하지 않는다. 앱 결과(app_out.json)와 항목별 대조."""
 import json, math, sys
@@ -112,7 +112,7 @@ def drain(load, floors, wc, trap, L):
     vs = vent_tbl(st, load, L)
     vl = None if br is None else first(32, lambda d: d >= br / 2)
     vi = first(32, lambda d: d >= (trap or 32) / 2)
-    return dict(load=jround(load, 2), perFloor=per, branch=br, stack=st, bldg=bd, ventStack=vs, ventLoop=vl, ventIndiv=vi)
+    return dict(load=jround(load, 2), perFloor=per, branch=br, stack=st, bldg=bd, ventStack=vs, ventMain=st, ventLoop=vl, ventIndiv=vi)
 
 C = {'sgp': 100, 'stp': 130, 'cu': 130, 'ppc': 150, 'xlpe': 150}
 

@@ -7,5 +7,5 @@ S = json.load(open(sys.argv[1] + '/sweep.json'))
 bq = sum(1 for L, t, v in S['Q'] if demand_lpm(L, False) != t or demand_lpm(L, True) != v)
 bd = 0
 for L, f, w, t, *r in S['D']:
-    e = drain(L, f, w, t, jround(max(1, f) * 3.0 + 1.0, 1)); bd += [e['branch'], e['stack'], e['bldg'], e['ventStack'], e['ventLoop'], e['ventIndiv']] != r
+    e = drain(L, f, w, t, jround(max(1, f) * 3.0 + 1.0, 1)); bd += [e['branch'], e['stack'], e['bldg'], e['ventStack'], e['ventMain'], e['ventLoop'], e['ventIndiv']] != r
 print('유량', len(S['Q']), '불일치', bq, '| 배수·통기', len(S['D']), '불일치', bd); sys.exit(1 if bq or bd else 0)

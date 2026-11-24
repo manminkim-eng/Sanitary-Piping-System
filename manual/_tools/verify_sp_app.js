@@ -29,7 +29,7 @@ for(let i=0;i<N;i++){
    document.getElementById('sel-circ').value=c.circ; document.getElementById('sel-supply').value=c.method;
    STATE.fixtureQty=JSON.parse(JSON.stringify(c.q)); liveCalc();
    const r=STATE.result; if(!r) return null;
-   const pick=D=>D?{load:D.load,perFloor:D.perFloor,branch:D.branch,stack:D.stack,bldg:D.bldg,ventStack:D.ventStack,ventLoop:D.ventLoop,ventIndiv:D.ventIndiv}:null;
+   const pick=D=>D?{load:D.load,perFloor:D.perFloor,branch:D.branch,stack:D.stack,bldg:D.bldg,ventStack:D.ventStack,ventMain:D.ventMain,ventLoop:D.ventLoop,ventIndiv:D.ventIndiv}:null;
    return {fuS:r.fuS,fuH:r.fuH,fuD:r.fuD,curve:r.curveS,qwS:r.qwS,qwH:r.qwH,sup:r.supplyMain,hot:r.hotMain,reqP:r.reqP,topP:r.topP,frl:r.frlS,
      all:pick(r.Dall),osu:pick(r.Dosu),jab:pick(r.Djab),circ:r.isCirc,prv:r.isPRV,botP:r.botP,
      a4:document.getElementById('a4Page').innerHTML.length};

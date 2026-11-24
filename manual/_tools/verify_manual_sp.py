@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """매뉴얼 검사 — usage: python verify_manual_sp.py <repoDir>
    ① 그림 파일·표시점 ② 범례 수 = 표시점 수 ③ 예제 결과·산식이 본문에 있음 ④ 내부 링크 ⑤ 앱 근거 표기
-   ⑥ v6.1.6 통기수직관 표 4.3-1 기대값(예제 A 합류식 DN80 · B 합류식 DN100 · 오수 DN80 · 잡배수 DN100)"""
+   ⑥ v6.1.6 통기수직관 표 4.3-1 기대값(예제 A 합류식 DN80 · B 합류식 DN100 · 오수 DN80 · 잡배수 DN100)
+   ⑦ v6.1.7 신정통기관 = 배수수직관 DN 이상(기술기준 별표 6 3.2.1(2)⑤) — 예제 A DN100 · B DN125"""
 import sys, os, re, json, math
 repo = sys.argv[1]; M = os.path.join(repo, 'manual'); ok = True
 def chk(name, cond, info=''):
@@ -20,7 +21,7 @@ A, B = ex['A'], ex['B']
 n = lambda x: f'{x:,.2f}'.rstrip('0').rstrip('.')
 need = []
 for e in (A, B):
-    need += [f"DN {e['sup']}", f"DN {e['hot']}", f"{n(e['qwS'])} L/min", f"{n(e['fuS'])}", f"{n(e['fuD'])}", f"{e['topP']} kPa", f"DN {e['all']['stack']}", f"DN {e['all']['bldg']}", f"DN {e['all']['vs']}", f"{n(e['vlen'])} m"]
+    need += [f"DN {e['all']['vm']}", f"DN {e['sup']}", f"DN {e['hot']}", f"{n(e['qwS'])} L/min", f"{n(e['fuS'])}", f"{n(e['fuD'])}", f"{e['topP']} kPa", f"DN {e['all']['stack']}", f"DN {e['all']['bldg']}", f"DN {e['all']['vs']}", f"{n(e['vlen'])} m"]
 miss = [x for x in need if x not in h]
 chk('예제 결과가 본문에 있음', not miss, f'{len(need)}개 ' + str(miss))
 # 손계산 재확인(앱과 독립): 기구 행 합 · 유량 · 유속 관경
@@ -32,6 +33,8 @@ for nm, e in (('A', A), ('B', B)):
 chk('예제 A 77.7 mm 문구', f"{math.sqrt(4 * A['qwS'] / 60000 / A['vel'] / math.pi) * 1000:.1f}" == '77.7')
 chk('예제 A 수압 적합 · B 부족', A['ok'] and not B['ok'])
 chk('v6.1.6 통기수직관 기대값(A 80 · B 100 · 오수 80 · 잡배수 100)', (A['all']['vs'], B['all']['vs'], B['osu']['vs'], B['jab']['vs']) == (80, 100, 80, 100), str((A['all']['vs'], B['all']['vs'], B['osu']['vs'], B['jab']['vs'])))
+chk('v6.1.7 신정통기관 기대값(A 100 · B 125 = 배수수직관 DN)', (A['all']['vm'], B['all']['vm']) == (100, 125) and A['all']['vm'] == A['all']['stack'] and B['all']['vm'] == B['all']['stack'], str((A['all']['vm'], B['all']['vm'])))
+chk('A4 통기 조건 — 신정통기관 DN100', '신정통기관 DN100' in ex['A_a4'])
 chk('통기 길이 자동(A 19 · B 44.5 m)', (A['vlen'], A['vauto'], B['vlen'], B['vauto']) == (19, True, 44.5, True))
 chk('A4 통기 조건 · 한계 줄', '통기 조건' in ex['A_a4'] and '※ 한계' in ex['A_a4'] and '통기수직관 표 4.3-1' in ex['A_a4'])
 chk('예제 B 공동주택 배너', B['apt'] and any('공동주택' in t for t in B['banners']))
@@ -44,5 +47,5 @@ chk('앱 — 매뉴얼 버튼', 'class="tb tb-manual"' in app and 'Sanitary-Pipi
 chk('앱 — 근거 표(IPC · KDS)', '[300,85.0,108.0]' in app and '100:[160,90,240,500]' in app and '100:[null,180,216,250]' in app)
 chk('앱 — 표 4.3-1 · 통기 길이 칸', 'const T431' in app and '[100,320,{50:7,65:17,80:52,100:195}]' in app and 'id="inp-ventlen"' in app)
 sw = open(os.path.join(repo, 'sw.js'), encoding='utf-8').read()
-chk("sw — sanpipe-v6.1.6", "'sanpipe-v6.1.6'" in sw)
+chk("sw — sanpipe-v6.1.7", "'sanpipe-v6.1.7'" in sw)
 sys.exit(0 if ok else 1)

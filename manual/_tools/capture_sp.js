@@ -5,7 +5,8 @@ const repo=path.resolve(process.argv[2]),out=path.resolve(process.argv[3]);fs.mk
 const VW=1440,VH=900,DSF=1.25,PORT=8899;
 /* 예제 A = 사무소 5층 · 층높이 3.6m · 가압 350kPa · 세정밸브 양변기 20 · 소변기 10 · 세면기 20(냉온) · 청소싱크 5(냉온) · 탕비실 싱크 5(냉온)
    예제 B = 아파트(3호 이상 공동주택) 15층 · 2.9m · 가압 500kPa · 세정탱크 양변기 60 · 세면기 60 · 욕조 30 · 샤워 30 · 주방싱크 30(냉온) · 세탁기 30 · 욕실 바닥배수 60
-   v6.1.6 기대값 — 통기수직관 길이 빈 칸(자동 = 층수 × 층높이 + 1.0 m): 예제 A 합류식 DN80(19 m) · 예제 B 합류식 DN100 · 오수 DN80 · 잡배수 DN100(44.5 m), 표 4.3-1 */
+   v6.1.6 기대값 — 통기수직관 길이 빈 칸(자동 = 층수 × 층높이 + 1.0 m): 예제 A 합류식 DN80(19 m) · 예제 B 합류식 DN100 · 오수 DN80 · 잡배수 DN100(44.5 m), 표 4.3-1
+   v6.1.7 기대값 — 신정통기관(ventMain) = 배수수직관 DN 이상(별표 6 3.2.1(2)⑤): 예제 A DN100 · 예제 B DN125 */
 const FREEZE=`(()=>{const T=new Date(2026,9,13,10,0,0).getTime();const D=Date;class F extends D{constructor(...a){if(a.length)super(...a);else super(T);}static now(){return T;}}window.Date=F;window.alert=()=>{};window.confirm=()=>true;try{localStorage.clear();localStorage.setItem('pwa-banner-dismissed','1')}catch(e){}})()`;
 const HELP=`window.__vis=e=>e&&e.getClientRects().length>0;
 window.__card=t=>{const h=[...document.querySelectorAll('.card-tit')].find(e=>__vis(e)&&e.textContent.trim().startsWith(t));return h?h.closest('.card'):null;};
@@ -20,7 +21,7 @@ window.__run=(b,f,h,p,q)=>{resetAll();__tab('calc');selectBuilding(b);__setv('in
   STATE.fixtureQty=JSON.parse(JSON.stringify(q));filterFixtures('wc',document.getElementById('seg-wc'));liveCalc();markStep(3,true);window.scrollTo(0,0);};
 window.__A=()=>__run('office',5,3.6,350,{wc_valve:{supply:20,hot:0},urinal:{supply:10,hot:0},lav:{supply:20,hot:20},sink_svc:{supply:5,hot:5},sink_kit:{supply:5,hot:5}});
 window.__B=()=>__run('apt',15,2.9,500,{wc_tank:{supply:60,hot:0},lav:{supply:60,hot:60},bathtub:{supply:30,hot:30},shower:{supply:30,hot:30},sink_kit:{supply:30,hot:30},washer:{supply:30,hot:0},floordr:{supply:60,hot:0}});
-window.__ex=()=>{const R=STATE.result;const D=x=>x?{load:x.load,per:x.perFloor,n:x.n,branch:x.branch,stack:x.stack,bldg:x.bldg,slope:x.bldgSlope,vs:x.ventStack,vl:x.ventLoop,vi:x.ventIndiv,vhalf:x.ventHalf,vrow:x.ventRow?[x.ventRow[1],x.ventStack!=null?x.ventRow[2][x.ventStack]:null]:null,vwhy:x.ventWhy}:null;
+window.__ex=()=>{const R=STATE.result;const D=x=>x?{load:x.load,per:x.perFloor,n:x.n,branch:x.branch,stack:x.stack,bldg:x.bldg,slope:x.bldgSlope,vs:x.ventStack,vm:x.ventMain,vl:x.ventLoop,vi:x.ventIndiv,vhalf:x.ventHalf,vrow:x.ventRow?[x.ventRow[1],x.ventStack!=null?x.ventRow[2][x.ventStack]:null]:null,vwhy:x.ventWhy}:null;
   return {b:STATE.buildingId,usage:STATE.usage,floors:STATE.floors,ht:STATE.floorHeight,p:STATE.pressure,vel:STATE.velSupply,qty:STATE.fixtureQty,col:R.colNm,
   fuS:R.fuS,fuH:R.fuH,fuD:R.fuD,fuOsu:R.fuOsu,fuJab:R.fuJabsu,curve:R.curveS,gpmS:R.gpmS,gpmH:R.gpmH,qwS:R.qwS,qwH:R.qwH,sup:R.supplyMain,vS:R.vS,hot:R.hotMain,vH:R.vH,
   reqP:R.reqP,reqFix:R.reqFix,ok:R.pressOk,topP:R.topP,frl:R.frlS,sh:R.sh,botP:R.botP,prv:R.isPRV,circ:R.isCirc,hw:R.estHWLen,vlen:R.ventLen,vauto:R.ventLenAuto,apt:R.isApt,overS:R.overS,overH:R.overH,all:D(R.Dall),osu:D(R.Dosu),jab:D(R.Djab),
@@ -36,7 +37,7 @@ const SHOTS=[
  {id:'s06_hero',clip:'#pipeSizeHero',union:'#flowDiagram',m:[['.psh-box.supply','급수 주관'],['.psh-box.hot','급탕 주관'],['.psh-box.drain','배수 횡주관'],['.psh-box.vent','배수 수직관'],['#pressure-banner','판정 배너'],['#flowDiagram','배관 구성 흐름']]},
  {id:'s07_supply',clip:'sec:0',union:'sec:1',m:[['#tbl-supply tbody tr:nth-child(2)','순간최대유량 곡선'],['#tbl-supply tbody tr:nth-child(3)','순간최대유량'],['#tbl-supply tbody tr:nth-child(4)','관경(유속 기준)'],['#tbl-supply tbody tr:nth-child(7)','최상층 잔류압 · 필요 수압'],['#tbl-hotwater','급탕 산정표']]},
  {id:'s08_drain',clip:'sec:2',m:[['#tbl-drain-osu','오수 계통'],['#tbl-drain-jab','잡배수 계통'],['#tbl-drain tbody tr:nth-child(3)','배수수평지관'],['#tbl-drain tbody tr:nth-child(4)','배수수직관'],['#tbl-drain tbody tr:nth-child(5)','건물배수수평주관']]},
- {id:'s09_vent',clip:'sec:3',m:[['#tbl-vent tbody tr:nth-child(1)','통기수직관 — 표 4.3-1'],['#tbl-vent tbody tr:nth-child(2)','루프통기관'],['#tbl-vent tbody tr:nth-child(3)','각개통기관'],['#tbl-vent tbody tr:nth-child(4)','통기수직관 길이'],['#tbl-vent tbody tr:nth-child(5)','길이 · 연결 조건']]},
+ {id:'s09_vent',clip:'sec:3',m:[['#tbl-vent tbody tr:nth-child(1)','통기수직관 — 표 4.3-1'],['#tbl-vent tbody tr:nth-child(2)','신정통기관 — 배수수직관 DN 이상'],['#tbl-vent tbody tr:nth-child(3)','루프통기관'],['#tbl-vent tbody tr:nth-child(4)','각개통기관'],['#tbl-vent tbody tr:nth-child(5)','통기수직관 길이'],['#tbl-vent tbody tr:nth-child(6)','길이 · 연결 조건']]},
  {id:'s10_summary',clip:'up:#res-fu-supply|.cbox',union:'#panel-calc .ref-box',m:[['up:#res-fu-supply|.crow','부하단위'],['up:#res-qw-supply|.crow','순간최대유량'],['up:#res-adopted-pipe|.crow','최저 필요수압'],['up:#res-top-press|.crow','최상층 잔류압'],['#panel-calc .ref-box','적용 기준']]},
  {id:'s11_std_supply',pre:"__tab('stdtable');scrollTo(0,0)",wait:700,clip:'card:급수 순간최대유량',m:[['#stdTblSupply tr:nth-child(31)','WSFU 100'],['#stdTblSupply tr:nth-child(40)','WSFU 300']]},
  {id:'s12_std_drain',clip:'card:배수관 허용 최대 DFU',m:[['#stdTblDrain tr:nth-child(6)','DN 100'],['#stdTblDrain tr:nth-child(5)','DN 80 — 최소 기울기 1/100']]},
