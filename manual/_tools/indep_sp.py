@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""위생배관 v5.0.10~ 독립 구현 — usage: python3 indep_sp.py <raw폴더>(cases.json · app_out.json)
+"""위생배관 v6.1.6~ 독립 구현(통기수직관 표 4.3-1 · 고가탱크 산식 v6.1.6) — usage: python3 indep_sp.py <raw폴더>(cases.json · app_out.json)
     — 근거표(IPC 2021 부록 E · KDS 31 30 25 · KDS 31 30 15)에서 직접 다시 짠 계산.
 앱 코드는 참조하지 않는다. 앱 결과(app_out.json)와 항목별 대조."""
 import json, math, sys
@@ -63,14 +63,14 @@ def dn_vel(q, v):
     return next((d for d in SUP_DN if d >= need), 300)
 
 # KDS 31 30 25 표 4.1-5 / 4.1-4
-DN = [32, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 375]
+DN = [32, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 380]
 HB  = dict(zip(DN, [1, 3, 6, 12, 20, 160, 360, 620, 1400, 2500, 3900, 7000]))
 S1  = dict(zip(DN, [1, 2, 6, 9, 20, 90, 200, 350, 600, 1000, 1500, None]))
 S3  = dict(zip(DN, [1, 4, 10, 20, 48, 240, 540, 960, 2200, 3800, 6000, None]))
 S4  = dict(zip(DN, [1, 8, 24, 42, 72, 500, 1100, 1900, 3600, 5600, 8400, None]))
 BD = {32: (None, None, 1), 40: (None, None, 3), 50: (None, None, 21), 65: (None, None, 24), 80: (None, 36, 42),
       100: (None, 180, 216), 125: (None, 390, 480), 150: (None, 700, 840), 200: (1400, 1600, 1920),
-      250: (2500, 2900, 3500), 300: (3900, 4600, 5600), 375: (7000, 8300, 10000)}
+      250: (2500, 2900, 3500), 300: (3900, 4600, 5600), 380: (7000, 8300, 10000)}
 def bd_cap(dn):   # 표 4.1-1 최소 기울기 열
     slope = 2 if dn <= 65 else (1 if dn <= 150 else 0)
     return BD[dn][slope]
@@ -80,7 +80,27 @@ def first(lo, cond):
         if d >= lo and cond(d): return d
     return None
 
-def drain(load, floors, wc, trap):
+# KDS 31 30 25 : 2026 표 4.3-1 신정통기관 · 통기수직관 크기(kcsc.re.kr 원문 2026-02-23판에서 옮김)
+# [오배수 수직관 DN, 총 DFU, {통기관 DN: 최대 통기관 거리 m}]
+T431 = [
+    [32, 2, {"32": 9}], [40, 8, {"32": 15, "40": 46}], [40, 10, {"32": 9, "40": 30}], [50, 12, {"32": 9, "40": 23, "50": 61}],
+    [50, 20, {"32": 8, "40": 15, "50": 46}], [65, 42, {"40": 9, "50": 30, "65": 91}], [80, 10, {"40": 13, "50": 46, "65": 110, "80": 317}], [80, 21, {"40": 10, "50": 34, "65": 82, "80": 247}],
+    [80, 53, {"40": 8, "50": 29, "65": 70, "80": 207}], [80, 102, {"40": 8, "50": 26, "65": 64, "80": 189}], [100, 43, {"50": 11, "65": 26, "80": 76, "100": 299}], [100, 140, {"50": 8, "65": 20, "80": 61, "100": 229}],
+    [100, 320, {"50": 7, "65": 17, "80": 52, "100": 195}], [100, 540, {"50": 6, "65": 15, "80": 46, "100": 177}], [125, 190, {"65": 9, "80": 25, "100": 98, "125": 302}], [125, 490, {"65": 6, "80": 19, "100": 76, "125": 232}],
+    [125, 940, {"65": 5, "80": 16, "100": 64, "125": 204}], [125, 1400, {"65": 5, "80": 15, "100": 58, "125": 180}], [150, 500, {"80": 10, "100": 40, "125": 122, "150": 305}], [150, 1100, {"80": 8, "100": 30, "125": 94, "150": 238}],
+    [150, 2000, {"80": 7, "100": 26, "125": 79, "150": 201}], [150, 2900, {"80": 6, "100": 23, "125": 73, "150": 183}], [200, 1800, {"100": 9, "125": 29, "150": 73, "200": 287}], [200, 3400, {"100": 7, "125": 22, "150": 58, "200": 222}],
+    [200, 5600, {"100": 6, "125": 19, "150": 49, "200": 186}], [200, 7600, {"100": 5, "125": 17, "150": 43, "200": 171}], [250, 4000, {"125": 9, "150": 24, "200": 94, "250": 293}], [250, 7200, {"125": 7, "150": 18, "200": 73, "250": 226}],
+    [250, 11000, {"125": 6, "150": 16, "200": 61, "250": 192}], [250, 15000, {"125": 5, "150": 14, "200": 55, "250": 174}], [300, 7300, {"150": 9, "200": 37, "250": 116, "300": 287}], [300, 13000, {"150": 7, "200": 29, "250": 91, "300": 219}],
+    [300, 20000, {"150": 6, "200": 24, "250": 76, "300": 186}], [300, 26000, {"150": 5, "200": 22, "250": 70, "300": 152}], [380, 15000, {"200": 12, "250": 40, "300": 94}], [380, 25000, {"200": 9, "250": 29, "300": 73}],
+    [380, 38000, {"200": 8, "250": 25, "300": 61}], [380, 50000, {"200": 7, "250": 23, "300": 55}],
+]
+def vent_tbl(st, load, L):
+    if st is None: return None
+    half = first(32, lambda d: d > st / 2)
+    row = next((r for r in T431 if r[0] == st and r[1] >= load), None)
+    if row is None: return None
+    return next((d for d in DN if d >= half and row[2].get(str(d)) is not None and row[2][str(d)] >= L), None)
+def drain(load, floors, wc, trap, L):
     if load <= 0: return None
     n = max(1, floors); per = jround(load / n, 2)
     br = first(max(32, trap or 32), lambda d: HB[d] >= per)
@@ -89,7 +109,7 @@ def drain(load, floors, wc, trap):
         return S4[d] is not None and S4[d] >= load and S1[d] is not None and S1[d] >= per
     st = first(max(br or 32, 80 if wc else 32), st_ok)
     bd = first(max(st or 32, 80 if wc else 32), lambda d: bd_cap(d) is not None and bd_cap(d) >= load)
-    vs = None if st is None else first(32, lambda d: d > st / 2)
+    vs = vent_tbl(st, load, L)
     vl = None if br is None else first(32, lambda d: d >= br / 2)
     vi = first(32, lambda d: d >= (trap or 32) / 2)
     return dict(load=jround(load, 2), perFloor=per, branch=br, stack=st, bldg=bd, ventStack=vs, ventLoop=vl, ventIndiv=vi)
@@ -121,15 +141,16 @@ def calc(c):
     L = c['floors'] * c['ht'] * 1.5
     frl = 0 if qs <= 0 else jround((10.67 * L * (qs / 60000) ** 1.852) / (C[c['mat']] ** 1.852 * (sup / 1000) ** 4.87) * 9.81, 1)
     sh = jround(c['floors'] * c['ht'] * 9.81)
-    top = jround(c['p'] - sh - frl)
+    top = jround(c['p'] - frl) if c['method'] == 'gravity' else jround(c['p'] - sh - frl)
+    VL = jround(c['floors'] * c['ht'] + 1.0, 1)
     fl = c['floors']
-    bot = sh if c['method'] == 'gravity' else jround(c['p'])
+    bot = jround(c['p'] + sh) if c['method'] == 'gravity' else jround(c['p'])
     return dict(fuS=fs, fuH=fh, fuD=fd, curve='valve' if valve else 'tank', qwS=qs, qwH=qh, sup=sup, hot=hot, reqP=req,
                 topP=top, frl=frl, botP=bot, prv=bot >= 550,
                 circ=(c['circ']=='yes') or (c['circ']=='auto' and c['floors']*c['ht']*1.3 > 15),
-                all=drain(loads['all'], fl, wc['all'], traps['all']),
-                osu=drain(loads['osu'], fl, wc['osu'], traps['osu']),
-                jab=drain(loads['jab'], fl, False, traps['jab']))
+                all=drain(loads['all'], fl, wc['all'], traps['all'], VL),
+                osu=drain(loads['osu'], fl, wc['osu'], traps['osu'], VL),
+                jab=drain(loads['jab'], fl, False, traps['jab'], VL))
 
 D_ = sys.argv[1] if len(sys.argv) > 1 else '.'
 cases = json.load(open(D_ + '/cases.json')); app = json.load(open(D_ + '/app_out.json'))
